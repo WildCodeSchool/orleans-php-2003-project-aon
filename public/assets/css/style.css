@@ -1,0 +1,55 @@
+/* pour importer les futurs fichiers: @import url(".css");*/
+@import url('https://fonts.googleapis.com/css2?family=Antic&family=Sen&display=swap');
+
+:root{
+    --color-light:#F0FFFF;
+    --color-dark:#002222;
+    --color-main: #008484;
+    --color-main-dark: #040A7D;
+    --color-main-light:#ADD8E6;
+    --color-contrast: red;
+
+
+    --font-title:'Antic', sans-serif;
+    --font-text:'Sen', sans-serif;
+
+    --padding: 8px;
+    --padding-small: calc(var(--padding) / 2);
+    --padding-large: calc(var(--padding) * 2);
+
+    --margin: 8px;
+    --margin-small: calc(var(--margin) / 2);
+    --margin-large: calc(var(--margin) * 2);
+
+    --font-main-size: 16px;
+
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    font-family: var(--font-title);
+    font-size: 120px;
+}
+
+h2{
+    font-family: var(--font-title);
+    font-size: 60px;
+}
+
+h3{
+    font-family: var(--font-title);
+    font-size: 30px;
+}
+
+li, a{
+    text-decoration: none;
+}
+
+a:visited{
+    text-decoration: none;
+}
