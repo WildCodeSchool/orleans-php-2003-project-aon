@@ -23,6 +23,10 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->twig->render('Home/index.html.twig');
+        //activity
+        $activityManager=new ActivityManager();
+        $activities=$activityManager->selectActivitiesToBeDisplayed();
+
+        return $this->twig->render('Home/index.html.twig', ['activities'=>$activities]);
     }
 }

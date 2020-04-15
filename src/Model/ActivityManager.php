@@ -37,8 +37,4 @@ class ActivityManager extends AbstractManager
     {
         return $this->pdo->query('SELECT * FROM ' . $this->table . ' WHERE to_be_displayed=1')->fetchAll();
     }
-
-
-
-
 }
