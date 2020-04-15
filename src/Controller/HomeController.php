@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Model\ActivityManager;
+
 class HomeController extends AbstractController
 {
 
