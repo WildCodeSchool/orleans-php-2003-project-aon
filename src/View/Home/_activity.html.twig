@@ -1,1 +1,8 @@
+{% for activity in activities %}
 
+    <div class="activity">
+        <img src="/assets/images/{{ activity.picture }}" alt="illustration de l'activité">
+        <div class="activityName">{{ activity.name }}</div>
+    </div>
+
+{% endfor %}
