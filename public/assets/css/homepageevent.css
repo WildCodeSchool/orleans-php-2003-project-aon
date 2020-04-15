@@ -1,0 +1,21 @@
+.eventpicture{
+    width: 500px;
+    padding: var(--margin-large);
+    margin: var(--margin);
+
+}
+
+.date{
+    margin-top: calc(2*(var(--margin-large)));
+}
+
+.description{
+    margin: var(--margin);
+}
+
+@media (max-width: 450px) {
+    .eventpicture{
+        width:85% ;
+        margin-left: var(--margin-large);
+    }
+}

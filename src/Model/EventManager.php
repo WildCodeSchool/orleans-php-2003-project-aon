@@ -6,8 +6,8 @@
  * Time: 20:52
  * PHP version 7
  */
-namespace App\Model;
 
+namespace App\Model;
 
 /**
  *
@@ -19,7 +19,8 @@ namespace App\Model;
  * </pre>
  */
 
-class EventManager extends AbstractManager {
+class EventManager extends AbstractManager
+{
     /**
      *
      */
@@ -33,12 +34,9 @@ class EventManager extends AbstractManager {
         parent::__construct(self::TABLE);
     }
 
+
     /**
-     * Get one row from database by ID.
-     *
-     * @param  int $id
-     *
-     * @return array
+     * @return mixed
      */
     public function selectNextEvent()
     {
@@ -47,6 +45,4 @@ class EventManager extends AbstractManager {
         $statement->execute();
         return $statement->fetch();
     }
-
 }
-
