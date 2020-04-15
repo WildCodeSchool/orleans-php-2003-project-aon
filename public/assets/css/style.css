@@ -33,7 +33,7 @@
 
 h1{
     font-family: var(--font-title);
-    font-size: 120px;
+    font-size: 70px;
 }
 
 h2{
@@ -52,4 +52,22 @@ li, a{
 
 a:visited{
     text-decoration: none;
+}
+
+.logoNavBar{
+    width: 30%;
+    height: 25%;
+}
+.collapse {
+    justify-content: flex-end;
+}
+.ul {
+    justify-content: space-between;
+}
+hr{
+    margin: 100px auto;
+    width: 75%;
+    height: 2px;
+    background-color: black;
+    border: none; /*on supprime le style par défaut*/
 }
