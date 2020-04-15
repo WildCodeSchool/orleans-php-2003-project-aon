@@ -7,6 +7,7 @@
  */
 
 namespace App\Controller;
+use App\Model\EventManager;
 
 class HomeController extends AbstractController
 {
@@ -19,8 +20,11 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
     public function index()
     {
-        return $this->twig->render('Home/index.html.twig');
+        $eventManager=new EventManager();
+        $event=$eventManager->selectNextEvent();
+        return $this->twig->render('Home/index.html.twig', ['event'=> $event]);
     }
 }
