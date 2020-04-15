@@ -1,8 +1,15 @@
-{% for activity in activities %}
+<div class="card-deck">
 
-    <div class="activity">
-        <img src="/assets/images/{{ activity.picture }}" alt="illustration de l'activité">
-        <div class="activityName">{{ activity.name }}</div>
-    </div>
+    {% for activity in activities %}
 
-{% endfor %}
+        <div class="card" >
+            <img class="card-img-top" src="/assets/images/{{ activity.picture }}" alt="illustration de l'activité">
+            <div class="card-body">
+                <h5 class="card-title">{{ activity.name }}</h5>
+                <p class="card-text">{{ activity.description }}</p>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
