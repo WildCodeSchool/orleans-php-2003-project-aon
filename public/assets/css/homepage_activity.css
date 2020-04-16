@@ -9,9 +9,15 @@
 .activity-card{
     max-width: 320px;
     min-width: 320px;
-    margin:var(--margin-large);
+    margin-top: var(--margin-large);
 }
 
 .activity-card-img{
-    height:212px;
+    height: 212px;
+}
+
+.button-activity{
+    display: flex;
+    padding: calc(2*(var(--padding-large)));
+    justify-content: center;
 }
