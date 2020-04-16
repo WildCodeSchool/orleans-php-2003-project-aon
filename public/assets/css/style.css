@@ -30,8 +30,6 @@
 }
 
 * {
-    _padding: 0;
-    _margin: 0;
     box-sizing: border-box;
 }
 
@@ -49,7 +47,6 @@ main{
     display:flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 
@@ -58,7 +55,6 @@ h1{
     font-size: 70px;
     padding-top: calc(2*(var(--padding-large)));
     padding-bottom: calc(2*(var(--padding-large)));
-
 }
 
 h2 {
