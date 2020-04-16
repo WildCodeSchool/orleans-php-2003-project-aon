@@ -1,17 +1,17 @@
 /* pour importer les futurs fichiers: @import url(".css");*/
 @import url('https://fonts.googleapis.com/css2?family=Antic&family=Sen&display=swap');
 
-:root{
-    --color-light:#F0FFFF;
-    --color-dark:#002222;
+:root {
+    --color-light: #F0FFFF;
+    --color-dark: #002222;
     --color-main: #008484;
     --color-main-dark: #040A7D;
-    --color-main-light:#ADD8E6;
+    --color-main-light: #ADD8E6;
     --color-contrast: red;
 
 
-    --font-title:'Antic', sans-serif;
-    --font-text:'Sen', sans-serif;
+    --font-title: 'Antic', sans-serif;
+    --font-text: 'Sen', sans-serif;
 
     --padding: 8px;
     --padding-small: calc(var(--padding) / 2);
@@ -25,31 +25,55 @@
 
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-h1{
+h1 {
     font-family: var(--font-title);
     font-size: 120px;
 }
 
-h2{
+h2 {
     font-family: var(--font-title);
     font-size: 60px;
 }
 
-h3{
+h3 {
     font-family: var(--font-title);
     font-size: 30px;
 }
 
-li, a{
+li, a {
     text-decoration: none;
 }
 
-a:visited{
+a:visited {
     text-decoration: none;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 70px;
+}
+
+.page-footer {
+    background-color: var(--color-main-light);
+
+}
+
+.link {
+
+}
+
+
