@@ -5,12 +5,12 @@
 
 :root {
     --color-light: #F0FFFF;
-    --color-dark: #002222;
-    --color-main: #008484;
-    --color-main-dark: #040A7D;
+    --color-dark: #465566;
+    --color-main: #91AAC7;
+    --color-main-dark: #465566;
     --color-main-light: #ADD8E6;
-    --color-contrast: red;
-
+    --color-contrast: #FF8F8C;
+    --color-light-alternative:#F5F4DB;
 
     --font-title: 'Antic', sans-serif;
     --font-text: 'Sen', sans-serif;
@@ -18,34 +18,50 @@
     --padding: 8px;
     --padding-small: calc(var(--padding) / 2);
     --padding-large: calc(var(--padding) * 2);
+    --padding-extra-large: calc(var(--padding) * 4);
 
     --margin: 8px;
     --margin-small: calc(var(--margin) / 2);
     --margin-large: calc(var(--margin) * 2);
+    --margin-extra-large: calc(var(--margin) * 4);
 
     --font-main-size: 16px;
 
 }
 
 * {
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
 }
 
 body{
     display:flex;
     flex-direction: column;
+    align-items: stretch;
+    color:var(--color-dark);
 }
+
+main{
+    align-self: center;
+    max-width:75%;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 h1{
     font-family: var(--font-title);
     font-size: 70px;
+    padding-top: calc(2*(var(--padding-large)));
+    padding-bottom: calc(2*(var(--padding-large)));
 }
 
 h2 {
     font-family: var(--font-title);
     font-size: 50px;
+    padding:var(--padding-large);
+    color:var(--color-main);
 }
 
 h3 {
@@ -88,13 +104,53 @@ ul {
 }
 
 hr{
-    margin: 100px auto;
+    margin: var(--margin-extra-large);
     width: 75%;
     height: 2px;
-    background-color: black;
+    background-color: var(--color-dark);
     border: none;
 }
 
-.card{
+.partner-card{
     border: none;
+    max-width: 150px;
+    min-width: 150px;
+    margin-top: var(--margin-large);
+}
+
+.partner-card-deck{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin:0;
+    padding: var(--padding-extra-large);
+}
+
+.navbar{
+    background-color: var(--color-main-light);
+}
+
+.navbar-toggler-icon {
+    background-image: url("../icons/hamburger.png");
+}
+
+section{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
+
+section h2{
+    align-self: start;
+}
+
+.welcome {
+    padding: 2vW;
+    max-width:800px;
+}
+
+.clearfix{
+    display:none;
 }

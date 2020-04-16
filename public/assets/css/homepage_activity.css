@@ -4,12 +4,14 @@
     display: flex;
     flex-wrap: wrap;
     margin:0;
+    padding-bottom: var(--padding-extra-large);
 }
 
 .activity-card{
-    max-width: 320px;
-    min-width: 320px;
+    max-width: 310px;
+    min-width: 310px;
     margin-top: var(--margin-large);
+    background:var(--color-light-alternative);
 }
 
 .activity-card-img{
@@ -20,4 +22,8 @@
     display: flex;
     padding: calc(2*(var(--padding-large)));
     justify-content: center;
+}
+
+.activity-button{
+    background-color: var(--color-main);
 }
