@@ -1,5 +1,7 @@
 /* pour importer les futurs fichiers: @import url(".css");*/
 @import url('https://fonts.googleapis.com/css2?family=Antic&family=Sen&display=swap');
+@import url('homepage_event.css');
+@import url('homepage_activity.css');
 
 :root{
     --color-light:#F0FFFF;
@@ -38,7 +40,7 @@ h1{
 
 h2{
     font-family: var(--font-title);
-    font-size: 60px;
+    font-size: 50px;
 }
 
 h3{
@@ -69,5 +71,6 @@ hr{
     width: 75%;
     height: 2px;
     background-color: black;
-    border: none; /*on supprime le style par défaut*/
+    border: none;
 }
+

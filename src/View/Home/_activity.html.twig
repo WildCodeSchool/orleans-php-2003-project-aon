@@ -1,0 +1,15 @@
+<div class="card-deck">
+
+    {% for activity in activities %}
+
+        <div class="card" >
+            <img class="card-img-top" src="/assets/images/{{ activity.picture }}" alt="illustration de l'activité">
+            <div class="card-body">
+                <h5 class="card-title">{{ activity.name }}</h5>
+                <p class="card-text">{{ activity.shortDescription }}</p>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>

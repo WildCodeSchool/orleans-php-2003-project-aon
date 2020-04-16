@@ -1,0 +1,8 @@
+.card-deck{
+    justify-content: center;
+}
+
+.card{
+    max-width: 350px;
+    margin:10px;
+}
