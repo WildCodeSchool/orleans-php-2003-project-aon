@@ -25,6 +25,4 @@ class PartnerManager extends AbstractManager
     {
         return $this->pdo->query('SELECT * FROM ' . $this->table)->fetchAll();
     }
-
 }
-
