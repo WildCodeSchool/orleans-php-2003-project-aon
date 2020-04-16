@@ -3,17 +3,17 @@
 @import url('homepage_event.css');
 @import url('homepage_activity.css');
 
-:root{
-    --color-light:#F0FFFF;
-    --color-dark:#002222;
+:root {
+    --color-light: #F0FFFF;
+    --color-dark: #002222;
     --color-main: #008484;
     --color-main-dark: #040A7D;
-    --color-main-light:#ADD8E6;
+    --color-main-light: #ADD8E6;
     --color-contrast: red;
 
 
-    --font-title:'Antic', sans-serif;
-    --font-text:'Sen', sans-serif;
+    --font-title: 'Antic', sans-serif;
+    --font-text: 'Sen', sans-serif;
 
     --padding: 8px;
     --padding-small: calc(var(--padding) / 2);
@@ -27,7 +27,7 @@
 
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -43,22 +43,39 @@ h1{
     font-size: 70px;
 }
 
-h2{
+h2 {
     font-family: var(--font-title);
     font-size: 50px;
 }
 
-h3{
+h3 {
     font-family: var(--font-title);
     font-size: 30px;
 }
 
-li, a{
+li, a {
     text-decoration: none;
 }
 
-a:visited{
+a:visited {
     text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 70px;
+}
+
+.page-footer {
+    background-color: var(--color-main-light);
 }
 
 .logoNavBar{
@@ -68,10 +85,6 @@ a:visited{
 
 .collapse {
     justify-content: flex-end;
-}
-
-.ul {
-    justify-content: space-between;
 }
 
 hr{
@@ -85,4 +98,3 @@ hr{
 .card{
     border: none;
 }
-
