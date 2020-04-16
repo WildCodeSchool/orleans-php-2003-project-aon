@@ -71,3 +71,7 @@ hr{
     background-color: black;
     border: none; /*on supprime le style par défaut*/
 }
+
+.card{
+    border: none;
+}
