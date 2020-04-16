@@ -44,9 +44,6 @@ class HomeController extends AbstractController
         /* add here call to other managers */
       
         /* add data required for the view to the tab here */
-        return $this->twig->render('Home/index.html.twig', ['event'=> $event, 
-                                                            'activities'=>$activities,
-                                                           ]
-                                  );
+        return $this->twig->render('Home/index.html.twig', ['event'=> $event, 'activities'=>$activities,]);
     }
 }
