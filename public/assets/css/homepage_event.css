@@ -1,8 +1,4 @@
 .event{
-    width:100%;
-    display:flex;
-    flex-direction: column;
-    align-items: start;
 }
 
 .eventContent{
@@ -46,5 +42,9 @@
     .eventpicture{
         width:85% ;
         margin-left: var(--margin-large);
+    }
+
+    .eventContent{
+        flex-direction: column;
     }
 }
