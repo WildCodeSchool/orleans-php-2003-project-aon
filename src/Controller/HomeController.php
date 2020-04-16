@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurelwcs
- * Date: 08/04/19
- * Time: 18:40
- */
 
 namespace App\Controller;
 
 use App\Model\EventManager;
 use App\Model\ActivityManager;
+use App\Model\PartnerManager;
 
 class HomeController extends AbstractController
 {
-
     /**
      * Display home page
      *
@@ -41,9 +35,13 @@ class HomeController extends AbstractController
             }
         }
 
-        /* add here call to other managers */
+        //partner
+        $partnerManager = new PartnerManager();
+        $partners = $partnerManager->selectAll();
       
         /* add data required for the view to the tab here */
-        return $this->twig->render('Home/index.html.twig', ['event'=> $event, 'activities'=>$activities,]);
+        return $this->twig->render('Home/index.html.twig', ['event'=>$event,
+                                                            'activities'=>$activities,
+                                                            'partners'=>$partners]);
     }
 }

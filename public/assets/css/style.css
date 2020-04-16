@@ -65,17 +65,24 @@ a:visited{
     width: 30%;
     height: 25%;
 }
+
 .collapse {
     justify-content: flex-end;
 }
+
 .ul {
     justify-content: space-between;
 }
+
 hr{
     margin: 100px auto;
     width: 75%;
     height: 2px;
     background-color: black;
+    border: none;
+}
+
+.card{
     border: none;
 }
 
