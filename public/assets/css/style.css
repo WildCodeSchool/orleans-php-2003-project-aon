@@ -33,6 +33,11 @@
     box-sizing: border-box;
 }
 
+body{
+    display:flex;
+    flex-direction: column;
+}
+
 h1{
     font-family: var(--font-title);
     font-size: 70px;
