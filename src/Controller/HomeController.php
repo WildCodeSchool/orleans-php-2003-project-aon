@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Model\ActivityManager;
+
 class HomeController extends AbstractController
 {
 
@@ -21,6 +23,18 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->twig->render('Home/index.html.twig');
+        //activity
+        $activityManager=new ActivityManager();
+        $activities=$activityManager->selectActivitiesToBeDisplayed();
+        $maxLength=50;
+
+        $activitiesLength=count($activities);
+        for ($i=0; $i<$activitiesLength; $i++) {
+            if (strlen($activities[$i]['description'])>$maxLength) {
+                $activities[$i]['shortDescription']=substr($activities[$i]['description'], 0, $maxLength).'...';
+            }
+        }
+
+        return $this->twig->render('Home/index.html.twig', ['activities'=>$activities]);
     }
 }

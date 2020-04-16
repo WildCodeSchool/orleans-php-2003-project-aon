@@ -1,5 +1,6 @@
 /* pour importer les futurs fichiers: @import url(".css");*/
 @import url('https://fonts.googleapis.com/css2?family=Antic&family=Sen&display=swap');
+@import 'homepage_activity.css';
 
 :root{
     --color-light:#F0FFFF;
@@ -53,3 +54,5 @@ li, a{
 a:visited{
     text-decoration: none;
 }
+
+
