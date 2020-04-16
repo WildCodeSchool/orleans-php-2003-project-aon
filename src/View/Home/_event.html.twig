@@ -2,14 +2,21 @@
 
     <h2>{{ event.title }}</h2>
 
-    <img src="../assets/images/{{ event.picture }}" class="eventpicture float-left" alt="image de l'évènement">
+    <div class="eventContent">
 
-     <h3 class="date">{{ event.date }}</h3>
 
-    <h4>{{ event.location }}</h4>
+        <img src="../assets/images/{{ event.picture }}" class="eventpicture float-left" alt="image de l'évènement">
 
-    <div class="description">
-        {{ event.description }}
+        <div class=eventDetails">
+            <h3 class="date">{{ event.date }}</h3>
+
+            <h4>{{ event.location }}</h4>
+
+            <div class="description">
+                {{ event.description }}
+            </div>
+        </div>
+
     </div>
 
 </section>
