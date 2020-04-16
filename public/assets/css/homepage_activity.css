@@ -1,9 +1,9 @@
 .activity-card-deck{
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-    align-items: center;
+    margin:0;
 }
 
 .activity-card{
@@ -20,5 +20,4 @@
     display: flex;
     padding: calc(2*(var(--padding-large)));
     justify-content: center;
-
 }

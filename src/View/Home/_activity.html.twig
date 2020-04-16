@@ -1,16 +1,17 @@
-<div class="activity-card-deck card-deck">
 
-    {% for activity in activities %}
+<section class="activity">
+    <div class="activity-card-deck card-deck">
+        {% for activity in activities %}
 
-        <div class="activity-card card" >
-            <img class="activity-card-img card-img-top" src="/assets/images/{{ activity.picture }}" alt="illustration de l'activité">
-            <div class="card-body">
-                <h5 class="card-title">{{ activity.name }}</h5>
-                <p class="card-text">{{ activity.shortDescription }}</p>
+            <div class="activity-card card" >
+                <img class="activity-card-img card-img-top" src="/assets/images/{{ activity.picture }}" alt="illustration de l'activité">
+                <div class="card-body">
+                    <h5 class="card-title">{{ activity.name }}</h5>
+                    <p class="card-text">{{ activity.shortDescription }}</p>
+                </div>
             </div>
-        </div>
 
-    {% endfor %}
+        {% endfor %}
+    </div>
+</section>
 
-
-</div>

@@ -1,10 +1,20 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
-    <h1>Hello Wilder !</h1>
-    {% include 'Home/_activity.html.twig' %}
-<div class="button-activity">
-    <a type="button" class="btn btn-primary btn-lg" href="Activity/index">Activités</a>
-</div>
+{% block title %}A.O.N Orléans{% endblock %}
 
+{% block content %}
+
+    {{ "<h1>Bienvenue sur le Site de l’A.O.N.!</h1>" }}
+  
+    <hr>
+        {% include 'Home/_event.html.twig' %}
+    <hr>
+        {% include 'Home/_activity.html.twig' %}
+        <div class="button-activity">
+           <a type="button" class="btn btn-primary btn-lg" href="Activity/index">Activités</a>
+        </div>
+    <hr>
+        {#
+        {% include 'Home/_partner.html.twig' %}
+         #}
 {% endblock %}
