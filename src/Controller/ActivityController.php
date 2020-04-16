@@ -38,4 +38,3 @@ class ActivityController extends AbstractController
         return $this->twig->render('Activity/index.html.twig', ['activities'=>$activities]);
     }
 }
-
