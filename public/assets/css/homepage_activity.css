@@ -1,0 +1,23 @@
+.activity-card-deck{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin:0;
+}
+
+.activity-card{
+    max-width: 320px;
+    min-width: 320px;
+    margin-top: var(--margin-large);
+}
+
+.activity-card-img{
+    height: 212px;
+}
+
+.button-activity{
+    display: flex;
+    padding: calc(2*(var(--padding-large)));
+    justify-content: center;
+}
