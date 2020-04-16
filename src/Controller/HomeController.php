@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Model\EventManager;
 use App\Model\ActivityManager;
 
 class HomeController extends AbstractController
@@ -21,9 +22,14 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
     public function index()
     {
-        //activity
+        //event section
+        $eventManager=new EventManager();
+        $event=$eventManager->selectNextEvent();
+
+        //activity section
         $activityManager=new ActivityManager();
         $activities=$activityManager->selectActivitiesToBeDisplayed();
         $maxLength=50;
@@ -35,6 +41,9 @@ class HomeController extends AbstractController
             }
         }
 
-        return $this->twig->render('Home/index.html.twig', ['activities'=>$activities]);
+        /* add here call to other managers */
+      
+        /* add data required for the view to the tab here */
+        return $this->twig->render('Home/index.html.twig', ['event'=> $event, 'activities'=>$activities,]);
     }
 }
