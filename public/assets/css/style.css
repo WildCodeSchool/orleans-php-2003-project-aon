@@ -5,12 +5,12 @@
 
 :root {
     --color-light: #F0FFFF;
-    --color-dark: #002222;
-    --color-main: #008484;
-    --color-main-dark: #040A7D;
+    --color-dark: #465566;
+    --color-main: #91AAC7;
+    --color-main-dark: #465566;
     --color-main-light: #ADD8E6;
-    --color-contrast: red;
-
+    --color-contrast: #FF8F8C;
+    --color-light-alternative:#F5F4DB;
 
     --font-title: 'Antic', sans-serif;
     --font-text: 'Sen', sans-serif;
@@ -18,10 +18,12 @@
     --padding: 8px;
     --padding-small: calc(var(--padding) / 2);
     --padding-large: calc(var(--padding) * 2);
+    --padding-extra-large: calc(var(--padding) * 4);
 
     --margin: 8px;
     --margin-small: calc(var(--margin) / 2);
     --margin-large: calc(var(--margin) * 2);
+    --margin-extra-large: calc(var(--margin) * 4);
 
     --font-main-size: 16px;
 
@@ -37,6 +39,7 @@ body{
     display:flex;
     flex-direction: column;
     align-items: stretch;
+    color:var(--color-dark);
 }
 
 main{
@@ -46,6 +49,7 @@ main{
     display:flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 
@@ -54,11 +58,14 @@ h1{
     font-size: 70px;
     padding-top: calc(2*(var(--padding-large)));
     padding-bottom: calc(2*(var(--padding-large)));
+
 }
 
 h2 {
     font-family: var(--font-title);
     font-size: 50px;
+    padding:var(--padding-large);
+    color:var(--color-main);
 }
 
 h3 {
@@ -101,10 +108,10 @@ ul {
 }
 
 hr{
-    margin: calc(3*(var(--margin-large)));
+    margin: var(--margin-extra-large);
     width: 75%;
     height: 2px;
-    background-color: black;
+    background-color: var(--color-dark);
     border: none;
 }
 
@@ -121,11 +128,15 @@ hr{
     display: flex;
     flex-wrap: wrap;
     margin:0;
-    padding: calc(2*(var(--padding-large)));
+    padding: var(--padding-extra-large);
 }
 
 .navbar{
     background-color: var(--color-main-light);
+}
+
+.navbar-toggler-icon {
+    background-image: url("../icons/hamburger.png");
 }
 
 section{
@@ -141,4 +152,9 @@ section h2{
 
 .welcome {
     padding: 2vW;
+    max-width:800px;
+}
+
+.clearfix{
+    display:none;
 }

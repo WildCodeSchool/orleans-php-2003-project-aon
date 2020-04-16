@@ -6,7 +6,7 @@
     display:flex;
     justify-content: center;
     align-items: stretch;
-    max-width: 1000px;
+    max-width: 1030px;
 }
 
 .eventDetails{
@@ -17,17 +17,17 @@
 }
 
 .eventpicture{
-    width: 500px;
-    min-width: 500px;
     padding: var(--margin-large);
     margin: var(--margin);
+    max-width:80%;
+    min-width: 50%;
 }
-
-
 
 .eventDetails{
     display: flex;
     flex-direction: column;
+    max-width:80%;
+    min-width: 50%;
 }
 
 .date{
