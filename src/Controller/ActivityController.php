@@ -16,10 +16,11 @@ class ActivityController extends AbstractController
      * Display activity page
      *
      * @return string
-     * @throws \Twig\Error\LoaderErrorv
+     * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
     public function index()
     {
         //activity

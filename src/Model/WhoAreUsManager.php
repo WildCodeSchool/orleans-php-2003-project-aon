@@ -3,7 +3,6 @@
 
 namespace App\Model;
 
-
 class WhoAreUsManager extends AbstractManager
 {
     const TABLE = 'whoAreUS';
@@ -24,7 +23,6 @@ class WhoAreUsManager extends AbstractManager
      */
     public function selectAll(): array
     {
-        return $this->pdo->query('SELECT * FROM ' . $this->table)->fetchAll();
+        return $this->pdo->query('SELECT * FROM ' . $this->table)->fetch();
     }
 }
-
