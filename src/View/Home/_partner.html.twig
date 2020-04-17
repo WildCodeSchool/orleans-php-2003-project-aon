@@ -1,0 +1,12 @@
+<section class="partner">
+    <h2>Nos partenaires</h2>
+        <div class="partner-card-deck card-deck">
+            {% for partner in partners %}
+                <div class="partner-card card" >
+                    <a href="{{ partner.link }}" target="_blank">
+                        <img class="card-img-top" src="/assets/images/{{ partner.picture }}" alt="illustration de l'activité">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+</section>
