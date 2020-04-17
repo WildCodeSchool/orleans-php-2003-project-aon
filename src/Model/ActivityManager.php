@@ -1,10 +1,8 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sylvain
- * Date: 07/03/18
- * Time: 18:20
- * PHP version 7
+ * User: Adrien
+ * Date: 15/04/2020
  */
 
 namespace App\Model;
