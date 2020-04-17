@@ -1,10 +1,9 @@
 
 
 {% block whoAreUsDetail %}
-        <img src="/assets/images/{{ whoAreUs.picture }}" alt="picture of us">
-
-        <div>
-            <p> Pour un moment de détente en famille, pour vous amuser entre amis ou pour dépasser vos performances personnelles, venez découvrir les activités que nous vous proposons.</p>
+        <div class="whoAreUs">
+            <img class="imgWhoAreUs" src="/assets/images/{{ whoAreUs.picture }}" alt="picture of us">
+            <p>{{ whoAreUs.description }}</p>
         </div>
 {% endblock %}
 

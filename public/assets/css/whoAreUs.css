@@ -1,0 +1,10 @@
+.whoAreUs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.imgWhoAreUs{
+    width: 450px;
+    height: 300px;
+}
