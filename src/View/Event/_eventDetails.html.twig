@@ -2,19 +2,24 @@ Ceci est le formulaire d'ajout des evenements
 
 <form method="post" action="../event/add">
     <label for="title">Nom de l'évenement</label>
-    <input type="text" id=title" name="title">
+    <input type="text" id="title" name="title" value="{{data.title}}">
+    <div class="errorMessage">{{errors.title}}</div>
 
     <label for="description">Description de l'évenement</label>
-    <input type="text" id="description" name="decription">
+    <input type="text" id="description" name="description" value="{{data.description}}">
+    <div class="errorMessage">{{errors.descriptione}}</div>
 
     <label for="picture">Illustration de l'évenement</label>
-    <input type="text" id="picture" name="picture">
+    <input type="text" id="picture" name="picture" value="{{data.picture}}">
+    <div class="errorMessage">{{errors.picture}}</div>
 
     <label for="date">Date de l'évenement</label>
-    <input type="date" id="date" name="date">
+    <input type="date" id="date" name="date" value="{{data.date}}">
+    <div class="errorMessage">{{errors.date}}</div>
 
     <label for="location">Endroit de l'évenement</label>
-    <input type="text" id="location" name="location">
+    <input type="text" id="location" name="location" value="{{data.location}}">
+    <div class="errorMessage">{{errors.location}}</div>
 
     <input type="submit" name="action" value="Créer cet évenement">
 </form>

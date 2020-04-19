@@ -12,6 +12,11 @@ use App\Model\EventManager;
 class EventController extends AbstractController
 {
 
+    public function list()
+    {
+        return $this->twig->render('Event/_eventDetails.html.twig');
+    }
+
     /**
      * Display activity page
      *
@@ -23,9 +28,17 @@ class EventController extends AbstractController
     public function add()
     {
         $errorsAndData=$this->checkPostData();
+        $toBeReturned="retour par defaut";
+        if (count($errorsAndData['data'])==5) {
+            $eventManager=new EventManager();
+            $eventManager->insert($errorsAndData['data']);
+            header("location:/event/list");
+        } else {
+            $toBeReturned = $this->twig->render('Event/_eventDetails.html.twig', ['errors'=>$errorsAndData['errors'],
+                'data'=>$errorsAndData['data']]);
+        }
 
-        return $this->twig->render('Event/_eventDetails.html.twig', ['errors'=>$errorsAndData[0],
-                                                                            'data'=>$errorsAndData[1]]);
+        return $toBeReturned;
     }
 
     /**
@@ -46,19 +59,17 @@ class EventController extends AbstractController
         //data array
         $data=array();
 
-        $errorsAndData=['errors' => $errors, 'data' => $data];
+        $checked=$this->checkTextFromPost('title', "du titre", 50);
+        $errors=array_merge($errors, $checked['errors']);
+        $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('title', "le titre", 50);
-        $errors=array_merge($errors, $checked[0]);
-        $data=array_merge($data, $checked[1]);
+        $checked=$this->checkTextFromPost('description', "de la description", 250);
+        $errors=array_merge($errors, $checked['errors']);
+        $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('description', "la description", 250);
-        $errors=array_merge($errors, $checked[0]);
-        $data=array_merge($data, $checked[1]);
-
-        $checked=$this->checkTextFromPost('picture', "l'illustration", 250);
-        $errors=array_merge($errors, $checked[0]);
-        $data=array_merge($data, $checked[1]);
+        $checked=$this->checkTextFromPost('picture', "de l'illustration", 250);
+        $errors=array_merge($errors, $checked['errors']);
+        $data=array_merge($data, $checked['data']);
 
         //check date
         if (empty($_POST['date'])) {
@@ -69,11 +80,11 @@ class EventController extends AbstractController
             $data['date']=trim($_POST['date']);
         }
 
-        $checked=$this->checkTextFromPost('location', "l'endroit", 50);
-        $errors=array_merge($errors, $checked[0]);
-        $data=array_merge($data, $checked[1]);
+        $checked=$this->checkTextFromPost('location', "de l'endroit", 50);
+        $errors=array_merge($errors, $checked['errors']);
+        $data=array_merge($data, $checked['data']);
 
-        return $errorsAndData;
+        return ['errors' => $errors, 'data' => $data];
     }
 
     public function checkTextFromPost($fieldName, $userFieldName, $maxLength) : array
@@ -83,11 +94,11 @@ class EventController extends AbstractController
         $errors[$fieldName]='';
 
         if (empty($_POST[$fieldName])) {
-            $errors[$fieldName] .= "Vous devez indiquer le nom de $userFieldName";
+            $errors[$fieldName] .= "Vous devez indiquer le nom $userFieldName";
         } elseif (strlen(trim($_POST[$fieldName]))>$maxLength) {
             $errors[$fieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
-            $data[$fieldName]=trim($_POST['location']);
+            $data[$fieldName]=trim($_POST[$fieldName]);
         }
 
         return ['errors' => $errors, 'data'=>$data];
