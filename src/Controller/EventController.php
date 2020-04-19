@@ -7,9 +7,9 @@
 
 namespace App\Controller;
 
-use App\Model\ActivityManager;
+use App\Model\EventManager;
 
-class ActivityController extends AbstractController
+class EventController extends AbstractController
 {
 
     /**
@@ -22,18 +22,8 @@ class ActivityController extends AbstractController
      */
     public function index()
     {
-        //activity
-        $activityManager=new ActivityManager();
-        $activities=$activityManager->selectAll();
-        $maxLength=50;
-
-        $activitiesLength=count($activities);
-        for ($i=0; $i<$activitiesLength; $i++) {
-            if (strlen($activities[$i]['description'])>$maxLength) {
-                $activities[$i]['shortDescription']=substr($activities[$i]['description'], 0, $maxLength).'...';
-            }
-        }
-
-        return $this->twig->render('Activity/index.html.twig', ['activities'=>$activities]);
+        $eventManager=new EventManager();
+return "ok";
+        return $this->twig->render('Event/_eventDetails.html.twig');
     }
 }
