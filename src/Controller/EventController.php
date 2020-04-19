@@ -20,10 +20,8 @@ class EventController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function add()
     {
-        $eventManager=new EventManager();
-return "ok";
         return $this->twig->render('Event/_eventDetails.html.twig');
     }
 }
