@@ -59,4 +59,11 @@
     .eventContent{
         flex-direction: column;
     }
+
+}
+
+@media (max-width: 850px){
+    .event:nth-of-type(odd) .eventContent, .event:nth-of-type(even) .eventContent {
+        flex-direction: column;
+    }
 }
