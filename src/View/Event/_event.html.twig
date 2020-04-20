@@ -1,0 +1,9 @@
+{% block Event %}
+<div class="eventlist">
+
+    {% for event in events %}
+    {% include 'Home/_event.html.twig' %}
+    {% endfor %}
+</div>
+
+{% endblock %}

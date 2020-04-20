@@ -38,6 +38,14 @@
     margin: var(--margin);
 }
 
+.eventlist{
+    align-self: center;
+    display:flex;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 1030px;
+    flex-direction: column;
+}
 @media (max-width: 450px) {
     .eventpicture{
         width:85% ;
