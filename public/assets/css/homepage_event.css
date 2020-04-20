@@ -9,6 +9,10 @@
     max-width: 1030px;
 }
 
+.event:nth-of-type(odd) .eventContent{
+    flex-direction: row-reverse;
+}
+
 .eventDetails{
     display:flex;
     flex-direction: column;
