@@ -47,6 +47,7 @@ body{
     flex-direction: column;
     align-items: stretch;
     color:var(--color-dark);
+    font-size:16pt;
 }
 
 main{
