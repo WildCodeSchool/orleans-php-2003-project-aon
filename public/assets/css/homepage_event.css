@@ -9,6 +9,10 @@
     max-width: 1030px;
 }
 
+.event:nth-of-type(odd) .eventContent{
+    flex-direction: row-reverse;
+}
+
 .eventDetails{
     display:flex;
     flex-direction: column;
@@ -38,6 +42,14 @@
     margin: var(--margin);
 }
 
+.eventlist{
+    align-self: center;
+    display:flex;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 1030px;
+    flex-direction: column;
+}
 @media (max-width: 450px) {
     .eventpicture{
         width:85% ;
@@ -45,6 +57,13 @@
     }
 
     .eventContent{
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 850px){
+    .event:nth-of-type(odd) .eventContent, .event:nth-of-type(even) .eventContent {
         flex-direction: column;
     }
 }
