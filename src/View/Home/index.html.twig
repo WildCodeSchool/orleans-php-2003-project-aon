@@ -24,3 +24,51 @@
        {% include 'Home/_partner.html.twig' %}
 
 {% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $('.navbar').css({
+                'background': 'transparent',
+                'position':'fixed',
+                'width':'var(--navbar-width)',
+                'z-index':'var(--navbar-zindex)',
+                'min-height':'var(--navbar-height)',
+                'box-shadow':'none'
+            });
+
+            $('.navbar a').css({
+                'color':'var(--color-dark)',
+            });
+
+            // faire apparaitre #text1
+            $(window).scroll(function(){
+                posScroll = $(document).scrollTop();
+                if(posScroll >=10) {
+
+                    $('.navbar').css({
+                        'background': 'var(--navbar-color)',
+                        'box-shadow': '10px 5px 5px rgba(220,220,220, 0.5)'
+                    });
+
+                    $('.navbar a').css({
+                        'color':'var(--color-dark)',
+                    });
+
+                } else {
+
+                    $('.navbar').css({
+                        'background': 'transparent',
+                        'box-shadow':'none'
+                    });
+
+                    $('.navbar a').css({
+                        'color':'var(--color-dark)',
+                    });
+
+                }
+            });
+        });
+    </script>
+{% endblock %}

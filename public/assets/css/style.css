@@ -12,6 +12,10 @@
     --color-contrast: #FF8F8C;
     --color-light-alternative:#F5F4DB;
 
+    --navbar-color: var(--color-main);
+    --navbar-zindex:100;
+    --navbar-width:100%;
+
     --font-title: 'Antic', sans-serif;
     --font-text: 'Sen', sans-serif;
 
@@ -131,11 +135,11 @@ hr{
 }
 
 .navbar{
-    background-color: var(--color-main-light);
+    background-color: var(--navbar-color);
 
     position:fixed;
-    width:100%;
-    z-index:100;
+    width:var(--navbar-width);
+    z-index:var(--navbar-zindex);
     min-height:var(--navbar-height);
 }
 
