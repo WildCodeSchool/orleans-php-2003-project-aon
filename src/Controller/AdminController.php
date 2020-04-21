@@ -9,12 +9,12 @@ namespace App\Controller;
 
 use App\Model\EventManager;
 
-class EventController extends AbstractController
+class AdminController extends AbstractController
 {
 
-    public function list()
+    public function index()
     {
-        return $this->twig->render('Event/_eventDetails.html.twig');
+        return $this->twig->render('Admin/_eventDetails.html.twig');
     }
 
     /**
@@ -25,16 +25,16 @@ class EventController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function add()
+    public function addEvent()
     {
-        $errorsAndData=$this->checkPostData();
-        $toBeReturned="retour par defaut";
+        $errorsAndData=$this->checkEventPostData();
+        $toBeReturned="";
         if (count($errorsAndData['data'])==5) {
             $eventManager=new EventManager();
             $eventManager->insert($errorsAndData['data']);
-            header("location:/event/list");
+            header("location:/admin/index");
         } else {
-            $toBeReturned = $this->twig->render('Event/_eventDetails.html.twig', ['errors'=>$errorsAndData['errors'],
+            $toBeReturned = $this->twig->render('Admin/_eventDetails.html.twig', ['errors'=>$errorsAndData['errors'],
                 'data'=>$errorsAndData['data']]);
         }
 
@@ -46,7 +46,7 @@ class EventController extends AbstractController
      * it check there are not empty, have the right size and the right type
      * @return array : array[] contains the data to be inserted in a clean form, array[1] contains error messages
      */
-    private function checkPostData() : array
+    private function checkEventPostData() : array
     {
         //errors array
         $errors=[
