@@ -1,7 +1,9 @@
 /* pour importer les futurs fichiers: @import url(".css");*/
 @import url('https://fonts.googleapis.com/css2?family=Antic&family=Sen&display=swap');
+@import url('homepage.css');
 @import url('homepage_event.css');
 @import url('homepage_activity.css');
+@import url('homepage_partner.css');
 
 :root {
     --color-light: #F0FFFF;
@@ -117,22 +119,6 @@ hr{
     border: none;
 }
 
-.partner-card{
-    border: none;
-    max-width: 150px;
-    min-width: 150px;
-    margin-top: var(--margin-large);
-}
-
-.partner-card-deck{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin:0;
-    padding: var(--padding-extra-large);
-}
-
 .navbar{
     background-color: var(--navbar-color);
 
@@ -155,41 +141,6 @@ section{
 
 section h2{
     align-self: start;
-}
-
-.welcome {
-    padding: 2vW;
-    max-width:800px;
-}
-
-.intro{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background-attachment: fixed;
-    background-image :  url("../images/intro.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    overflow:hidden;
-
-    padding-top: calc(1.5 * var(--navbar-height));
-    height:100vh;
-    width:100vw;
-
-    color:var(--color-light-alternative);
-    font-family: 'Lato', sans-serif;
-}
-
-.welcome{
-    align-self: start;
-    font-weight: bold;
-}
-
-.intro h1{
-    padding-top:0;
 }
 
 .clearfix{
