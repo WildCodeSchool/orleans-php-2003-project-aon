@@ -15,6 +15,7 @@
     --color-light-alternative:#F5F4DB;
 
     --navbar-color: var(--color-main);
+    --navbar-color-transp: transparent;
     --navbar-link-color-light : var(--color-light-alternative);
     --navbar-link-color-dark : var(--color-dark);
     --navbar-zindex:100;
@@ -36,6 +37,8 @@
     --font-main-size: 16pt;
 
     --navbar-height:5vw;
+
+    --h1-padding-top:calc(1.5 * var(--navbar-height));
 }
 
 * {
@@ -69,7 +72,7 @@ h1{
     font-family: var(--font-title);
     font-size: 70px;
     font-weight:bold;
-    padding-top: calc(1.5 * var(--navbar-height));
+    padding-top: var(--h1-padding-top);
     padding-bottom: calc(2*(var(--padding-large)));
 }
 
@@ -191,4 +194,10 @@ section h2{
 
 .clearfix{
     display:none;
+}
+
+@media screen and (max-width: 991px) {
+    .navbar {
+        --navbar-color-transp: var(--navbar-color);
+    }
 }

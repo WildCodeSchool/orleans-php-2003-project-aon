@@ -32,7 +32,7 @@
         $(document).ready(function(){
 
             $('.navbar').css({
-                'background': 'transparent',
+                'background': 'var(--navbar-color-transp)',
                 'box-shadow':'none'
             });
 
@@ -43,6 +43,7 @@
             // faire apparaitre #text1
             $(window).scroll(function(){
                 posScroll = $(document).scrollTop();
+
                 if(posScroll >=10) {
 
                     $('.navbar').css({
@@ -57,7 +58,7 @@
                 } else {
 
                     $('.navbar').css({
-                        'background': 'transparent',
+                        'background': 'var(--navbar-color-transp)',
                         'box-shadow':'none'
                     });
 

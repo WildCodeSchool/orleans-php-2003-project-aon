@@ -30,3 +30,9 @@
     max-width:800px;
 }
 
+@media screen and (max-width: 991px) {
+    .intro h1 {
+        padding-top:var(--h1-padding-top);
+    }
+}
+
