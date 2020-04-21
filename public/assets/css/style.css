@@ -27,6 +27,7 @@
 
     --font-main-size: 16px;
 
+    --navbar-height:5vw;
 }
 
 * {
@@ -47,6 +48,8 @@ main{
     display:flex;
     flex-direction: column;
     align-items: center;
+
+    padding-top: calc(1.5 * var(--navbar-height));
 }
 
 
@@ -129,6 +132,11 @@ hr{
 
 .navbar{
     background-color: var(--color-main-light);
+
+    position:fixed;
+    width:100%;
+    z-index:100;
+    min-height:var(--navbar-height);
 }
 
 .navbar-toggler-icon {
