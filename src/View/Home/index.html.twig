@@ -33,15 +33,11 @@
 
             $('.navbar').css({
                 'background': 'transparent',
-                'position':'fixed',
-                'width':'var(--navbar-width)',
-                'z-index':'var(--navbar-zindex)',
-                'min-height':'var(--navbar-height)',
                 'box-shadow':'none'
             });
 
             $('.navbar a').css({
-                'color':'var(--color-dark)',
+                'color':'var(--navbar-link-color-light)',
             });
 
             // faire apparaitre #text1
@@ -55,7 +51,7 @@
                     });
 
                     $('.navbar a').css({
-                        'color':'var(--color-dark)',
+                        'color':'var(--navbar-link-color-dark)',
                     });
 
                 } else {
@@ -66,7 +62,7 @@
                     });
 
                     $('.navbar a').css({
-                        'color':'var(--color-dark)',
+                        'color':'var(--navbar-link-color-light)',
                     });
 
                 }

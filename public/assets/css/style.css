@@ -15,6 +15,8 @@
     --color-light-alternative:#F5F4DB;
 
     --navbar-color: var(--color-main);
+    --navbar-link-color-light : var(--color-light-alternative);
+    --navbar-link-color-dark : var(--color-dark);
     --navbar-zindex:100;
     --navbar-width:100%;
 
@@ -31,7 +33,7 @@
     --margin-large: calc(var(--margin) * 2);
     --margin-extra-large: calc(var(--margin) * 4);
 
-    --font-main-size: 16px;
+    --font-main-size: 16pt;
 
     --navbar-height:5vw;
 }
@@ -61,6 +63,7 @@ main{
 h1{
     font-family: var(--font-title);
     font-size: 70px;
+    font-weight:bold;
     padding-top: calc(1.5 * var(--navbar-height));
     padding-bottom: calc(2*(var(--padding-large)));
 }
@@ -68,6 +71,7 @@ h1{
 h2 {
     font-family: var(--font-title);
     font-size: 50px;
+    font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
 }
@@ -75,6 +79,12 @@ h2 {
 h3 {
     font-family: var(--font-title);
     font-size: 30px;
+    font-weight: bold;
+}
+
+h4, h5 {
+    color:var(--color-contrast);
+    font-weight: bold;
 }
 
 li, a {
@@ -128,8 +138,39 @@ hr{
     min-height:var(--navbar-height);
 }
 
+.navbar a{
+    color:var(--navbar-link-color-dark);
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
 .navbar-toggler-icon {
     background-image: url("../icons/hamburger.png");
+}
+
+.navbar li{
+    position:relative;
+    box-sizing: content-box;
+}
+
+.navbar li::after{
+    content:' ';
+    width:30%;
+    height:5%;
+    position:absolute;
+    background:transparent;
+    top:80%;
+    left:0;
+    z-index: -1;
+    left:35%
+}
+
+
+.navbar li:hover::after{
+    width:80%;
+    left:10%;
+    background:var(--navbar-link-color-light);
+    transition:0.8s;
 }
 
 section{
