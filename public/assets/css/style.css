@@ -59,7 +59,7 @@ main{
 
     display:flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    transition:0.8s;
 
     background-attachment:fixed;
     background-image : url("../images/turbulences2.png");
@@ -70,15 +70,17 @@ main{
 
 h1{
     font-family: var(--font-title);
-    font-size: 70px;
+    font-size : calc( 35 * ( 1px + ((100vw - 320px) / 1200)));
     font-weight:bold;
     padding-top: var(--h1-padding-top);
     padding-bottom: calc(2*(var(--padding-large)));
+    padding-left:var(--padding-large);
 }
 
 h2 {
     font-family: var(--font-title);
     font-size: 50px;
+    font-size : calc( 25 * ( 1.5px + ((100vw - 320px) / 2400)));
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
@@ -103,8 +105,9 @@ a:visited {
     text-decoration: none;
 }
 
-a:hover{
+a:hover, .navbar li a:hover{
     text-decoration: none;
+    color:var(--navbar-link-color-light);
 }
 
 ul {

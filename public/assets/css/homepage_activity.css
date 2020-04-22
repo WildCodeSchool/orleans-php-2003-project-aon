@@ -11,13 +11,13 @@
     max-width: 310px;
     min-width: 310px;
     margin-top: var(--margin-large);
-    background:var(--color-light-alternative);
+    background:transparent;
 }
 
-.activity-card:nth-of-type(n) {
+.activity-card .card-body {
     background-color: rgba(29, 253, 146, 0.3);
     background: rgb(16, 199, 146);
-    background: linear-gradient(324deg, rgba(16, 199, 146, 0.35) 0%, rgba(116, 225, 202, 0.23) 76%, rgba(148, 233, 220, 0.33) 100%);
+    background: linear-gradient(324deg, rgba(16, 199, 170, 0.70) 0%, rgba(116, 225, 202, 0.35) 70%, rgba(148, 233, 240, 0.6) 100%);
 }
 
 .activity-card-img{
