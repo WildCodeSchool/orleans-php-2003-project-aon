@@ -10,8 +10,8 @@
 .activity-card{
     max-width: 310px;
     min-width: 310px;
-    margin-top: var(--margin-large);
     background:var(--color-light-alternative);
+    margin: calc(2*(var(--margin-extra-large)));
 }
 
 .activity-card-img{
