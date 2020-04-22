@@ -43,7 +43,4 @@ class EventManager extends AbstractManager
         $statement->execute();
         return $statement->fetch();
     }
-
-
-
 }

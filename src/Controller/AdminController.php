@@ -1,9 +1,8 @@
 <?php
 
-
 namespace App\Controller;
-use App\Model\EventManager;
 
+use App\Model\EventManager;
 
 class AdminController extends AbstractController
 {
