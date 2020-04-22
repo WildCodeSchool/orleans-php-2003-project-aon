@@ -62,7 +62,7 @@ main{
     align-items: center;
 
     background-attachment:fixed;
-    background-image : url("../images/turbulences.png");
+    background-image : url("../images/turbulences2.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -103,6 +103,10 @@ a:visited {
     text-decoration: none;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 ul {
     list-style-type: none;
 }
@@ -113,11 +117,14 @@ ul {
 }
 
 .logo {
-    width: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    max-width: 70px;
+    max-height: 70px;
 }
 
 .page-footer {
-    background-color: var(--color-main-light);
+    background-color: var(--navbar-color);
 }
 
 .logoNavBar{
@@ -146,7 +153,7 @@ hr{
     min-height:var(--navbar-height);
 }
 
-.navbar a{
+.navbar a, footer a{
     color:var(--navbar-link-color-dark);
     letter-spacing: 4px;
     font-weight: bold;
@@ -156,7 +163,7 @@ hr{
     background-image: url("../icons/hamburger.png");
 }
 
-.navbar li{
+.navbar li, footer li{
     position:relative;
     box-sizing: content-box;
 }
@@ -169,8 +176,7 @@ hr{
     background:transparent;
     top:80%;
     left:0;
-    z-index: -1;
-    left:35%
+    left:35%;
 }
 
 
