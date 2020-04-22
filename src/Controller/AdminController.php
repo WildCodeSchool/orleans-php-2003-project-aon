@@ -4,21 +4,23 @@ namespace App\Controller;
 
 use App\Model\EventManager;
 
-/**
- * Class AdminController
- *
- */
 class AdminController extends AbstractController
 {
+
     /**
-     * Handle event deletion
+     * Display activity page
      *
-     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
-    public function delete(int $id)
+
+    public function index()
     {
-        $eventManager = new EventManager();
-        $eventManager->delete($id);
-        header('Location:/Admin/index');
+        //whoAreUs
+        $adminEvent = new EventManager();
+        $event = $adminEvent->selectAll();
+        return $this->twig->render('Admin/index.html.twig', ['event' => $event]);
     }
 }

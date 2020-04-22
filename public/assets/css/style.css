@@ -1,16 +1,25 @@
 /* pour importer les futurs fichiers: @import url(".css");*/
 @import url('https://fonts.googleapis.com/css2?family=Antic&family=Sen&display=swap');
+@import url('homepage.css');
 @import url('homepage_event.css');
 @import url('homepage_activity.css');
+@import url('homepage_partner.css');
 
 :root {
     --color-light: #F0FFFF;
     --color-dark: #465566;
-    --color-main: #91AAC7;
+    --color-main:#3DABC4;
     --color-main-dark: #465566;
     --color-main-light: #ADD8E6;
     --color-contrast: #FF8F8C;
     --color-light-alternative:#F5F4DB;
+
+    --navbar-color: var(--color-main);
+    --navbar-color-transp: transparent;
+    --navbar-link-color-light : var(--color-light-alternative);
+    --navbar-link-color-dark : var(--color-dark);
+    --navbar-zindex:100;
+    --navbar-width:100%;
 
     --font-title: 'Antic', sans-serif;
     --font-text: 'Sen', sans-serif;
@@ -25,8 +34,11 @@
     --margin-large: calc(var(--margin) * 2);
     --margin-extra-large: calc(var(--margin) * 4);
 
-    --font-main-size: 16px;
+    --font-main-size: 16pt;
 
+    --navbar-height:5vw;
+
+    --h1-padding-top:calc(1.5 * var(--navbar-height));
 }
 
 * {
@@ -38,6 +50,7 @@ body{
     flex-direction: column;
     align-items: stretch;
     color:var(--color-dark);
+    font-size:16pt;
 }
 
 main{
@@ -47,19 +60,28 @@ main{
     display:flex;
     flex-direction: column;
     align-items: center;
-}
 
+    background-attachment:fixed;
+    background-image : url("../images/turbulences2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 
 h1{
     font-family: var(--font-title);
-    font-size: 70px;
-    padding-top: calc(2*(var(--padding-large)));
+    font-size : calc( 35 * ( 1px + ((100vw - 320px) / 1200)));
+    font-weight:bold;
+    padding-top: var(--h1-padding-top);
     padding-bottom: calc(2*(var(--padding-large)));
+    padding-left:var(--padding-large);
 }
 
 h2 {
     font-family: var(--font-title);
     font-size: 50px;
+    font-size : calc( 25 * ( 1.5px + ((100vw - 320px) / 2400)));
+    font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
 }
@@ -67,6 +89,12 @@ h2 {
 h3 {
     font-family: var(--font-title);
     font-size: 30px;
+    font-weight: bold;
+}
+
+h4, h5 {
+    color:var(--color-contrast);
+    font-weight: bold;
 }
 
 li, a {
@@ -75,6 +103,11 @@ li, a {
 
 a:visited {
     text-decoration: none;
+}
+
+a:hover, .navbar li a:hover{
+    text-decoration: none;
+    color:var(--navbar-link-color-light);
 }
 
 ul {
@@ -87,11 +120,11 @@ ul {
 }
 
 .logo {
-    width: 70px;
+    width: 35px;
 }
 
 .page-footer {
-    background-color: var(--color-main-light);
+    background-color: var(--navbar-color);
 }
 
 .logoNavBar{
@@ -111,28 +144,47 @@ hr{
     border: none;
 }
 
-.partner-card{
-    border: none;
-    max-width: 150px;
-    min-width: 150px;
-    margin-top: var(--margin-large);
-}
-
-.partner-card-deck{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin:0;
-    padding: var(--padding-extra-large);
-}
-
 .navbar{
-    background-color: var(--color-main-light);
+    background-color: var(--navbar-color);
+
+    position:fixed;
+    width:var(--navbar-width);
+    z-index:var(--navbar-zindex);
+    min-height:var(--navbar-height);
+}
+
+.navbar a, footer a{
+    color:var(--navbar-link-color-dark);
+    letter-spacing: 4px;
+    font-weight: bold;
 }
 
 .navbar-toggler-icon {
     background-image: url("../icons/hamburger.png");
+}
+
+.navbar li, footer li{
+    position:relative;
+    box-sizing: content-box;
+}
+
+.navbar li::after{
+    content:' ';
+    width:30%;
+    height:5%;
+    position:absolute;
+    background:transparent;
+    top:80%;
+    left:0;
+    left:35%;
+}
+
+
+.navbar li:hover::after{
+    width:80%;
+    left:10%;
+    background:var(--navbar-link-color-light);
+    transition:0.8s;
 }
 
 section{
@@ -140,17 +192,20 @@ section{
     flex-direction: column;
     align-items: center;
     width:100%;
+    min-height:100vh;
+    justify-content: space-around;
 }
 
 section h2{
     align-self: start;
 }
 
-.welcome {
-    padding: 2vW;
-    max-width:800px;
-}
-
 .clearfix{
     display:none;
+}
+
+@media screen and (max-width: 991px) {
+    .navbar {
+        --navbar-color-transp: var(--navbar-color);
+    }
 }
