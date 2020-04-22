@@ -14,7 +14,15 @@ class AdminController extends AbstractController
 
     public function index()
     {
-        return $this->twig->render('Admin/_eventDetails.html.twig');
+        $adminEvent = new EventManager();
+        $event = $adminEvent->selectAll();
+        return $this->twig->render('Admin/index.html.twig', ['event' => $event]);
+    }
+
+    public function createEvent(string $message = "")
+    {
+        $message = urldecode($message);
+        return $this->twig->render('Admin/addEvent.html.twig', ['message' => $message]);
     }
 
     /**
@@ -27,17 +35,22 @@ class AdminController extends AbstractController
      */
     public function addEvent()
     {
-        $errorsAndData=$this->checkEventPostData();
         $toBeReturned="";
-        if (count($errorsAndData['data'])==5) {
-            $eventManager=new EventManager();
-            $eventManager->insert($errorsAndData['data']);
-            header("location:/admin/index");
-        } else {
-            $toBeReturned = $this->twig->render('Admin/_eventDetails.html.twig', ['errors'=>$errorsAndData['errors'],
-                'data'=>$errorsAndData['data']]);
-        }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errorsAndData=$this->checkEventPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
 
+            if (count($data)==5 && empty($data['id'])) {
+                $eventManager=new EventManager();
+                $eventManager->insert($data);
+                header("location:/admin/index");
+            } else {
+                $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
+                    'data'=>$data,
+                    'message'=>"L'évenement n'a pas pu être créé."]);
+            }
+        }
         return $toBeReturned;
     }
 
@@ -54,7 +67,8 @@ class AdminController extends AbstractController
             'description' => '',
             'picture' => '',
             'date' => '',
-            'location' => ''];
+            'location' => '',
+            'id' => ''];
 
         //data array
         $data=array();
@@ -78,6 +92,17 @@ class AdminController extends AbstractController
             $errors['date'] .= "La date doit avoir le format aaaa-mm-jj";
         } else {
             $data['date']=trim($_POST['date']);
+        }
+
+        //check id
+        if (empty($_POST['id'])) {
+            $errors['id'] .= "ID ERROR";
+        } elseif (!is_numeric(trim($_POST['id']))) {
+            $errors['id'] .= "Format id incorrect";
+        } elseif (intval(trim($_POST['id']))<1) {
+            $errors['id'] .= "Id is negative";
+        } else {
+            $data['id']=intval(trim($_POST['id']));
         }
 
         $checked=$this->checkTextFromPost('location', "de l'endroit", 50);

@@ -1,31 +1,27 @@
-Ceci est le formulaire d'ajout des evenements
-
-<form method="post" action="../admin/addEvent">
-    <div class="form-group">
-        <label for="title">Nom de l'évenement</label>
-        <input type="text" id="title" name="title" value="{{data.title}}">
-        <div class="errorMessage" class="form-text text-muted">{{errors.title}}</div>
-    </div>
-    <div class="form-group">
-        <label for="description">Description de l'évenement</label>
-        <input type="text" id="description" name="description" value="{{data.description}}">
-        <div class="errorMessage" class="form-text text-muted">{{errors.descriptione}}</div>
-    </div>
-    <div class="form-group">
-        <label for="picture">Illustration de l'évenement</label>
-        <input type="text" id="picture" name="picture" value="{{data.picture}}">
-        <div class="errorMessage" class="form-text text-muted">{{errors.picture}}</div>
-    </div>
-     <div class="form-group">
-        <label for="date">Date de l'évenement</label>
-        <input type="date" id="date" name="date" value="{{data.date}}">
-        <div class="errorMessage" class="form-text text-muted">{{errors.date}}</div>
-     </div>
-     <div class="form-group">
-        <label for="location">Endroit de l'évenement</label>
-        <input type="text" id="location" name="location" value="{{data.location}}">
-        <div class="errorMessage" class="form-text text-muted">{{errors.location}}</div>
-     </div>
-
-    <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Créer cet évenement">
-</form>
+<div class="form-message">{{ message }}</div>
+<div class="form-group">
+    <label for="title">Nom de l'évenement</label>
+    <input type="text" id="title" name="title" value="{{data.title}}">
+    <div class="errorMessage" class="form-text text-muted">{{errors.title}}</div>
+</div>
+<div class="form-group">
+    <label for="description">Description de l'évenement</label>
+    <input type="text" id="description" name="description" value="{{data.description}}">
+    <div class="errorMessage" class="form-text text-muted">{{errors.description}}</div>
+</div>
+<div class="form-group">
+    <label for="picture">Illustration de l'évenement</label>
+    <input type="text" id="picture" name="picture" value="{{data.picture}}">
+    <div class="errorMessage" class="form-text text-muted">{{errors.picture}}</div>
+</div>
+<div class="form-group">
+    <label for="date">Date de l'évenement</label>
+    <input type="date" id="date" name="date" value="{{data.date}}">
+    <div class="errorMessage" class="form-text text-muted">{{errors.date}}</div>
+</div>
+<div class="form-group">
+    <label for="location">Endroit de l'évenement</label>
+    <input type="text" id="location" name="location" value="{{data.location}}">
+    <div class="errorMessage" class="form-text text-muted">{{errors.location}}</div>
+</div>
+<input type="hidden" name="id" value="{{ data.id }}">

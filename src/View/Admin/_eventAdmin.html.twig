@@ -1,0 +1,34 @@
+ <section class="cookies container-fluid">
+        <div class="row">
+            <h2>Event Admin</h2>
+
+
+            <table class="table table-stripped">
+                <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>location</th>
+                    <th>Edit</th>
+                    <th>supp</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  for id in event %}
+                <tr>
+                    <td>{{ id.title }}</td>
+                    <td>{{ id.date }}</td>
+                    <td>{{ id.location }}</td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+     <a class="activity-button btn btn-primary btn-lg" href="/./Admin/createEvent">Ajouter un évenement</a>
+    </section>
+
