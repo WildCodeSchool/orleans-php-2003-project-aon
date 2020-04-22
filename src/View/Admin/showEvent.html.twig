@@ -1,11 +1,12 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Edit Event {{ event.title }}</h1>
-    <form>
-   {# {% include 'Event/_eventDetails.html.twig' %} #}
-        <input type="submit" value="Retour">
-        <input type="submit" value="Enregistrer les modifications">
+    <h1>Modifier l'évènement:  {{ data.title }}</h1>
+    <form class = "event-form" method="post" action="/./Admin/editEvent">
+        {% include 'Admin/_eventDetails.html.twig' %}
+        <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>
+        <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Enregistrer les modifications">
     </form>
-    <a href="../Admin/showEvent/{{ event.id }}">Back</a>
 {% endblock %}
+
+

@@ -1,0 +1,3 @@
+.event-form{
+    padding-bottom: calc(2*(var(--margin-extra-large)));
+}
