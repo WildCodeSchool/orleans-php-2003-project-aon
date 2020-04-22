@@ -32,12 +32,11 @@ class AdminController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function show(int $id)
+    public function showEvent(int $id)
     {
         $eventManager = new EventManager();
         $event = $eventManager->selectOneById($id);
-
-        return $this->twig->render('Admin/show.html.twig', ['event' => $event]);
+        return $this->twig->render('Admin/showEvent.html.twig', ['event' => $event]);
     }
 
 
@@ -50,15 +49,15 @@ class AdminController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function edit(int $id): string
+    public function editEvent(int $id): string
     {
         $eventManager = new EventManager();
         $event = $eventManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $event['title'] = $_POST['title'];
-            $eventManager->update($event);
+            $eventManager->updateEvent($event);
         }
-        return $this->twig->render('Admin/edit.html.twig', ['event' => $event]);
+        return $this->twig->render('Admin/showEvent/html/twig', ['event' => $event]);
     }
 }
