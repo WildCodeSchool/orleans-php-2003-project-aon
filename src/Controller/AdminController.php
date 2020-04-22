@@ -87,18 +87,25 @@ class AdminController extends AbstractController
         return ['errors' => $errors, 'data' => $data];
     }
 
-    public function checkTextFromPost($fieldName, $userFieldName, $maxLength) : array
+    /**
+     * Check if the provided fieldName exist in $_POST as String and match with the maximul length
+     * @param string $postFieldName
+     * @param string $userFieldName
+     * @param int $maxLength
+     * @return array array['erros'] contains the errors list, array['data'] contained date clean for use in database
+     */
+    public function checkTextFromPost(string $postFieldName, string $userFieldName, int $maxLength) : array
     {
         $data=array();
         $errors=array();
-        $errors[$fieldName]='';
+        $errors[$postFieldName]='';
 
-        if (empty($_POST[$fieldName])) {
-            $errors[$fieldName] .= "Vous devez indiquer le nom $userFieldName";
-        } elseif (strlen(trim($_POST[$fieldName]))>$maxLength) {
-            $errors[$fieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
+        if (empty($_POST[$postFieldName])) {
+            $errors[$postFieldName] .= "Vous devez indiquer le nom $userFieldName";
+        } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
+            $errors[$postFieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
-            $data[$fieldName]=trim($_POST[$fieldName]);
+            $data[$postFieldName]=trim($_POST[$postFieldName]);
         }
 
         return ['errors' => $errors, 'data'=>$data];
