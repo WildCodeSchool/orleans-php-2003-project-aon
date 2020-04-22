@@ -1,0 +1,19 @@
+.whoAreUs-card {
+    display: flex;
+    flex-direction: row;
+}
+.card-img {
+    width: 350px;
+    height: 350px;
+}
+.card-text {
+    padding: var(--padding-large) ;
+}
+
+@media screen and (max-width: 901px) {
+    .whoAreUs-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
