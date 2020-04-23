@@ -73,15 +73,15 @@ class AdminController extends AbstractController
         //data array
         $data=array();
 
-        $checked=$this->checkTextFromPost('title', "du titre", 50);
+        $checked=$this->checkTextFromPost('title', "le titre", 50);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('description', "de la description", 250);
+        $checked=$this->checkTextFromPost('description', "la description", 250);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('picture', "de l'illustration", 250);
+        $checked=$this->checkTextFromPost('picture', "la photo", 250);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
@@ -105,7 +105,7 @@ class AdminController extends AbstractController
             $data['id']=intval(trim($_POST['id']));
         }
 
-        $checked=$this->checkTextFromPost('location', "de l'endroit", 50);
+        $checked=$this->checkTextFromPost('location', "l'endroit", 50);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
@@ -126,7 +126,7 @@ class AdminController extends AbstractController
         $errors[$postFieldName]='';
 
         if (empty($_POST[$postFieldName])) {
-            $errors[$postFieldName] .= "Vous devez indiquer le nom $userFieldName";
+            $errors[$postFieldName] .= "Vous devez indiquer $userFieldName de l'évenement";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
             $errors[$postFieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
