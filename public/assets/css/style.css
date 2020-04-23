@@ -5,6 +5,7 @@
 @import url('homepage_activity.css');
 @import url('homepage_partner.css');
 @import url('admin_event.css');
+@import url('whoAreUs.css');
 
 :root {
     --color-light: #F0FFFF;
