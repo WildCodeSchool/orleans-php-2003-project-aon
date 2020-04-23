@@ -43,6 +43,7 @@ class ItemManager extends AbstractManager
         }
     }
 
+    
     /**
      * @param int $id
      */
@@ -54,6 +55,7 @@ class ItemManager extends AbstractManager
         $statement->execute();
     }
 
+    
     /**
      * @param array $item
      * @return bool
