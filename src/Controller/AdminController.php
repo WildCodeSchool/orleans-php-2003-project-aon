@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Emmanuelle
- * Date: 15/04/2020
- */
 
 namespace App\Controller;
 
@@ -12,6 +7,15 @@ use App\Model\EventManager;
 class AdminController extends AbstractController
 {
 
+
+    /**
+     * Display activity page
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function index()
     {
         $adminEvent = new EventManager();
@@ -26,13 +30,32 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Display activity page
+     * Display event informations specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function showEvent(int $id, string $message = "")
+    {
+        $message = urldecode($message);
+        $eventManager = new EventManager();
+        $event = $eventManager->selectOneById($id);
+        return $this->twig->render('Admin/showEvent.html.twig', ['data' => $event, 'message' => $message]);
+    }
+
+
+    /**
+     * Display event edition page specified by $id
      *
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
     public function addEvent()
     {
         $toBeReturned="";
@@ -49,6 +72,33 @@ class AdminController extends AbstractController
                 $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
                     'data'=>$data,
                     'message'=>"L'évenement n'a pas pu être créé."]);
+            }
+        }
+        return $toBeReturned;
+    }
+  
+  
+    /**
+     * Display event edition page specified by $id
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function editEvent(): string
+    {
+        $toBeReturned = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errorsAndData = $this->checkEventPostData();
+
+            if (count($errorsAndData['data']) == 6) {
+                $eventManager = new EventManager();
+                $eventManager->updateEvent($errorsAndData['data']);
+                header("location:/admin/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
+            } else {
+                $toBeReturned = $this->twig->render('Admin/showEvent.html.twig', ['errors' => $errorsAndData['errors'],
+                    'data' => $errorsAndData['data']]);
             }
         }
         return $toBeReturned;
