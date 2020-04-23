@@ -43,6 +43,12 @@ class EventManager extends AbstractManager
         $statement->execute();
         return $statement->fetch();
     }
+    
+    
+        public function selectAll(): array
+    {
+        return $this->pdo->query("SELECT * FROM " . $this->table . " ORDER BY date DESC")->fetchAll();
+    }
 
     /**
      * @param int $id
