@@ -1,44 +1,43 @@
 <div class="form-message">{{ message }}</div>
 
+<div class="form-container">
 
-    <div class="form-group">
-        <label class="col-form-label" for="title">Nom de l'évenement</label>
-        <input class="form-control" type="text" id="title" name="title" value="{{data.title}}">
-        <small class="errorMessage form-text text-danger">{{errors.title}}</small>
+    <div class="form-container-left">
+        <div class="form-group">
+            <label class="col-form-label" for="title">Nom de l'évenement</label>
+            <input class="form-control" type="text" id="title" name="title" value="{{data.title}}">
+            <small class="errorMessage form-text text-danger">{{errors.title}}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="description">Description de l'évenement</label>
+            <textarea class="eventFormTextArea form-control" type="text" id="description" name="description" value="{{data.description}}"></textarea>
+            <small class="errorMessage form-text text-danger">{{errors.description}}</small>
+        </div>
+    </div>
+
+    <div class="form-container-right">
+        <div class="form-group">
+            <label class="col-form-label" for="picture">Illustration de l'évenement</label>
+            <input class="form-control" type="text" id="picture" name="picture" value="{{data.picture}}">
+            <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="date">Date de l'évenement</label>
+            <input class="form-control" type="date" id="date" name="date" value="{{data.date}}">
+            <small class="errorMessage form-text text-danger">{{errors.date}}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="location">Endroit de l'évenement</label>
+            <input class="form-control" type="text" id="location" name="location" value="{{data.location}}">
+            <small class="errorMessage form-text text-danger">{{errors.location}}</small>
+        </div>
     </div>
 
 
 
-    <div class="form-group">
-        <label class="col-form-label" for="description">Description de l'évenement</label>
-        <textarea class="eventFormTextArea form-control" type="text" id="description" name="description" value="{{data.description}}"></textarea>
-        <small class="errorMessage form-text text-danger">{{errors.description}}</small>
-    </div>
-
-
-
-    <div class="form-group">
-        <label class="col-form-label" for="picture">Illustration de l'évenement</label>
-        <input class="form-control" type="text" id="picture" name="picture" value="{{data.picture}}">
-        <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
-    </div>
-
-
-
-    <div class="form-group">
-        <label class="col-form-label" for="date">Date de l'évenement</label>
-        <input class="form-control" type="date" id="date" name="date" value="{{data.date}}">
-        <small class="errorMessage form-text text-danger">{{errors.date}}</small>
-    </div>
-
-
-
-    <div class="form-group">
-        <label class="col-form-label" for="location">Endroit de l'évenement</label>
-        <input class="form-control" type="text" id="location" name="location" value="{{data.location}}">
-        <small class="errorMessage form-text text-danger">{{errors.location}}</small>
-    </div>
-
-
+</div>
 
 <input type="hidden" name="id" value="{{ data.id }}">
