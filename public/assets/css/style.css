@@ -200,6 +200,10 @@ section h2{
     align-self: start;
 }
 
+.delete_button{
+    width: 45px;
+}
+
 .clearfix{
     display:none;
 }
