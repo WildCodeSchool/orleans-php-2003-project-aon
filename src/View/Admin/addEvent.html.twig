@@ -1,14 +1,10 @@
-{% extends 'layout.html.twig' %}
+{% extends 'Admin/eventFormLayout.html.twig' %}
 
-{% block content %}
-    <h1>Creer un évènement</h1>
-    <form class = "event-form" method="post" action="/./Admin/addEvent">
-        {% include 'Admin/_eventDetails.html.twig' %}
-        <div class="form-button-pannel">
+{% block title %}Creer un évènement{% endblock %}
+
+{% block buttons %}
             <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>
             <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Enregistrer l'évenement">
-        </div>
-    </form>
 {% endblock %}
 
 

@@ -2,8 +2,8 @@
     display:flex;
     flex-direction: column;
     align-items: center;
-
     padding: var(--padding-extra-large);
+    width:100%;
 }
 
 .form-message{
@@ -11,11 +11,13 @@
     font-size: 50px;
     padding:var(--padding-large);
     color:var(--color-main);
+    width:100%;
 }
 
 .form-container{
     display:flex;
     flex-wrap: wrap;
+    width:100%;
 }
 
 .form-container-left, .form-container-right{
