@@ -39,14 +39,18 @@ class EventManager extends AbstractManager
     public function selectNextEvent()
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM $this->table ORDER BY date DESC LIMIT 1");
+        $statement = $this->pdo->prepare("SELECT title, description, location, picture, date as ordered_date,
+                DATE_FORMAT(date, '%d/%m/%Y') as date 
+                FROM $this->table ORDER BY ordered_date DESC LIMIT 1");
         $statement->execute();
         return $statement->fetch();
     }
 
     public function selectAll(): array
     {
-        return $this->pdo->query("SELECT * FROM " . $this->table . " ORDER BY date DESC")->fetchAll();
+        return $this->pdo->query("SELECT id, title, description, location, picture, date as ordered_date,
+                DATE_FORMAT(date, '%d/%m/%Y') as date 
+                FROM " . $this->table . " ORDER BY ordered_date DESC")->fetchAll();
     }
 
     /**

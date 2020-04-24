@@ -1,16 +1,14 @@
  <section class="cookies container-fluid">
         <div class="row">
-            <h2>Event Admin</h2>
+            <h2>Gestion des évenements</h2>
 
 
             <table class="table table-stripped">
                 <thead>
                 <tr>
-                    <th>Event</th>
+                    <th>Evenement</th>
                     <th>Date</th>
-                    <th>location</th>
-                    <th>Edit</th>
-                    <th>supp</th>
+                    <th>Lieu</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,7 +17,7 @@
                     <td>{{ id.title }}</td>
                     <td>{{ id.date }}</td>
                     <td>{{ id.location }}</td>
-                    <td><a href="showEvent/{{ id.id }}">Modifier</a>
+                    <td><a class="mini activity-button btn btn-primary btn-lg" href="showEvent/{{ id.id }}">Modifier</a>
                     </td>
                     <td>
                     </td>

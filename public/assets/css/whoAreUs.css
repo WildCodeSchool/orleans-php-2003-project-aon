@@ -1,13 +1,16 @@
 .whoAreUs-card {
     display: flex;
     flex-direction: row;
+    background:transparent;
 }
-.card-img {
+.wau-card-img {
     width: 350px;
     height: 350px;
 }
-.card-text {
+.wau-card-text {
     padding: var(--padding-large) ;
+
+    text-align:center;
 }
 
 @media screen and (max-width: 901px) {
