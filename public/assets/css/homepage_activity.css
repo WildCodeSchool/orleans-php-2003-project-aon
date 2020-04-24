@@ -7,10 +7,10 @@
     padding-bottom: var(--padding-extra-large);
 }
 
-.activity-card{
+.card-deck .activity-card{
     max-width: 310px;
     min-width: 310px;
-    margin: calc(2*(var(--margin-extra-large)));
+    margin: calc(1 * (var(--margin-extra-large)));
     background:transparent;
 }
 

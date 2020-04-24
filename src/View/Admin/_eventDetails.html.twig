@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label class="col-form-label" for="description">Description de l'évenement</label>
-            <textarea class="eventFormTextArea form-control" type="text" id="description" name="description" value="{{data.description}}"></textarea>
+            <textarea class="eventFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
             <small class="errorMessage form-text text-danger">{{errors.description}}</small>
         </div>
 
@@ -46,3 +46,4 @@
 </div>
 
 <input type="hidden" name="id" value="{{ data.id }}">
+

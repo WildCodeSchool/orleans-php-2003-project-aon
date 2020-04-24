@@ -40,7 +40,7 @@
     </header>
 
     <main>
-    {% block content %}    {% endblock %}
+        {% block content %}    {% endblock %}
     </main>
 
   <footer class="page-footer font-small blue pt-4">
@@ -76,7 +76,7 @@
                           <a href="/./WhoAreUs/index">Qui sommes-nous</a>
                       </li>
                       <li class="col-md-12 link">
-                          <a href="/./admin/index">Admin</a>
+                          <a href="/./Admin/index">Espace Administrateur</a>
                       </li>
                   </ul>
               </div>
@@ -92,12 +92,15 @@
 
     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
     <script>
         AOS.init({
             easing: "ease-out",
             duration: 800,
         });
     </script>
+
+
 
     {% block javascript %}
     {% endblock %}

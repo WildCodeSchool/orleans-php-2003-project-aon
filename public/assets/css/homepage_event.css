@@ -1,4 +1,7 @@
 .event{
+    min-height: unset;
+    padding-top: 35px;
+    padding-bottom:35px;
 }
 
 .eventContent{
