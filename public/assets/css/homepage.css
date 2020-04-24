@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
     background-attachment: fixed;
     background-image :  url("../images/intro.jpg");
     background-position: center;
@@ -11,7 +10,7 @@
 
     overflow:hidden;
 
-    padding-top: calc(1.5 * var(--navbar-height));
+    padding-top: calc(1 * var(--navbar-height));
     min-height:100vh;
     width:100vw;
 
@@ -21,13 +20,15 @@
 
 .intro h1{
     padding-top:0;
+    max-width: 60%;
 }
 
 .intro .welcome{
     align-self: start;
     font-weight: bold;
     padding: 2vW;
-    max-width:800px;
+    max-width:600px;
+radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
 }
 
 @media screen and (max-width: 991px) {

@@ -40,3 +40,12 @@
 h1{
     margin:0;
 }
+
+.mini{
+    height:35px;
+    display:flex;
+    align-items: center;
+    width: min-content;
+    margin:0;
+}
+
