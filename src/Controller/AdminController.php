@@ -7,6 +7,7 @@ use App\Model\EventManager;
 class AdminController extends AbstractController
 {
 
+
     /**
      * Display activity page
      *
@@ -15,14 +16,19 @@ class AdminController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-
     public function index()
     {
-        //whoAreUs
         $adminEvent = new EventManager();
         $event = $adminEvent->selectAll();
         return $this->twig->render('Admin/index.html.twig', ['event' => $event]);
     }
+
+    public function createEvent(string $message = "")
+    {
+        $message = urldecode($message);
+        return $this->twig->render('Admin/addEvent.html.twig', ['message' => $message]);
+    }
+
     /**
      * Display event informations specified by $id
      *
@@ -41,6 +47,37 @@ class AdminController extends AbstractController
     }
 
 
+    /**
+     * Display event edition page specified by $id
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+
+    public function addEvent()
+    {
+        $toBeReturned="";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errorsAndData=$this->checkEventPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
+
+            if (count($data)==5 && empty($data['id'])) {
+                $eventManager=new EventManager();
+                $eventManager->insert($data);
+                header("location:/admin/index");
+            } else {
+                $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
+                    'data'=>$data,
+                    'message'=>"L'évenement n'a pas pu être créé."]);
+            }
+        }
+        return $toBeReturned;
+    }
+  
+  
     /**
      * Display event edition page specified by $id
      *
@@ -86,15 +123,15 @@ class AdminController extends AbstractController
         //data array
         $data=array();
 
-        $checked=$this->checkTextFromPost('title', "du titre", 50);
+        $checked=$this->checkTextFromPost('title', "le titre", 50);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('description', "de la description", 250);
+        $checked=$this->checkTextFromPost('description', "la description", 250);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('picture', "de l'illustration", 250);
+        $checked=$this->checkTextFromPost('picture', "la photo", 250);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
@@ -112,29 +149,38 @@ class AdminController extends AbstractController
             $errors['id'] .= "ID ERROR";
         } elseif (!is_numeric(trim($_POST['id']))) {
             $errors['id'] .= "Format id incorrect";
+        } elseif (intval(trim($_POST['id']))<1) {
+            $errors['id'] .= "Id is negative";
         } else {
-            $data['id']=trim($_POST['id']);
+            $data['id']=intval(trim($_POST['id']));
         }
 
-        $checked=$this->checkTextFromPost('location', "de l'endroit", 50);
+        $checked=$this->checkTextFromPost('location', "l'endroit", 50);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
         return ['errors' => $errors, 'data' => $data];
     }
 
-    public function checkTextFromPost($fieldName, $userFieldName, $maxLength) : array
+    /**
+     * Check if the provided fieldName exist in $_POST as String and match with the maximul length
+     * @param string $postFieldName
+     * @param string $userFieldName
+     * @param int $maxLength
+     * @return array array['erros'] contains the errors list, array['data'] contained date clean for use in database
+     */
+    public function checkTextFromPost(string $postFieldName, string $userFieldName, int $maxLength) : array
     {
         $data=array();
         $errors=array();
-        $errors[$fieldName]='';
+        $errors[$postFieldName]='';
 
-        if (empty($_POST[$fieldName])) {
-            $errors[$fieldName] .= "Vous devez indiquer le nom $userFieldName";
-        } elseif (strlen(trim($_POST[$fieldName]))>$maxLength) {
-            $errors[$fieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
+        if (empty($_POST[$postFieldName])) {
+            $errors[$postFieldName] .= "Vous devez indiquer $userFieldName de l'évenement";
+        } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
+            $errors[$postFieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
-            $data[$fieldName]=trim($_POST[$fieldName]);
+            $data[$postFieldName]=trim($_POST[$postFieldName]);
         }
 
         return ['errors' => $errors, 'data'=>$data];
