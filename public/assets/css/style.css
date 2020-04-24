@@ -209,6 +209,8 @@ section h2{
     display:none;
 }
 
+
+
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
