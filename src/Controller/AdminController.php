@@ -39,7 +39,6 @@ class AdminController extends AbstractController
     {
         $message = urldecode($message);
         return $this->twig->render('Admin/addEvent.html.twig', ['message' => $message]);
-
     }
 
     /**
