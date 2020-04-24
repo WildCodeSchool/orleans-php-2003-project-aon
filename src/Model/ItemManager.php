@@ -43,6 +43,7 @@ class ItemManager extends AbstractManager
         }
     }
 
+
     /**
      * @param int $id
      */
@@ -53,6 +54,7 @@ class ItemManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
+
 
     /**
      * @param array $item

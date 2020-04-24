@@ -4,6 +4,9 @@
 @import url('homepage_event.css');
 @import url('homepage_activity.css');
 @import url('homepage_partner.css');
+@import url('admin_event.css');
+@import url('whoAreUs.css');
+
 
 :root {
     --color-light: #F0FFFF;
@@ -56,7 +59,6 @@ body{
 main{
     align-self: center;
     max-width:75%;
-
     display:flex;
     flex-direction: column;
     align-items: center;

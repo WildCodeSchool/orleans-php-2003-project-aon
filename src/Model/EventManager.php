@@ -16,7 +16,6 @@ namespace App\Model;
  *  $conn = $db->getPdoConnection();
  * </pre>
  */
-
 class EventManager extends AbstractManager
 {
     /**
@@ -43,6 +42,12 @@ class EventManager extends AbstractManager
         $statement->execute();
         return $statement->fetch();
     }
+    
+    
+    public function selectAll(): array
+    {
+        return $this->pdo->query("SELECT * FROM " . $this->table . " ORDER BY date DESC")->fetchAll();
+    }
 
     /**
      * @param int $id
@@ -53,5 +58,39 @@ class EventManager extends AbstractManager
         $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
+    }
+
+    /**
+     * @param array $event
+     * @return bool
+     */
+    public function insert(array $event):bool
+    {
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+            " (`title`, `description`, `picture`, `date`, `location`) 
+            VALUES 
+            (:title, :description, :picture, :date, :location)");
+
+        $statement->bindValue('title', $event['title'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $event['description'], \PDO::PARAM_STR);
+        $statement->bindValue('picture', $event['picture'], \PDO::PARAM_STR);
+        $statement->bindValue('date', $event['date'], \PDO::PARAM_STR);
+        $statement->bindValue('location', $event['location'], \PDO::PARAM_STR);
+      
+        return $statement->execute();
+    }
+
+    public function updateEvent(array $event): bool
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `title` = :title, 
+        `description` = :description, `picture` = :picture, `date` = :date, `location` = :location WHERE id=:id");
+        $statement->bindValue('title', $event['title'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $event['description'], \PDO::PARAM_STR);
+        $statement->bindValue('picture', $event['picture'], \PDO::PARAM_STR);
+        $statement->bindValue('date', $event['date']);
+        $statement->bindValue('location', $event['location'], \PDO::PARAM_STR);
+        $statement->bindValue('id', $event['id'], \PDO::PARAM_INT);
+
+        return $statement->execute();
     }
 }

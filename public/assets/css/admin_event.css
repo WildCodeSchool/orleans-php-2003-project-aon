@@ -1,0 +1,42 @@
+.event-form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-large);
+    min-width:100%;
+}
+
+.form-message{
+    font-family: var(--font-title);
+    font-size: 50px;
+    padding:var(--padding);
+    color:var(--color-main);
+}
+
+.form-container{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width:1000px;
+    max-width:90vw;
+}
+
+.form-container-left, .form-container-right{
+    display:flex;
+    flex-direction: column;
+    justify-content: stretch;
+    width:50%;
+    padding: var(--padding-large);
+}
+
+.form-container-left{
+    width:300px;
+}
+
+.form-group textarea{
+    height : 330px;
+}
+
+h1{
+    margin:0;
+}
