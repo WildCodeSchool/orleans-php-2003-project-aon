@@ -44,12 +44,24 @@ class EventManager extends AbstractManager
         $statement->execute();
         return $statement->fetch();
     }
-
+    
+    
     public function selectAll(): array
     {
         return $this->pdo->query("SELECT id, title, description, location, picture, date as ordered_date,
                 DATE_FORMAT(date, '%d/%m/%Y') as date 
                 FROM " . $this->table . " ORDER BY ordered_date DESC")->fetchAll();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 
     /**
