@@ -20,3 +20,7 @@
     transform: scale(1.5);
     transition:0.2s;
 }
+
+.partner{
+    min-height: unset;
+}
