@@ -25,17 +25,46 @@ class LessonManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectEverthingForOneById(int $activityId)
+    public function selectEverthingForOneById(int $activityId, int $ageClassId = -1)
     {
+        $ageClassId=1;
+        $ageQuery="";
+        if ($ageClassId >= 0) {
+            $ageQuery=" and age.id=$ageClassId";
+        }
+
         // prepared request
         $statement = $this->pdo->prepare("SELECT *,
             pool.name AS pool_name,
-            activity.name as activity_name 
+            activity.name as activity_name,
+            activity.description,
+            activity.id,
+            activity.picture,
+            age.age,
+            age.id
             FROM $this->table
             RIGHT JOIN activity ON lesson.activity_id=activity.id 
             JOIN pool ON lesson.pool_id=pool.id 
             JOIN age ON lesson.age_id=age.id 
-            WHERE activity.id=:id ");
+            WHERE activity.id=:id 
+            ".$ageQuery);//
+
+        $statement->bindValue('id', $activityId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function selectAgeClassesForOneById(int $activityId)
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("SELECT
+            age.age,
+            age.id
+            FROM $this->table
+            JOIN age ON lesson.age_id=age.id 
+            WHERE activity_id=:id 
+            ");//
 
         $statement->bindValue('id', $activityId, \PDO::PARAM_INT);
         $statement->execute();

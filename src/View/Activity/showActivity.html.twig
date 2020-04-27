@@ -12,32 +12,51 @@
 
         <p> Informations utiles  : </p>
 
-        {% for lesson in activity %}
-            <div class="lessonData">
+        <select id="ageClass">
+            {% for ageClass in ageClasses %}
+                <option value="{{ ageClass.age }}">{{ ageClass.age }}</option>
+            {% endfor %}
+        </select>
 
-                <p  class="lessonAge"> age :{{ lesson.age }}</p>
+            {% for lesson in activity %}
+                <div class="lessonData">
 
-                <div class="priceAndPlace">
-                    <div class="titleAndData">
-                        <span  class="title lessonPrice">prix :</span>
-                        <span  class="data lessonPrice">{{ lesson.price }}€</span>
+                    <p  class="lessonAge"> age :{{ lesson.age }}</p>
+
+                    <div class="priceAndPlace">
+                        <div class="titleAndData">
+                            <span  class="title lessonPrice">prix :</span>
+                            <span  class="data lessonPrice">{{ lesson.price }}€</span>
+                        </div>
+
+                        <div class="titleAndData">
+                            <span  class="title lessonPool">bassin:</span>
+                            <span  class="data lessonPool">{{ lesson.pool_name }}</span>
+                        </div>
                     </div>
 
-                    <div class="titleAndData">
-                        <span  class="title lessonPool">bassin:</span>
-                        <span  class="data lessonPool">{{ lesson.pool_name }}</span>
+                    <div class="timetable">
+                        <p  class="timeTitle">Horaires:</p>
+                        <div class="timeList">
+                            <p  class="lessonDay"> {{ lesson.day }}</p>
+                            <p  class="lessonTime"> {{ lesson.time }}</p>
+                        </div>
                     </div>
                 </div>
+            {% endfor %}
 
-                <div class="timetable">
-                    <p  class="timeTitle">Horaires:</p>
-                    <div class="timeList">
-                        <p  class="lessonDay"> {{ lesson.day }}</p>
-                        <p  class="lessonTime"> {{ lesson.time }}</p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
 
     </section>
 {% endblock %}
+
+{% block script %}
+
+    <script>
+        const ageClass = document.getElementById("ageClass");
+        ageClass.addEventListener('change', event => {
+            newTexture.style.backgroundImage = `url(${event.target.value})`
+        });
+
+    </script>
+{% endblock %}
+

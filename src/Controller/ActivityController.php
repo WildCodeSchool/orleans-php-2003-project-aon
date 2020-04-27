@@ -42,6 +42,7 @@ class ActivityController extends AbstractController
     {
         $lessonManager=new LessonManager();
         $activity=$lessonManager->selectEverthingForOneById($id);
-        return $this->twig->render('Activity/showActivity.html.twig', ['activity' => $activity]);
+        $ageClasses=$lessonManager->selectAgeClassesForOneById($id);
+        return $this->twig->render('Activity/showActivity.html.twig', ['activity' => $activity, 'ageClasses' => $ageClasses]);
     }
 }
