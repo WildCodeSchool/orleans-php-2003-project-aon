@@ -27,21 +27,20 @@ class LessonManager extends AbstractManager
 
     public function selectEverthingForOneById(int $activityId, int $ageClassId = -1)
     {
-        $ageClassId=1;
+        //$ageClassId=1;
         $ageQuery="";
         if ($ageClassId >= 0) {
             $ageQuery=" and age.id=$ageClassId";
         }
 
         // prepared request
-        $statement = $this->pdo->prepare("SELECT *,
+        $statement = $this->pdo->prepare("SELECT
+            lesson.price,
+            lesson.day,
+            lesson.time,
             pool.name AS pool_name,
-            activity.name as activity_name,
-            activity.description,
-            activity.id,
-            activity.picture,
             age.age,
-            age.id
+            age.id AS age_id
             FROM $this->table
             RIGHT JOIN activity ON lesson.activity_id=activity.id 
             JOIN pool ON lesson.pool_id=pool.id 
@@ -58,7 +57,7 @@ class LessonManager extends AbstractManager
     public function selectAgeClassesForOneById(int $activityId)
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT
+        $statement = $this->pdo->prepare("SELECT DISTINCT
             age.age,
             age.id
             FROM $this->table
