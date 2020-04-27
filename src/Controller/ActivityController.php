@@ -43,6 +43,4 @@ class ActivityController extends AbstractController
         $activity=$activityManager->selectOneById($id);
         return $this->twig->render('Activity/showActivity.html.twig', ['activity' => $activity]);
     }
-
-
 }
