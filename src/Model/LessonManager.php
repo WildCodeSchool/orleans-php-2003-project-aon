@@ -28,7 +28,10 @@ class LessonManager extends AbstractManager
     public function selectEverthingForOneById(int $activityId)
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT *, pool.name AS pool_name FROM $this->table
+        $statement = $this->pdo->prepare("SELECT *,
+            pool.name AS pool_name,
+            activity.name as activity_name 
+            FROM $this->table
             RIGHT JOIN activity ON lesson.activity_id=activity.id 
             JOIN pool ON lesson.pool_id=pool.id 
             JOIN age ON lesson.age_id=age.id 
