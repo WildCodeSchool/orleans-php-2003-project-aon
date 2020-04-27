@@ -6,18 +6,35 @@
 
         <h1> {{ activity.name }} </h1>
 
-        <p class="activityIndex"> index : {{ activity.id }} </p>
-        <p class="activityDescription"> {{ activity.description }} </p>
+
         <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
+        <p class="activityDescription"> {{ activity.description }} </p>
 
-        <p> Leçons disponibles  : </p>
+        <p> Informations utiles  : </p>
 
-        <div class=lessonData">
-            <p  class="lessonTime"> heure :{{ activity.time }}</p>
-            <p  class="lessonDay"> jour :{{ activity.day }}</p>
-            <p  class="lessonPrice"> prix :{{ activity.price }}</p>
-            <p  class="lessonPool"> bassin :{{ activity.pool_id }}</p>
-            <p  class="lessonAge"> age :{{ activity.age_id }}</p>
+        <div class="lessonData">
+
+            <p  class="lessonAge"> age :{{ activity.age }}</p>
+
+            <div class="priceAndPlace">
+                <div class="titleAndData">
+                    <span  class="title lessonPrice">prix :</span>
+                    <span  class="data lessonPrice">{{ activity.price }}€</span>
+                </div>
+
+                <div class="titleAndData">
+                    <span  class="title lessonPool">bassin:</span>
+                    <span  class="data lessonPool">{{ activity.pool_name }}</span>
+                </div>
+            </div>
+
+            <div class="timetable">
+                <p  class="timeTitle">Horaires:</p>
+                <div class="timeList">
+                    <p  class="lessonDay"> {{ activity.day }}</p>
+                    <p  class="lessonTime"> {{ activity.time }}</p>
+                </div>
+            </div>
         </div>
 
     </section>
