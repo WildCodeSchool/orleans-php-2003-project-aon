@@ -8,19 +8,23 @@
             <thead>
             <tr>
                 <th>Nom</th>
-                <th>A afficher</th>
+                <th>Age</th>
+                <th>Jour</th>
+                <th>Heure</th>
             </tr>
             </thead>
             <tbody>
             {%  for id in activities %}
                 <tr>
                     <td>{{ id.name }}</td>
-                    <td>{{ id.to_be_displayed}}</td>
-                    <td><a class="mini activity-button btn btn-primary btn-lg" href="showEvent/{{ id.id }}">Modifier</a>
+                    <td>{{ id.age}}</td>
+                    <td>{{ id.day}}</td>
+                    <td>{{ id.time}}</td>
+                    <td><a class="activity-button btn btn-primary btn-lg" href="">Modifier</a>
                     </td>
                     <td>
                         <button>
-                            <a href="delete/{{ id.id }}"><img class="delete_button" src="/./assets/icons/logo_delete.png" alt="logo_delete"></a>
+                            <a><img class="delete_button" src="/./assets/icons/logo_delete.png" alt="logo_delete"></a>
                         </button>
                     </td>
                 </tr>
@@ -29,6 +33,6 @@
             </tbody>
         </table>
     </div>
-    <a class="activity-button btn btn-primary btn-lg" href="/./Admin/">Ajouter une activité</a>
+    <a class="activity-button btn btn-primary btn-lg" href="">Ajouter une activité</a>
 </section>
 
