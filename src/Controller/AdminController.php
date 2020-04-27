@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\ActivityManager;
 use App\Model\EventManager;
 
 class AdminController extends AbstractController
@@ -20,7 +21,10 @@ class AdminController extends AbstractController
     {
         $adminEvent = new EventManager();
         $event = $adminEvent->selectAll();
-        return $this->twig->render('Admin/index.html.twig', ['event' => $event]);
+
+        $activityManager = new ActivityManager();
+        $activities = $activityManager->selectAll();
+        return $this->twig->render('Admin/index.html.twig', ['event' => $event, 'activities'=>$activities, ]);
     }
 
     /**
