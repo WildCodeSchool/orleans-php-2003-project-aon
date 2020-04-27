@@ -1,24 +1,24 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <section>
+    <section class="activityDetails">
         Ceci est la page d'une activité.
 
-        <h2> {{ activity.name }} </h2>
+        <h1> {{ activity.name }} </h1>
 
-        <p> index : {{ activity.id }} </p>
-        <p> {{ activity.description }} </p>
-        <img src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
-        <p> {{ activity.to_be_displayed }} </p>
+        <p class="activityIndex"> index : {{ activity.id }} </p>
+        <p class="activityDescription"> {{ activity.description }} </p>
+        <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
 
         <p> Leçons disponibles  : </p>
 
-        <p> heure :{{ activity.time }}</p>
-        <p> jour :{{ activity.day }}</p>
-        <p> prix :{{ activity.price }}</p>
-        <p> bassin :{{ activity.pool_id }}</p>
-        <p> age :{{ activity.age_id }}</p>
-
+        <div class=lessonData">
+            <p  class="lessonTime"> heure :{{ activity.time }}</p>
+            <p  class="lessonDay"> jour :{{ activity.day }}</p>
+            <p  class="lessonPrice"> prix :{{ activity.price }}</p>
+            <p  class="lessonPool"> bassin :{{ activity.pool_id }}</p>
+            <p  class="lessonAge"> age :{{ activity.age_id }}</p>
+        </div>
 
     </section>
 {% endblock %}

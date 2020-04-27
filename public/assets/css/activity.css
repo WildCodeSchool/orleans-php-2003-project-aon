@@ -1,0 +1,35 @@
+.activityDetails{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    align-items: start;
+}
+.activityIndex{
+
+}
+.activityDescription{
+
+}
+.activityPicture{
+
+}
+.lessonData{
+    border:thin solid var(--color-main);
+}
+
+.lessonTime{
+
+}
+.lessonDay{
+
+}
+.lessonPrice{
+
+}
+.lessonPool{
+
+}
+.lessonAge{
+
+}
