@@ -37,8 +37,12 @@ class ActivityController extends AbstractController
         return $this->twig->render('Activity/index.html.twig', ['activities'=>$activities]);
     }
 
-    public function showActivity()
+    public function showActivity(int $id)
     {
-        return $this->twig->render('Activity/showActivity.html.twig');
+        $activityManager=new ActivityManager();
+        $activity=$activityManager->selectOneById($id);
+        return $this->twig->render('Activity/showActivity.html.twig', ['activity' => $activity]);
     }
+
+
 }
