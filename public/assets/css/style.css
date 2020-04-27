@@ -47,6 +47,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: var(--font-text);
 }
 
 body{
@@ -160,7 +161,6 @@ hr{
 
 .navbar a, footer a{
     color:var(--navbar-link-color-dark);
-    letter-spacing: 4px;
     font-weight: bold;
 }
 
