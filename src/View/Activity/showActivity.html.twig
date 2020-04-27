@@ -3,5 +3,14 @@
 {% block content %}
     <section>
         Ceci est la page d'une activité.
+
+        <h2> {{ activity.name }} </h2>
+
+        <p> index : {{ activity.id }} </p>
+        <p> {{ activity.description }} </p>
+        <img src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
+        <p> {{ activity.to_be_displayed }} </p>
+
+
     </section>
 {% endblock %}
