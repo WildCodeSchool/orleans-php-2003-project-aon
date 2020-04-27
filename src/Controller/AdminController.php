@@ -55,7 +55,7 @@ class AdminController extends AbstractController
         $message = urldecode($message);
         $eventManager = new EventManager();
         $event = $eventManager->selectOneById($id);
-        return $this->twig->render('Admin/showEvent.html.twig', ['data' => $event, 'message' => $message]);
+        return $this->twig->render('Admin/showActivity.html.twig', ['data' => $event, 'message' => $message]);
     }
 
 
@@ -109,8 +109,11 @@ class AdminController extends AbstractController
                 $eventManager->updateEvent($errorsAndData['data']);
                 header("location:/admin/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
             } else {
-                $toBeReturned = $this->twig->render('Admin/showEvent.html.twig', ['errors' => $errorsAndData['errors'],
-                    'data' => $errorsAndData['data']]);
+                $toBeReturned = $this->twig->render(
+                    'Admin/showActivity.html.twig',
+                    ['errors' => $errorsAndData['errors'],
+                    'data' => $errorsAndData['data']]
+                );
             }
         }
         return $toBeReturned;
