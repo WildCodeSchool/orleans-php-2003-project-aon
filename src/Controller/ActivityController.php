@@ -8,6 +8,7 @@
 namespace App\Controller;
 
 use App\Model\ActivityManager;
+use App\Model\LessonManager;
 
 class ActivityController extends AbstractController
 {
@@ -35,5 +36,12 @@ class ActivityController extends AbstractController
         }
 
         return $this->twig->render('Activity/index.html.twig', ['activities'=>$activities]);
+    }
+
+    public function showActivity(int $id)
+    {
+        $lessonManager=new LessonManager();
+        $activity=$lessonManager->selectEverthingForOneById($id);
+        return $this->twig->render('Activity/showActivity.html.twig', ['activity' => $activity[0]]);
     }
 }

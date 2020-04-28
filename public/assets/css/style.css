@@ -6,6 +6,7 @@
 @import url('homepage_partner.css');
 @import url('admin_event.css');
 @import url('whoAreUs.css');
+@import url('activity.css');
 
 
 :root {
@@ -218,5 +219,12 @@ section h2{
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
+    }
+
+    .main{
+        max-width:95vw;
+        min-width:95vw;
+        margin:0;
+        padding:0;
     }
 }
