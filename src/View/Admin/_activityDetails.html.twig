@@ -8,7 +8,7 @@
     <div class="form- activity-left form-container-left">
         <div class="form-group">
             <label class="col-form-label" for="title">Nom de l'activité</label>
-            <input class="form-control" type="text" id="title" name="title" value="{{data.name}}" placeholder="Aquajog">
+            <input class="form-control" type="text" id="name" name="activity-name" value="{{data.name}}" placeholder="Aquajog">
             <!--nom de l'activité-->
             <small class="errorMessage form-text text-danger">{{errors.name}}</small>
         </div>
@@ -22,14 +22,14 @@
 
         <div class="form-group">
             <label class="col-form-label" for="location">Age</label>
-            <input class="form-control" type="text" id="location" name="location" value="{{data.age}}" placeholder="A partir de 4 ans">
+                <input class="form-control" type="text" id="age" name="age" value="{{data.age}}" placeholder="A partir de 4 ans">
             <!--age de l'activité-->
             <small class="errorMessage form-text text-danger">{{errors.age}}</small>
         </div>
 
         <div class="form-group">
             <label class="col-form-label" for="location">Prix</label>
-            <input class="form-control" type="text" id="location" name="location" value="{{data.price}}" placeholder="A partir de 4 ans">
+            <input class="form-control" type="text" id="price" name="price" value="{{data.price}}" placeholder="150">
             <!--prx de l'activité-->
             <small class="errorMessage form-text text-danger">{{errors.price}}</small>
         </div>
@@ -47,6 +47,16 @@
             </select>
         </div>
         <div class="form-group">
+            <label class="col-form-label" for="location">Heure</label>
+            <input class="form-control" type="text" id="hour" name="hour" value="{{data.time}}" placeholder="19h00-20h00"required>
+            <!--heure-->
+            <small class="errorMessage form-text text-danger">{{errors.time}}</small>
+        </div>
+
+    </div>
+
+    <div class="form- activity-right form-container-right">
+        <div class="form-group">
             <label for="pool-select">Choisir le bassin:</label>
             <select name="pool" id="pool-select">
                 <option value="">--Choisir un bassin--</option>
@@ -55,23 +65,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="col-form-label" for="location">Heure</label>
-            <input class="form-control" type="text" id="location" name="location" value="{{data.time}}" placeholder="19h00-20h00"required>
-            <!--heure-->
-            <small class="errorMessage form-text text-danger">{{errors.time}}</small>
-        </div>
-
-    </div>
-
-    <div class="form- activity-right form-container-right">
-
-        <div class="form-group">
             <label class="col-form-label" for="description">Description de l'activité</label>
             <textarea class="eventFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
             <small class="errorMessage form-text text-danger">{{errors.description}}</small>
         </div>
         <div>
-            <input type="checkbox" id="scales" name="scales"
+            <input type="checkbox" id="display" name="display"
                    checked>
             <label for="scales">A afficher</label>
         </div>

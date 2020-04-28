@@ -3,78 +3,20 @@
 namespace App\Controller;
 
 use App\Model\ActivityManager;
-use App\Model\EventManager;
+use App\Model\PoolManager;
 
-class AdminController extends AbstractController
+class AdminActivityController extends AbstractController
 {
 
-
-    /**
-     * Display activity page
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function index()
-    {
-        $adminEvent = new EventManager();
-        $event = $adminEvent->selectAll();
-
-        $activityManager = new ActivityManager();
-        $activities = $activityManager->selectAllActivitiesForAdmin();
-
-        return $this->twig->render('Admin/index.html.twig', ['event' => $event, 'activities' => $activities]);
-    }
-
-    /**
-     * Handle item deletion
-     *
-     * @param int $id
-     */
-    public function delete(int $id): void
-    {
-        $eventManager = new EventManager();
-        $eventManager->delete($id);
-        header('Location:/Admin/index');
-    }
-  
-    public function createEvent(string $message = "")
+    public function createActivity(string $message = "")
     {
         $message = urldecode($message);
-        return $this->twig->render('Admin/addEvent.html.twig', ['message' => $message]);
+        return $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);
     }
 
-    /**
-     * Display event informations specified by $id
-     *
-     * @param int $id
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function showEvent(int $id, string $message = "")
-    {
-        $message = urldecode($message);
-        $eventManager = new EventManager();
-        $event = $eventManager->selectOneById($id);
-        return $this->twig->render('Admin/showEvent.html.twig', ['data' => $event, 'message' => $message]);
-    }
+    public function addActivity()
+    {   $poolManager = new PoolManager();
 
-
-    /**
-     * Display event edition page specified by $id
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-
-    public function addEvent()
-    {
         $toBeReturned="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData=$this->checkEventPostData();
@@ -82,40 +24,13 @@ class AdminController extends AbstractController
             $errors=$errorsAndData['errors'];
 
             if (count($data)==5 && empty($data['id'])) {
-                $eventManager=new EventManager();
-                $eventManager->insert($data);
+                $activityManager=new ActivityManager();
+                $activityManager->insert($data);
                 header("location:/admin/index");
-            } else {
-                $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
-                    'data'=>$data,
-                    'message'=>"L'évenement n'a pas pu être créé."]);
-            }
-        }
-        return $toBeReturned;
-    }
-  
-  
-    /**
-     * Display event edition page specified by $id
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function editEvent(): string
-    {
-        $toBeReturned = "";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $errorsAndData = $this->checkEventPostData();
-
-            if (count($errorsAndData['data']) == 6) {
-                $eventManager = new EventManager();
-                $eventManager->updateEvent($errorsAndData['data']);
-                header("location:/admin/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
-            } else {
-                $toBeReturned = $this->twig->render('Admin/showEvent.html.twig', ['errors' => $errorsAndData['errors'],
-                    'data' => $errorsAndData['data']]);
+        } else {
+            $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
+                'data'=>$data,
+                'message'=>"L'activité n'a pas pu être créée."]);
             }
         }
         return $toBeReturned;
@@ -130,12 +45,19 @@ class AdminController extends AbstractController
     {
         //errors array
         $errors=[
-            'title' => '',
-            'description' => '',
+            'activity-name'=> '',
             'picture' => '',
-            'date' => '',
-            'location' => '',
-            'id' => ''];
+            'age' => '',
+            'price' => '',
+            'day' => '',
+            'time' => '',
+            'pool' => '',
+            'id' => '',
+            'description' => '',
+            'display' => '',
+            ];
+
+
 
         //data array
         $data=array();
