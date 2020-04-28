@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Model\ActivityManager;
-use App\Model\PoolManager;
 
 class AdminActivityController extends AbstractController
 {
@@ -15,8 +14,7 @@ class AdminActivityController extends AbstractController
     }
 
     public function addActivity()
-    {   $poolManager = new PoolManager();
-
+    {
         $toBeReturned="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData=$this->checkEventPostData();
@@ -27,10 +25,9 @@ class AdminActivityController extends AbstractController
                 $activityManager=new ActivityManager();
                 $activityManager->insert($data);
                 header("location:/admin/index");
-        } else {
-            $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
-                'data'=>$data,
-                'message'=>"L'activité n'a pas pu être créée."]);
+            } else {
+                $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
+                    'data'=>$data, 'message'=>"L'activité n'a pas pu être créée."]);
             }
         }
         return $toBeReturned;
@@ -62,26 +59,17 @@ class AdminActivityController extends AbstractController
         //data array
         $data=array();
 
-        $checked=$this->checkTextFromPost('title', "le titre", 50);
+        $checked=$this->checkTextFromPost('activity-name', "nom de l'acitivté", 50);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
-        $checked=$this->checkTextFromPost('description', "la description", 250);
+        $checked=$this->checkTextFromPost('description', "la description", 500);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
 
         $checked=$this->checkTextFromPost('picture', "la photo", 250);
         $errors=array_merge($errors, $checked['errors']);
         $data=array_merge($data, $checked['data']);
-
-        //check date
-        if (empty($_POST['date'])) {
-            $errors['date'] .= "Vous devez indiquer la date de l'évenement";
-        } elseif (!preg_match("/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/", trim($_POST['date']))) {
-            $errors['date'] .= "La date doit avoir le format aaaa-mm-jj";
-        } else {
-            $data['date']=trim($_POST['date']);
-        }
 
         //check id
         if (empty($_POST['id'])) {
@@ -93,11 +81,6 @@ class AdminActivityController extends AbstractController
         } else {
             $data['id']=intval(trim($_POST['id']));
         }
-
-        $checked=$this->checkTextFromPost('location', "l'endroit", 50);
-        $errors=array_merge($errors, $checked['errors']);
-        $data=array_merge($data, $checked['data']);
-
         return ['errors' => $errors, 'data' => $data];
     }
 
@@ -115,7 +98,7 @@ class AdminActivityController extends AbstractController
         $errors[$postFieldName]='';
 
         if (empty($_POST[$postFieldName])) {
-            $errors[$postFieldName] .= "Vous devez indiquer $userFieldName de l'évenement";
+            $errors[$postFieldName] .= "Vous devez indiquer $userFieldName de l'activité";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
             $errors[$postFieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
