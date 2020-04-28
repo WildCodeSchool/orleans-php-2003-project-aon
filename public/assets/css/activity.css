@@ -14,7 +14,7 @@
 
 }
 .activityPicture{
-
+    width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
 }
 
 
@@ -34,18 +34,21 @@
 
 }
 .lessonAge{
-
+    text-align:center;
+    font-weight:bold;
 }
 
 
 .lessonData{
-    border:thick double var(--color-main);
+    border:thick double var(--color-main-dark);
     display:flex;
     flex-direction: column;
-    width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));;
-    background:var(--color-light);
+    width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
+    background:var(--color-light-alternative);
     margin:var(--margin-large);
     align-self: start;
+    box-shadow: 2px 2px 5px lightgrey;
+    box-sizing: content-box;
 }
 
 .priceAndPlace{
@@ -53,17 +56,23 @@
     flex-direction: row;
     min-width:100%;
     justify-content: space-around;
+    border-top:thick dotted var(--color-main-dark);
+    border-bottom:thick dotted var(--color-main-dark);
 }
 
 .titleAndData{
-    color:var(--color-main);
+    color:var(--color-main-dark);
     background-color:var(--color-light);
     width:100%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align:center;
 
 }
 
 .titleAndData:first-of-type{
-    background-color:var(--color-main);
+    background-color:var(--color-main-dark);
     color:var(--color-light);
 }
 
@@ -73,13 +82,40 @@
     width:100%;
 }
 
+.timeTitle{
+    border-right:thick dotted var(--color-main-dark);
+}
+
 .timeList{
     display:flex;
     flex-direction: row;
     width:100%;
 }
 
+.timeTable, .timeTable p{
+    margin:0;
+    padding:0;
+}
 .lessonDay, .lessonTime{
     margin-left:var(--margin);
     margin-righ:var(--margin);
+}
+
+.lessonDay:after{
+    content:" ";
+    width:50px;
+    background-image : url("../icons/cal.png");
+}
+
+.lessonTime:after{
+    content:" ";
+    width:50px;
+    background-image : url("../icons/clock.png");
+}
+
+.lessonPool:after{
+    content:" ";
+    min-width:50px;
+    min-height:50px;
+    background-image : url("../icons/location.png");
 }
