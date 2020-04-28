@@ -2,39 +2,55 @@
 
 {% block content %}
     <section class="activityDetails">
-        Ceci est la page d'une activité.
 
         <h1> {{ activity.activity_name }} </h1>
 
 
         <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
 
-        <div class="lessonData">
+        {% for ageClass in lessonsByAgeClass %}
+        <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
 
-            <p  class="lessonAge"> {{ activity.age }}</p>
+                    <p  class="lessonAge">{{ ageClass.0.age }}</p>
 
-            <div class="priceAndPlace">
-                <div class="titleAndData">
-                    <span  class="title lessonPrice">prix :</span>
-                    <span  class="data lessonPrice">{{ activity.price }}€</span>
-                </div>
+                    <div class="priceAndPlace">
+                        <div class="titleAndData">
+                            <span  class="title lessonPrice">Prix :</span>
+                            <span  class="data lessonPrice">{{ ageClass.0.price }}€</span>
+                        </div>
 
-                <div class="titleAndData">
-                    <span  class="title poolTitle">bassin:</span>
-                    <span  class="data poolName">{{ activity.pool_name }}</span>
-                </div>
-            </div>
+                        <div class="titleAndData">
+                            <span  class="title lessonPool">Bassin:</span>
+                            <span  class="data lessonPool">{{ ageClass.0.pool_name }}</span>
+                        </div>
+                    </div>
 
-            <div class="timetable">
-                <p  class="timeTitle">Horaires:</p>
-                <div class="timeList">
-                    <p  class="lessonDay"> {{ activity.day }}</p>
-                    <p  class="lessonTime"> {{ activity.time }}</p>
-                </div>
-            </div>
+                    <div class="timetable">
+                        <div  class="timeTitle">Horaires</div>
+
+                        <div class="timeList">
+                            {% for lesson in ageClass %}
+                            <div class="timeBlock">
+                                <p  class="lessonDay"> {{ lesson.day }}</p>
+                                <p  class="lessonTime"> {{ lesson.time }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
         </div>
+        {% endfor %}
+
+        <p> Selectionnez votre catégorie  : </p>
+        <ul class="nav nav-tabs">
+            {% for ageClass in ageClasses %}
+                <li class="{{ageClass.action}}">
+                    <a href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                </li>
+            {% endfor %}
+        </ul>
 
         <p class="activityDescription"> {{ activity.description }} </p>
 
     </section>
 {% endblock %}
+

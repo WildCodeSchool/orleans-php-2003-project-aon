@@ -38,10 +38,29 @@ class ActivityController extends AbstractController
         return $this->twig->render('Activity/index.html.twig', ['activities'=>$activities]);
     }
 
-    public function showActivity(int $id)
+    public function showActivity(int $id, int $ageClassId = -1)
     {
+        $activityManager=new ActivityManager();
+        $activity=$activityManager->selectOneById($id);
+
         $lessonManager=new LessonManager();
-        $activity=$lessonManager->selectEverthingForOneById($id);
-        return $this->twig->render('Activity/showActivity.html.twig', ['activity' => $activity[0]]);
+        $ageClasses=$lessonManager->selectAgeClassesForOneById($id);
+        $ageClass=null;
+        foreach ($ageClasses as &$ageClass) {
+            if ($ageClass['id']==$ageClassId) {
+                $ageClass['action']='active';
+            }
+        }
+
+        $lessonsByAgeClass=array();
+        if ($ageClassId>=0) {
+            $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClassId);
+        } elseif (!empty($ageClasses)) {
+            $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClasses[0]['id']);
+        }
+
+        return $this->twig->render('Activity/showActivity.html.twig', ['activity'=>$activity,
+            'lessonsByAgeClass' => $lessonsByAgeClass,
+            'ageClasses' => $ageClasses]);
     }
 }
