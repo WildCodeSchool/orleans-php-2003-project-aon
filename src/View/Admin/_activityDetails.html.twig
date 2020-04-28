@@ -1,0 +1,78 @@
+{% if message != '' %}
+    <div class="form-message">{{ message }}</div>
+{% endif %}
+
+<div class="form-Activity form-container">
+
+
+    <div class="form- activity-left form-container-left">
+        <div class="form-group">
+            <label class="col-form-label" for="title">Nom de l'activité</label>
+            <input class="form-control" type="text" id="title" name="title" value="{{data.name}}" placeholder="Aquajog">
+            <!--nom de l'activité-->
+            <small class="errorMessage form-text text-danger">{{errors.name}}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="picture">Illustration de l'activité</label>
+            <input class="form-control" type="text" id="picture" name="picture" value="{{data.picture}}" placeholder="photo.jpg">
+            <!--nom de l'image l'activité-->
+            <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="location">Age</label>
+            <input class="form-control" type="text" id="location" name="location" value="{{data.age}}" placeholder="A partir de 4 ans">
+            <!--age de l'activité-->
+            <small class="errorMessage form-text text-danger">{{errors.age}}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="location">Prix</label>
+            <input class="form-control" type="text" id="location" name="location" value="{{data.price}}" placeholder="A partir de 4 ans">
+            <!--prx de l'activité-->
+            <small class="errorMessage form-text text-danger">{{errors.price}}</small>
+        </div>
+
+        <div class="form-group">
+            <label for="day-select">Choisir le jour:</label>
+            <select name="day" id="day-select">
+                <option value="">--Choisir un jour--</option>
+                <option value="monday">Lundi</option>
+                <option value="tuesday">Mardi</option>
+                <option value="wednesday">Mercredi</option>
+                <option value="thursday">Jeudi</option>
+                <option value="friday">Vendredi</option>
+                <option value="saturday ">Samedi</option>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="location">Heure</label>
+            <input class="form-control" type="time" id="location" name="location" value="{{data.time}}" placeholder="19h00-20h00" min="00:00" max="24:00" required>
+            <!--heure-->
+            <small class="errorMessage form-text text-danger">{{errors.time}}</small>
+        </div>
+
+    </div>
+
+    <div class="form- activity-right form-container-right">
+
+        <div class="form-group">
+            <label class="col-form-label" for="description">Description de l'activité</label>
+            <textarea class="eventFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
+            <small class="errorMessage form-text text-danger">{{errors.description}}</small>
+        </div>
+
+    </div>
+
+    <div>
+        <input type="checkbox" id="scales" name="scales"
+               checked>
+        <label for="scales">A afficher</label>
+    </div>
+
+
+
+</div>
+
+<input type="hidden" name="id" value="{{ data.id }}">
+
