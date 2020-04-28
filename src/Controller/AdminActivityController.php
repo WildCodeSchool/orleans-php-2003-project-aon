@@ -6,6 +6,22 @@ use App\Model\ActivityManager;
 
 class AdminActivityController extends AbstractController
 {
+    /**
+     * Display event informations specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function showActivity(int $id, string $message = "")
+    {
+        $message = urldecode($message);
+        $activityManager = new ActivityManager();
+        $activity = $activityManager->selectOneById($id);
+        return $this->twig->render('Admin/showActivity.html.twig', ['data' => $activity, 'message' => $message]);
+    }
 
     public function createActivity(string $message = "")
     {
