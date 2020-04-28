@@ -45,6 +45,7 @@ class ActivityController extends AbstractController
 
         $lessonManager=new LessonManager();
         $ageClasses=$lessonManager->selectAgeClassesForOneById($id);
+        $ageClass=null;
         foreach ($ageClasses as &$ageClass) {
             if ($ageClass['id']==$ageClassId) {
                 $ageClass['action']='active';
