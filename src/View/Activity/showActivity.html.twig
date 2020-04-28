@@ -7,7 +7,7 @@
 
 
         <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
-        <p class="activityDescription"> {{ activity.description }} </p>
+
 
         <p> Selectionnez votre catégorie  : </p>
 
@@ -20,8 +20,6 @@
             {% endfor %}
         </ul>
 
-
-        <p> Informations utiles  : </p>
 
         {% for ageClass in lessonsByAgeClass %}
         <div id="{{ageClass.0.age_id }}" class="lessonData ageClass{{ageClass.0.age_id }}">
@@ -59,6 +57,8 @@
 
         </div>
         {% endfor %}
+
+        <p class="activityDescription"> {{ activity.description }} </p>
 
     </section>
 {% endblock %}
