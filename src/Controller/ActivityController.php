@@ -55,8 +55,8 @@ class ActivityController extends AbstractController
         if ($ageClassId>=0) {
             $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClassId);
         } else {
-            foreach ($ageClasses as $ageClass) {
-                $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClass['id']);
+            if(!empty($ageClasses)){
+                $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClasses[0]['id']);
             }
         }
 
