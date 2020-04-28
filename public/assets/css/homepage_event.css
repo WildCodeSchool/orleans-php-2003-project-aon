@@ -20,14 +20,15 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
+    margin:var(--margin-large);
 
 }
 
 .eventpicture{
-    padding: var(--margin-large);
     margin: var(--margin);
     max-width:80%;
     min-width: 50%;
+    object-fit: contain;
 }
 
 .eventDetails{
@@ -42,7 +43,6 @@
 }
 
 .description{
-    margin: var(--margin);
 }
 
 .eventlist{
