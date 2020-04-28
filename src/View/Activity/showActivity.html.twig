@@ -11,18 +11,24 @@
 
         <p> Selectionnez votre catégorie  : </p>
 
-        {% for ageClass in ageClasses %}
-            <a class="activity-button btn btn-primary btn-lg" href="/./activity/showActivity/{{ activity.id }}/{{ ageClass.id }}" >{{ ageClass.age }}</a>
-        {% endfor %}
+
+        <ul class="nav nav-tabs">
+            {% for ageClass in ageClasses %}
+                <li class="{{ageClass.action}}">
+                <a href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
 
         <p> Informations utiles  : </p>
 
         {% for ageClass in lessonsByAgeClass %}
-        <div class="lessonData ageClass{{ageClass.0.age_id }}">
+        <div id="{{ageClass.0.age_id }}" class="lessonData ageClass{{ageClass.0.age_id }}">
 
 
 
-                    <p  class="lessonAge"> age :{{ ageClass.0.age }}</p>
+                    <p  class="lessonAge">{{ ageClass.0.age }}</p>
 
                     <div class="priceAndPlace">
                         <div class="titleAndData">
@@ -37,13 +43,17 @@
                     </div>
 
                     <div class="timetable">
-                        <p  class="timeTitle">Horaires:</p>
-                        {% for lesson in ageClass %}
+                        <div  class="timeTitle">Horaires</div>
+
                         <div class="timeList">
-                            <p  class="lessonDay"> {{ lesson.day }}</p>
-                            <p  class="lessonTime"> {{ lesson.time }}</p>
+                            {% for lesson in ageClass %}
+                            <div class="timeBlock">
+                                <p  class="lessonDay"> {{ lesson.day }}</p>
+                                <p  class="lessonTime"> {{ lesson.time }}</p>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+
                     </div>
 
 
