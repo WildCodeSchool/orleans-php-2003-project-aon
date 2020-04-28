@@ -3,11 +3,10 @@
 {% block content %}
     <section class="activityDetails">
 
-        <h1> {{ activity.name }} </h1>
+        <h1> {{ activity.activity_name }} </h1>
 
 
         <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
-
 
         {% for ageClass in lessonsByAgeClass %}
         <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
@@ -37,10 +36,7 @@
                             </div>
                             {% endfor %}
                         </div>
-
                     </div>
-
-
         </div>
         {% endfor %}
 
@@ -52,7 +48,6 @@
                 </li>
             {% endfor %}
         </ul>
-
 
         <p class="activityDescription"> {{ activity.description }} </p>
 
