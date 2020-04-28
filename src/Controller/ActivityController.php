@@ -42,7 +42,6 @@ class ActivityController extends AbstractController
     {
         $activityManager=new ActivityManager();
         $activity=$activityManager->selectOneById($id);
-
         $lessonManager=new LessonManager();
         $ageClasses=$lessonManager->selectAgeClassesForOneById($id);
         $ageClass=null;

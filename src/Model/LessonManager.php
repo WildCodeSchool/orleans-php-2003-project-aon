@@ -34,6 +34,7 @@ class LessonManager extends AbstractManager
         }
 
         // prepared request
+
         $statement = $this->pdo->prepare("SELECT
             lesson.price,
             lesson.day,
