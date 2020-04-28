@@ -10,9 +10,7 @@
 
 
         {% for ageClass in lessonsByAgeClass %}
-        <div id="{{ageClass.0.age_id }}" class="lessonData ageClass{{ageClass.0.age_id }}">
-
-
+        <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
 
                     <p  class="lessonAge">{{ ageClass.0.age }}</p>
 
@@ -55,7 +53,7 @@
             {% endfor %}
         </ul>
 
-        
+
         <p class="activityDescription"> {{ activity.description }} </p>
 
     </section>
