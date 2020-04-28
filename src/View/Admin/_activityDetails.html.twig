@@ -6,26 +6,6 @@
 
 
     <div class="form- activity-left form-container-left">
-        <div class="form-group">
-            <label class="col-form-label" for="title">Nom de l'activité</label>
-            <input class="form-control" type="text" id="name" name="activity-name" value="{{data.name}}" placeholder="Aquajog">
-            <!--nom de l'activité-->
-            <small class="errorMessage form-text text-danger">{{errors.name}}</small>
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label" for="picture">Illustration de l'activité</label>
-            <input class="form-control" type="text" id="picture" name="picture" value="{{data.picture}}" placeholder="photo.jpg">
-            <!--nom de l'image l'activité-->
-            <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label" for="location">Age</label>
-                <input class="form-control" type="text" id="age" name="age" value="{{data.age}}" placeholder="A partir de 4 ans">
-            <!--age de l'activité-->
-            <small class="errorMessage form-text text-danger">{{errors.age}}</small>
-        </div>
 
         <div class="form-group">
             <label class="col-form-label" for="location">Prix</label>
@@ -55,27 +35,6 @@
 
     </div>
 
-    <div class="form- activity-right form-container-right">
-        <div class="form-group">
-            <label for="pool-select">Choisir le bassin:</label>
-            <select name="pool" id="pool-select">
-                <option value="">--Choisir un bassin--</option>
-                <option value="sport">Piscine du Palais des Sports</option>
-                <option value="ephemeral">Piscine Éphémère</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="col-form-label" for="description">Description de l'activité</label>
-            <textarea class="eventFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
-            <small class="errorMessage form-text text-danger">{{errors.description}}</small>
-        </div>
-        <div>
-            <input type="checkbox" id="display" name="display"
-                   checked>
-            <label for="scales">A afficher</label>
-        </div>
-
-    </div>
 
 
 
