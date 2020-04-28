@@ -202,4 +202,32 @@ class AdminController extends AbstractController
 
         return ['errors' => $errors, 'data'=>$data];
     }
+
+    public function createActivity(string $message = "")
+    {
+        $message = urldecode($message);
+        return $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);
+    }
+
+    public function addActivity()
+    {
+        $toBeReturned="";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errorsAndData=$this->checkEventPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
+
+            if (count($data)==5 && empty($data['id'])) {
+                $activityManager=new ActivityManager();
+                $activityManager->insert($data);
+                header("location:/admin/index");
+            } else {
+                $toBeReturned = $this->twig->render('Activity', ['errors'=>$errors,
+                    'data'=>$data,
+                    'message'=>"L'activité n'a pas pu être créée."]);
+            }
+        }
+        return $toBeReturned;
+    }
+
 }

@@ -41,4 +41,24 @@ class ActivityManager extends AbstractManager
         return $this->pdo->query('SELECT ac.name, a.age, l.day, l.time FROM lesson as l 
         INNER JOIN activity as ac ON ac.id=l.activity_id JOIN age as a ON a.id=l.age_id')->fetchAll();
     }
+
+
+    /**
+     * @param array $event
+     * @return bool
+     */
+    public function insert(array $event):bool
+    {
+        $statement = $this->pdo->prepare("INSERT INTO lesson 
+            (`name`, `age`, `day`, `time`) 
+            VALUES 
+            (:name, :age, :day, :time)");
+
+        $statement->bindValue('name', $event['name'], \PDO::PARAM_STR);
+        $statement->bindValue('age', $event['age'], \PDO::PARAM_STR);
+        $statement->bindValue('day', $event['day'], \PDO::PARAM_STR);
+        $statement->bindValue('time', $event['time'], \PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
 }

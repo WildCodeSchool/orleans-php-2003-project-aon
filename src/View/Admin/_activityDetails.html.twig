@@ -44,10 +44,19 @@
                 <option value="thursday">Jeudi</option>
                 <option value="friday">Vendredi</option>
                 <option value="saturday ">Samedi</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pool-select">Choisir le bassin:</label>
+            <select name="pool" id="pool-select">
+                <option value="">--Choisir un bassin--</option>
+                <option value="sport">Piscine du Palais des Sports</option>
+                <option value="ephemeral">Piscine Éphémère</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="col-form-label" for="location">Heure</label>
-            <input class="form-control" type="time" id="location" name="location" value="{{data.time}}" placeholder="19h00-20h00" min="00:00" max="24:00" required>
+            <input class="form-control" type="text" id="location" name="location" value="{{data.time}}" placeholder="19h00-20h00"required>
             <!--heure-->
             <small class="errorMessage form-text text-danger">{{errors.time}}</small>
         </div>
@@ -61,14 +70,15 @@
             <textarea class="eventFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
             <small class="errorMessage form-text text-danger">{{errors.description}}</small>
         </div>
+        <div>
+            <input type="checkbox" id="scales" name="scales"
+                   checked>
+            <label for="scales">A afficher</label>
+        </div>
 
     </div>
 
-    <div>
-        <input type="checkbox" id="scales" name="scales"
-               checked>
-        <label for="scales">A afficher</label>
-    </div>
+
 
 
 
