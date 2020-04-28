@@ -21,8 +21,8 @@
                         </div>
 
                         <div class="titleAndData">
-                            <span  class="title lessonPool">Bassin:</span>
-                            <span  class="data lessonPool">{{ ageClass.0.pool_name }}</span>
+                            <span  class="title poolTitle">Bassin:</span>
+                            <span  class="data poolName">{{ ageClass.0.pool_name }}</span>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
         <ul class="nav nav-tabs">
             {% for ageClass in ageClasses %}
                 <li class="{{ageClass.action}}">
-                    <a href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                    <a class="activity-button btn btn-primary btn-lg" href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
                 </li>
             {% endfor %}
         </ul>

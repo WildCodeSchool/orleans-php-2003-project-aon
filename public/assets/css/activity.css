@@ -54,14 +54,14 @@
     display:flex;
     flex-direction: column;
     width:var(--width);
-    background:linear-gradient(324deg, rgba(16, 199, 170, 0.80) 0%, rgba(116, 225, 202, 0.45) 70%, rgba(148, 233, 240, 0.7) 100%);
+    background:var(--color-light-alternative);
     margin:var(--margin-large);
 
     box-shadow: 2px 2px 5px grey;
     box-sizing: content-box;
 
     position:relative;
-    top:-100px;
+    top:-80px;
     left:calc( var(--width) / 2);
 }
 
@@ -87,6 +87,8 @@
 .titleAndData:first-of-type{
     background-color:var(--color-main);
     color:var(--color-light);
+    font-weight: bold;
+    font-size:25px;
 }
 
 .timetable{
@@ -132,6 +134,13 @@
     align-items: center;
 }
 
+.poolTitle{
+    padding:var(--padding);
+    display:flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .lessonTime:before{
     content:"";
     display: inline-block;
@@ -155,9 +164,7 @@
     background-repeat: no-repeat;
 }
 
-.poolName{
-    position:relative;
-}
+
 .poolName:before{
 
     content:"";
