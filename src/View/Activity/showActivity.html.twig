@@ -9,45 +9,45 @@
             <img  class="col-md activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
 
             <div class="col-md buttonAndTable">
-            <p> Selectionnez votre catégorie  : </p>
-            <div class="btn-group">
-                {% for ageClass in ageClasses %}
-                    <a class="{{ageClass.action}} activity-button btn btn-primary btn-lg" href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
-                {% endfor %}
-            </div>
+              <p> Selectionnez votre catégorie  : </p>
+              <div class="btn-group">
+                  {% for ageClass in ageClasses %}
+                      <a class="{{ageClass.action}} activity-button btn btn-primary btn-lg" href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                  {% endfor %}
+              </div>
 
-            {% for ageClass in lessonsByAgeClass %}
-            <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
+              {% for ageClass in lessonsByAgeClass %}
+              <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
 
 
-                        <p  class="lessonAge">{{ ageClass.0.age }}</p>
+                          <p  class="lessonAge">{{ ageClass.0.age }}</p>
 
-                        <div class="priceAndPlace">
-                            <div class="titleAndData">
-                                <span  class="title lessonPrice">Prix :</span>
-                                <span  class="data lessonPrice">{{ ageClass.0.price }}€</span>
-                            </div>
+                          <div class="priceAndPlace">
+                              <div class="titleAndData">
+                                  <span  class="title lessonPrice">Prix :</span>
+                                  <span  class="data lessonPrice">{{ ageClass.0.price }}€</span>
+                              </div>
 
-                            <div class="titleAndData">
-                                <span  class="title poolTitle">Bassin:</span>
-                                <span  class="data poolName">{{ ageClass.0.pool_name }}</span>
-                            </div>
-                        </div>
+                              <div class="titleAndData">
+                                  <span  class="title poolTitle">Bassin:</span>
+                                  <span  class="data poolName">{{ ageClass.0.pool_name }}</span>
+                              </div>
+                          </div>
 
-                        <div class="timetable">
-                            <div  class="timeTitle">Horaires</div>
+                          <div class="timetable">
+                              <div  class="timeTitle">Horaires</div>
 
-                            <div class="timeList">
-                                {% for lesson in ageClass %}
-                                <div class="timeBlock">
-                                    <p  class="lessonDay"> {{ lesson.day }}</p>
-                                    <p  class="lessonTime"> {{ lesson.time }}</p>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-            </div>
-            {% endfor %}
+                              <div class="timeList">
+                                  {% for lesson in ageClass %}
+                                  <div class="timeBlock">
+                                      <p  class="lessonDay"> {{ lesson.day }}</p>
+                                      <p  class="lessonTime"> {{ lesson.time }}</p>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                          </div>
+              </div>
+              {% endfor %}
             </div>
         </div>
 
