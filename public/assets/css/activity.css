@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-around;
 
-    align-items: start;
+    align-items: center;
     padding:0;
     margin:0;
 }
@@ -11,10 +11,14 @@
 
 }
 .activityDescription{
-
+    text-indent: 5em;
+    padding : var(--padding-large);
 }
 .activityPicture{
     width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
+    display: flex;
+    align-items: center;
+
 }
 
 
@@ -44,15 +48,21 @@
 
 
 .lessonData{
+
+    --width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
     border:thick double var(--color-main-dark);
     display:flex;
     flex-direction: column;
-    width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
+    width:var(--width);
     background:var(--color-light-alternative);
     margin:var(--margin-large);
-    align-self: start;
-    box-shadow: 2px 2px 5px lightgrey;
+
+    box-shadow: 2px 2px 5px grey;
     box-sizing: content-box;
+
+    position:relative;
+    top:-100px;
+    left:calc( var(--width) / 2);
 }
 
 .priceAndPlace{
@@ -91,13 +101,14 @@
     padding:var(--padding);
     display:flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
 }
 
 .timeList{
     display:flex;
     flex-direction: row;
     justify-content: space-around;
+    align-content: center;
     flex-wrap: wrap;
     width:100%;
 }
@@ -116,17 +127,47 @@
     background-image : url("../icons/cal.png");
 }
 
-.lessonTime:after{
-    content:" ";
-    width:50px;
-    background-image : url("../icons/clock.png");
+.lessonTime, .lessonDay, .poolName{
+    display: flex;
+    align-items: center;
 }
 
-.lessonPool:after{
-    content:" ";
-    min-width:50px;
-    min-height:50px;
-    background-image : url("../icons/location.png");
+.lessonTime:before{
+    content:"";
+    display: inline-block;
+    width:40px;
+    height:40px;
+    background-image:url(../icons/clock.png);
+    background-position: center;
+    background-size: 75%;
+    background-repeat: no-repeat;
+}
+
+.lessonDay:before{
+
+    content:"";
+    display: inline-block;
+    width:40px;
+    height:40px;
+    background-image:url(../icons/cal.png);
+    background-position: center;
+    background-size: 75%;
+    background-repeat: no-repeat;
+}
+
+.poolName{
+    position:relative;
+}
+.poolName:before{
+
+    content:"";
+    display: inline-block;
+    width:40px;
+    height:40px;
+    background-image:url(../icons/location.png);
+    background-position: center;
+    background-size: 75%;
+    background-repeat: no-repeat;
 }
 
 li a:focus{

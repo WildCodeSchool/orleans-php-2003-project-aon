@@ -9,18 +9,6 @@
         <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
 
 
-        <p> Selectionnez votre catégorie  : </p>
-
-
-        <ul class="nav nav-tabs">
-            {% for ageClass in ageClasses %}
-                <li class="{{ageClass.action}}">
-                <a href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-
-
         {% for ageClass in lessonsByAgeClass %}
         <div id="{{ageClass.0.age_id }}" class="lessonData ageClass{{ageClass.0.age_id }}">
 
@@ -58,6 +46,16 @@
         </div>
         {% endfor %}
 
+        <p> Selectionnez votre catégorie  : </p>
+        <ul class="nav nav-tabs">
+            {% for ageClass in ageClasses %}
+                <li class="{{ageClass.action}}">
+                    <a href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        
         <p class="activityDescription"> {{ activity.description }} </p>
 
     </section>
