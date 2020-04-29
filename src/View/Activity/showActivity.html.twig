@@ -3,53 +3,55 @@
 {% block content %}
     <section class="activityDetails">
 
-        <h1> {{ activity.activity_name }} </h1>
+        <h1> {{ activity.name }}</h1>
+
+        <div class="row">
+            <img  class="col-md activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
+
+            <div class="col-md buttonAndTable">
+              <p> Selectionnez votre catégorie  : </p>
+              <div class="btn-group">
+                  {% for ageClass in ageClasses %}
+                      <a class="{{ageClass.action}} activity-button btn btn-primary btn-lg" href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                  {% endfor %}
+              </div>
+
+              {% for ageClass in lessonsByAgeClass %}
+              <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
 
 
-        <img  class="activityPicture" src="/./assets/images/{{ activity.picture }}" alt="Activity Picture">
+                          <p  class="lessonAge">{{ ageClass.0.age }}</p>
 
-        {% for ageClass in lessonsByAgeClass %}
-        <div id="{{ageClass.0.age_id }}>" class="lessonData ageClass{{ageClass.0.age_id }}">
+                          <div class="priceAndPlace">
+                              <div class="titleAndData">
+                                  <span  class="title lessonPrice">Prix :</span>
+                                  <span  class="data lessonPrice">{{ ageClass.0.price }}€</span>
+                              </div>
 
-                    <p  class="lessonAge">{{ ageClass.0.age }}</p>
+                              <div class="titleAndData">
+                                  <span  class="title poolTitle">Bassin:</span>
+                                  <span  class="data poolName">{{ ageClass.0.pool_name }}</span>
+                              </div>
+                          </div>
 
-                    <div class="priceAndPlace">
-                        <div class="titleAndData">
-                            <span  class="title lessonPrice">Prix :</span>
-                            <span  class="data lessonPrice">{{ ageClass.0.price }}€</span>
-                        </div>
+                          <div class="timetable">
+                              <div  class="timeTitle">Horaires</div>
 
-                        <div class="titleAndData">
-                            <span  class="title lessonPool">Bassin:</span>
-                            <span  class="data lessonPool">{{ ageClass.0.pool_name }}</span>
-                        </div>
-                    </div>
-
-                    <div class="timetable">
-                        <div  class="timeTitle">Horaires</div>
-
-                        <div class="timeList">
-                            {% for lesson in ageClass %}
-                            <div class="timeBlock">
-                                <p  class="lessonDay"> {{ lesson.day }}</p>
-                                <p  class="lessonTime"> {{ lesson.time }}</p>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+                              <div class="timeList">
+                                  {% for lesson in ageClass %}
+                                  <div class="timeBlock">
+                                      <p  class="lessonDay"> {{ lesson.day }}</p>
+                                      <p  class="lessonTime"> {{ lesson.time }}</p>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                          </div>
+              </div>
+              {% endfor %}
+            </div>
         </div>
-        {% endfor %}
 
-        <p> Selectionnez votre catégorie  : </p>
-        <ul class="nav nav-tabs">
-            {% for ageClass in ageClasses %}
-                <li class="{{ageClass.action}}">
-                    <a href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-
-        <p class="activityDescription"> {{ activity.description }} </p>
+        <div class="activityDescription"> {{ activity.description }} </div>
 
     </section>
 {% endblock %}

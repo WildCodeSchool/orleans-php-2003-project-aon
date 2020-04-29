@@ -27,7 +27,6 @@ class LessonManager extends AbstractManager
 
     public function selectEverthingForOneById(int $activityId, int $ageClassId = -1)
     {
-        //$ageClassId=1;
         $ageQuery="";
         if ($ageClassId >= 0) {
             $ageQuery=" and age.id=$ageClassId";
@@ -46,7 +45,7 @@ class LessonManager extends AbstractManager
             JOIN pool ON lesson.pool_id=pool.id 
             JOIN age ON lesson.age_id=age.id 
             WHERE activity.id=:id 
-            ".$ageQuery);//
+            ".$ageQuery);
 
         $statement->bindValue('id', $activityId, \PDO::PARAM_INT);
         $statement->execute();

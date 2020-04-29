@@ -48,6 +48,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: var(--font-text);
 }
 
 body{
@@ -66,7 +67,7 @@ main{
     align-items: center;
 
     background-attachment:fixed;
-    background-image : url("../images/turbulences2.png");
+    background-image : url("../images/bulles.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -92,15 +93,16 @@ h2 {
     color:var(--color-main);
 }
 
-h3 {
+h3,h5 {
     font-family: var(--font-title);
+    color:var(--color-contrast);
     font-size: 30px;
     font-weight: bold;
 }
 
-h4, h5 {
-    color:var(--color-contrast);
+h4{
     font-weight: bold;
+    color:var(--color-dark);
 }
 
 li, a {
@@ -161,8 +163,9 @@ hr{
 
 .navbar a, footer a{
     color:var(--navbar-link-color-dark);
-    letter-spacing: 4px;
     font-weight: bold;
+    margin-left:var(--margin);
+    margin-right:var(--margin);
 }
 
 .navbar-toggler-icon {

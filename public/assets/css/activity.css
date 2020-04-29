@@ -2,67 +2,51 @@
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-
     align-items: center;
-    padding:0;
-    margin:0;
 }
-.activityIndex{
 
-}
 .activityDescription{
     text-indent: 5em;
-    padding : var(--padding-large);
+    padding:var(--padding-extra-large);
+    padding-top : calc(4 * var(--padding-extra-large));
+    max-width:800px;
 }
+
 .activityPicture{
     width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
-    display: flex;
-    align-items: center;
-
+    min-width:calc( 150 * ( 1px + ((100vw - 320px) / 1200)));
+    margin:auto;
+    padding-top:50px;
 }
-
-
-
-
 
 .lessonTime{
     padding:0;
     margin:0;
     text-align: center;
 }
+
 .lessonDay{
     padding:0;
     margin:0;
     text-align: center;
 }
-.lessonPrice{
 
-}
-.lessonPool{
-
-}
 .lessonAge{
     text-align:center;
     font-weight:bold;
 }
 
-
 .lessonData{
-
     --width:calc( 300 * ( 1px + ((100vw - 320px) / 1200)));
     border:thick double var(--color-main-dark);
     display:flex;
     flex-direction: column;
-    width:var(--width);
+    width:calc(1.2 * var(--width));
     background:var(--color-light-alternative);
     margin:var(--margin-large);
-
     box-shadow: 2px 2px 5px grey;
     box-sizing: content-box;
-
     position:relative;
-    top:-100px;
-    left:calc( var(--width) / 2);
 }
 
 .priceAndPlace{
@@ -87,13 +71,14 @@
 .titleAndData:first-of-type{
     background-color:var(--color-main);
     color:var(--color-light);
+    font-weight: bold;
+    font-size:25px;
 }
 
 .timetable{
     display:flex;
     flex-direction: row;
     width:100%;
-
 }
 
 .timeTitle{
@@ -101,7 +86,7 @@
     padding:var(--padding);
     display:flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
 }
 
 .timeList{
@@ -112,10 +97,12 @@
     flex-wrap: wrap;
     width:100%;
 }
+
 .timeTable, .timeTable p{
     margin:0;
     padding:0;
 }
+
 .lessonDay, .lessonTime{
     margin-left:var(--margin);
     margin-righ:var(--margin);
@@ -132,6 +119,13 @@
     align-items: center;
 }
 
+.poolTitle{
+    padding:var(--padding);
+    display:flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .lessonTime:before{
     content:"";
     display: inline-block;
@@ -144,7 +138,6 @@
 }
 
 .lessonDay:before{
-
     content:"";
     display: inline-block;
     width:40px;
@@ -155,11 +148,7 @@
     background-repeat: no-repeat;
 }
 
-.poolName{
-    position:relative;
-}
 .poolName:before{
-
     content:"";
     display: inline-block;
     width:40px;
@@ -174,4 +163,15 @@ li a:focus{
     color:red;
     border:thin solid grey;
     border-bottom:none
+}
+
+
+.buttonAndTable{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activity-button{
+    min-width:140px;
 }
