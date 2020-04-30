@@ -35,4 +35,10 @@ class ActivityManager extends AbstractManager
     {
         return $this->pdo->query('SELECT * FROM ' . $this->table . ' WHERE to_be_displayed=1')->fetchAll();
     }
+
+    public function selectAllActivitiesForAdmin(): array
+    {
+        return $this->pdo->query('SELECT ac.name, a.age, l.day, l.time FROM lesson as l 
+        INNER JOIN activity as ac ON ac.id=l.activity_id JOIN age as a ON a.id=l.age_id')->fetchAll();
+    }
 }

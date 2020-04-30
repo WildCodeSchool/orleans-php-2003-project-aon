@@ -21,6 +21,7 @@
 
 .activity-card-img{
     height: 212px;
+    object-fit: cover;
 }
 
 .activity-card .card-text{

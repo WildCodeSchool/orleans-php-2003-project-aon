@@ -20,14 +20,14 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
-
+    margin:var(--margin-large);
 }
 
 .eventpicture{
-    padding: var(--margin-large);
     margin: var(--margin);
     max-width:80%;
     min-width: 50%;
+    object-fit: contain;
 }
 
 .eventDetails{
@@ -41,10 +41,6 @@
     margin-top: calc(2*(var(--margin-large)));
 }
 
-.description{
-    margin: var(--margin);
-}
-
 .eventlist{
     align-self: center;
     display:flex;
@@ -53,6 +49,7 @@
     max-width: 1030px;
     flex-direction: column;
 }
+
 @media (max-width: 450px) {
     .eventpicture{
         width:85% ;
