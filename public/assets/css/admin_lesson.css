@@ -1,0 +1,12 @@
+.form-group-lesson{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container-left-lesson, .form-container-right-lesson{
+    display:flex;
+    flex-direction: column;
+    justify-content: stretch;
+    width:40%;
+    padding: var(--padding-large);
+}

@@ -5,8 +5,8 @@
 <div class="form-Activity form-container">
 
 
-    <div class="form- activity-left form-container-left">
-        <div>
+    <div class="form- activity-left form-container-left-lesson">
+        <div class="form-group-lesson">
             <label class="col-form-label" for="title">Type de l'activité</label>
             <select required class="form-control" id="activity" name="activity">
                 {% for activity in activities %}
@@ -14,7 +14,7 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group-lesson">
             <label class="col-form-label" for="location">Age</label>
             <select required class="form-control" type="text" id="age" name="age">
                 {% for age in ages %}
@@ -22,7 +22,7 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group-lesson">
             <label for="pool-select">Choisir le bassin:</label>
             <select required  class="form-control" name="pool" id="pool">
                 {% for pool in pools %}
@@ -32,10 +32,10 @@
         </div>
     </div>
 
-    <div class="form- activity-right form-container-right">
-        <div class="form-group">
+    <div class="form- activity-right form-container-right-lesson">
+        <div class="form-group-lesson">
             <label for="day-select">Choisir le jour:</label>
-            <select name="day" id="day">
+            <select name="day" id="day" class="form-control">
                 <option value="{{ lesson.day }}">--Choisir un jour--</option>
                 <option value="Lundi">Lundi</option>
                 <option value="Mardi">Mardi</option>
@@ -45,13 +45,13 @@
                 <option value="Samedi">Samedi</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group-lesson">
             <label class="col-form-label" for="location">Heure</label>
-            <input class="form-control" type="text" id="time" name="time" value="{{ lesson.time}}" placeholder="19h00-20h00">
+            <input class="form-control-lesson" type="text" id="time" name="time" value="{{ lesson.time}}" placeholder="19h00-20h00">
         </div>
-        <div class="form-group">
+        <div class="form-group-lesson">
             <label class="col-form-label" for="location">Prix</label>
-            <input class="form-control" type="text" id="price" name="price" value="{{ lesson.price}}" placeholder="200">
+            <input class="form-control-lesson" type="text" id="price" name="price" value="{{ lesson.price}}" placeholder="200">
         </div>
     </div>
 
