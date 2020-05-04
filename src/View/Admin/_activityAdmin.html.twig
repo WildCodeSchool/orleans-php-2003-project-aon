@@ -8,18 +8,12 @@
             <thead>
             <tr>
                 <th>Nom</th>
-                <th>Age</th>
-                <th>Jour</th>
-                <th>Heure</th>
             </tr>
             </thead>
             <tbody>
             {%  for id in activities %}
                 <tr>
                     <td>{{ id.name }}</td>
-                    <td>{{ id.age}}</td>
-                    <td>{{ id.day}}</td>
-                    <td>{{ id.time}}</td>
                     <td><a class="mini activity-button btn btn-primary btn-lg" href="">Modifier</a>
                     </td>
                     <td>

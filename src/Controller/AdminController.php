@@ -19,13 +19,13 @@ class AdminController extends AbstractController
      */
     public function index()
     {
+        $activityManager = new ActivityManager();
+        $activities = $activityManager->getActivityList();
+
         $adminEvent = new EventManager();
         $event = $adminEvent->selectAll();
 
-        $activityManager = new ActivityManager();
-        $activities = $activityManager->selectAllActivitiesForAdmin();
-
-        return $this->twig->render('Admin/index.html.twig', ['event' => $event, 'activities' => $activities]);
+        return $this->twig->render('Admin/index.html.twig', ['activities' => $activities, 'event' => $event]);
     }
 
     /**
