@@ -18,6 +18,16 @@
             <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
         </div>
 
+        <div class="form-group">
+            <label class="col-form-label" for="tbd">Page d'accueil :</label>
+            <input class="form-control" type="checkbox" id="tbd" name="toBeDisplayed" value="1"
+                   {%  if data.to_be_displayed==1 %}
+                       checked
+                   {% endif %}
+
+            >
+            <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+        </div>
     </div>
 
     <div class="form-container-right">

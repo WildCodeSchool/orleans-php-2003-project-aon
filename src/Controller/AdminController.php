@@ -213,6 +213,7 @@ class AdminController extends AbstractController
         $message = urldecode($message);
         $activityManager = new ActivityManager();
         $activity = $activityManager->selectOneById($id);
+
         return $this->twig->render('Admin/showActivity.html.twig', ['data' => $activity, 'message' => $message]);
     }
 
@@ -222,7 +223,7 @@ class AdminController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
 
-            if (count($errorsAndData['data']) == 4) {
+            if (count($errorsAndData['data']) == 5) {
                 $activityManager = new ActivityManager();
                 $activityManager->updateActivity($errorsAndData['data']);
                 header("location:/admin/showActivity/" .
@@ -266,6 +267,13 @@ class AdminController extends AbstractController
             $errors['id'] .= "Id is negative";
         } else {
             $data['id']=intval(trim($_POST['id']));
+        }
+
+        //check toBeDisplayed
+        if (empty($_POST['toBeDisplayed'])) {
+            $data['toBeDisplayed']=0;
+        } else {
+            $data['toBeDisplayed']=1;
         }
 
         return ['errors' => $errors, 'data' => $data];

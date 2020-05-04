@@ -50,11 +50,12 @@ class ActivityManager extends AbstractManager
     public function updateActivity(array $activity): bool
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `name` = :name, 
-        `description` = :description, `picture` = :picture WHERE id=:id");
+        `description` = :description, `picture` = :picture , `to_be_displayed` = :toBeDisplayed WHERE id=:id");
         $statement->bindValue('name', $activity['name'], \PDO::PARAM_STR);
         $statement->bindValue('description', $activity['description'], \PDO::PARAM_STR);
         $statement->bindValue('picture', $activity['picture'], \PDO::PARAM_STR);
         $statement->bindValue('id', $activity['id'], \PDO::PARAM_INT);
+        $statement->bindValue('toBeDisplayed', $activity['toBeDisplayed'], \PDO::PARAM_INT);
 
         return $statement->execute();
     }
