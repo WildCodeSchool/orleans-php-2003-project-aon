@@ -60,7 +60,7 @@ class AdminController extends AbstractController
         $message = urldecode($message);
         $eventManager = new EventManager();
         $event = $eventManager->selectOneById($id);
-        return $this->twig->render('Admin/showActivity.html.twig', ['data' => $event, 'message' => $message]);
+        return $this->twig->render('Admin/showEvent.html.twig', ['data' => $event, 'message' => $message]);
     }
 
 
@@ -115,7 +115,7 @@ class AdminController extends AbstractController
                 header("location:/admin/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
             } else {
                 $toBeReturned = $this->twig->render(
-                    'Admin/showActivity.html.twig',
+                    'Admin/showEvent.html.twig',
                     ['errors' => $errorsAndData['errors'],
                     'data' => $errorsAndData['data']]
                 );
@@ -143,17 +143,11 @@ class AdminController extends AbstractController
         //data array
         $data=array();
 
-        $checked=$this->checkTextFromPost('title', "le titre", 50);
-        $errors=array_merge($errors, $checked['errors']);
-        $data=array_merge($data, $checked['data']);
+        $this->checkTextFromPost('title', "le titre", 50, $errors, $data);
 
-        $checked=$this->checkTextFromPost('description', "la description", 250);
-        $errors=array_merge($errors, $checked['errors']);
-        $data=array_merge($data, $checked['data']);
+        $this->checkTextFromPost('description', "la description", 10000, $errors, $data);
 
-        $checked=$this->checkTextFromPost('picture', "la photo", 250);
-        $errors=array_merge($errors, $checked['errors']);
-        $data=array_merge($data, $checked['data']);
+        $this->checkTextFromPost('picture', "la photo", 250, $errors, $data);
 
         //check date
         if (empty($_POST['date'])) {
@@ -175,9 +169,7 @@ class AdminController extends AbstractController
             $data['id']=intval(trim($_POST['id']));
         }
 
-        $checked=$this->checkTextFromPost('location', "l'endroit", 50);
-        $errors=array_merge($errors, $checked['errors']);
-        $data=array_merge($data, $checked['data']);
+        $this->checkTextFromPost('location', "l'endroit", 50, $errors, $data);
 
         return ['errors' => $errors, 'data' => $data];
     }
@@ -189,21 +181,30 @@ class AdminController extends AbstractController
      * @param int $maxLength
      * @return array array['erros'] contains the errors list, array['data'] contained date clean for use in database
      */
-    public function checkTextFromPost(string $postFieldName, string $userFieldName, int $maxLength) : array
-    {
-        $data=array();
-        $errors=array();
-        $errors[$postFieldName]='';
+    public function checkTextFromPost(
+        string $postFieldName,
+        string $userFieldName,
+        int $maxLength,
+        &$errors,
+        &$data
+    ) : array {
+        $datum="";
+        $error="";
 
         if (empty($_POST[$postFieldName])) {
-            $errors[$postFieldName] .= "Vous devez indiquer $userFieldName de l'évenement";
+            $error = "Vous devez indiquer $userFieldName de l'évenement";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
-            $errors[$postFieldName] .= "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
+            $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
-            $data[$postFieldName]=trim($_POST[$postFieldName]);
+            $datum =trim($_POST[$postFieldName]);
         }
 
-        return ['errors' => $errors, 'data'=>$data];
+        $errors[$postFieldName]=$error;
+        if ($datum!="") {
+            $data[$postFieldName] = $datum;
+        }
+
+        return ['error' => $error, 'data'=>$data];
     }
 
 
@@ -213,5 +214,58 @@ class AdminController extends AbstractController
         $activityManager = new ActivityManager();
         $activity = $activityManager->selectOneById($id);
         return $this->twig->render('Admin/showActivity.html.twig', ['data' => $activity, 'message' => $message]);
+    }
+
+    public function editActivity(): string
+    {
+        $toBeReturned = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errorsAndData = $this->checkActivityPostData();
+
+            if (count($errorsAndData['data']) == 6) {
+                $eventManager = new EventManager();
+                $eventManager->updateEvent($errorsAndData['data']);
+                header("location:/admin/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
+            } else {
+                $toBeReturned = $this->twig->render(
+                    'Admin/showActivity.html.twig',
+                    ['errors' => $errorsAndData['errors'],
+                        'data' => $errorsAndData['data']]
+                );
+            }
+        }
+        return $toBeReturned;
+    }
+
+    private function checkActivityPostData() : array
+    {
+        //errors array
+        $errors=[
+            'name' => '',
+            'description' => '',
+            'picture' => '',
+            'id' => ''];
+
+        //data array
+        $data=array();
+
+        $this->checkTextFromPost('name', "le nom", 50, $errors, $data);
+
+        $this->checkTextFromPost('description', "la description", 10000, $errors, $data);
+
+        $this->checkTextFromPost('picture', "la photo", 250, $errors, $data);
+
+        //check id
+        if (empty($_POST['id'])) {
+            $errors['id'] .= "ID ERROR";
+        } elseif (!is_numeric(trim($_POST['id']))) {
+            $errors['id'] .= "Format id incorrect";
+        } elseif (intval(trim($_POST['id']))<1) {
+            $errors['id'] .= "Id is negative";
+        } else {
+            $data['id']=intval(trim($_POST['id']));
+        }
+
+        return ['errors' => $errors, 'data' => $data];
     }
 }
