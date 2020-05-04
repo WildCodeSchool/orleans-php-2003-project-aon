@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>{% block title %}{% endblock %}</h1>
-    <section class="form">
+    <section class="form-lesson">
         <form class = "event-form" method="post" action="/./AdminLesson/AddLesson">
             {% include 'Admin/_lessonDetails.html.twig' %}
             <div class="form-button-pannel">
@@ -11,4 +11,3 @@
         </form>
     </section>
 {% endblock %}
-
