@@ -69,4 +69,13 @@ class LessonManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    public function selectAllLessonsForAdmin(): array
+    {
+        $query = ('SELECT ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
+                    INNER JOIN activity as ac ON ac.id=l.activity_id 
+                    JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id');
+
+        return $this->pdo->query($query)->fetchAll();
+    }
 }

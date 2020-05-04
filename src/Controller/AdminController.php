@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\ActivityManager;
 use App\Model\EventManager;
+use App\Model\LessonManager;
 
 class AdminController extends AbstractController
 {
@@ -22,10 +23,10 @@ class AdminController extends AbstractController
         $adminEvent = new EventManager();
         $event = $adminEvent->selectAll();
 
-        $activityManager = new ActivityManager();
-        $activities = $activityManager->selectAllActivitiesForAdmin();
+        $lessonManager = new LessonManager();
+        $lessons = $lessonManager->selectAllLessonsForAdmin();
 
-        return $this->twig->render('Admin/index.html.twig', ['event' => $event, 'activities' => $activities]);
+        return $this->twig->render('Admin/index.html.twig', ['event' => $event, 'lessons' => $lessons]);
     }
 
     /**
