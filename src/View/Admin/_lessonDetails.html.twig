@@ -1,0 +1,64 @@
+{% for error in errors %}
+    <div class="form-message">{{ error }}</div>
+{% endfor %}
+
+<div class="form-Activity form-container">
+
+
+    <div class="form- activity-left form-container-left">
+        <div>
+            <label class="col-form-label" for="title">Type de l'activité</label>
+            <select required class="form-control" id="activity" name="activity">
+                {% for activity in activities %}
+                    <option value="{{ activity.id }}">{{ activity.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="location">Age</label>
+            <select required class="form-control" type="text" id="age" name="age">
+                {% for age in ages %}
+                    <option value="{{ age.id }}">{{ age.age }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pool-select">Choisir le bassin:</label>
+            <select required  class="form-control" name="pool" id="pool">
+                {% for pool in pools %}
+                    <option value="{{ pool.id }}">{{ pool.pool_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="form- activity-right form-container-right">
+        <div class="form-group">
+            <label for="day-select">Choisir le jour:</label>
+            <select name="day" id="day">
+                <option value="{{ lesson.day }}">--Choisir un jour--</option>
+                <option value="Lundi">Lundi</option>
+                <option value="Mardi">Mardi</option>
+                <option value="Mercredi">Mercredi</option>
+                <option value="Jeudi">Jeudi</option>
+                <option value="Vendredi">Vendredi</option>
+                <option value="Samedi">Samedi</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="location">Heure</label>
+            <input class="form-control" type="text" id="time" name="time" value="{{ lesson.time}}" placeholder="19h00-20h00">
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="location">Prix</label>
+            <input class="form-control" type="text" id="price" name="price" value="{{ lesson.price}}" placeholder="200">
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+<input type="hidden" name="id" value="{{ data.id }}">
