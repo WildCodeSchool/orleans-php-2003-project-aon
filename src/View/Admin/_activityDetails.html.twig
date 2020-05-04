@@ -14,7 +14,17 @@
 
         <div class="form-group">
             <label class="col-form-label" for="picture">Illustration de l'activité</label>
-            <input class="form-control" type="text" id="picture" name="picture" value="{{data.picture}}" placeholder="photo.jpg">
+            <select name="picture" class="form-control">
+                {% for picture in availablePictures %}
+                    <option value="{{ picture }}"
+                            {%  if picture==data.picture %}
+                                selected
+                            {% endif %}
+                    >{{ picture }}</option>
+                {% endfor %}
+            </select>
+
+
             <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
         </div>
 

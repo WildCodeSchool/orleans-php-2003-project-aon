@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\ActivityManager;
 use App\Model\EventManager;
+use \FilesystemIterator;
 
 class AdminController extends AbstractController
 {
@@ -214,7 +215,14 @@ class AdminController extends AbstractController
         $activityManager = new ActivityManager();
         $activity = $activityManager->selectOneById($id);
 
-        return $this->twig->render('Admin/showActivity.html.twig', ['data' => $activity, 'message' => $message]);
+        $availablePictures=array();
+        $path="assets/activityImages/";
+        $iterator = new \FilesystemIterator($path);
+        foreach ($iterator as $fileinfo) {
+            $availablePictures[] = $fileinfo->getFilename();
+        }
+
+        return $this->twig->render('Admin/showActivity.html.twig', ['data' => $activity, 'message' => $message, 'availablePictures' => $availablePictures]);
     }
 
     public function editActivity(): string
