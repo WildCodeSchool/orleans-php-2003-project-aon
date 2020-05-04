@@ -205,4 +205,13 @@ class AdminController extends AbstractController
 
         return ['errors' => $errors, 'data'=>$data];
     }
+
+
+    public function showActivity(int $id, string $message = "")
+    {
+        $message = urldecode($message);
+        $activityManager = new ActivityManager();
+        $activity = $activityManager->selectOneById($id);
+        return $this->twig->render('Admin/showActivity.html.twig', ['data' => $activity, 'message' => $message]);
+    }
 }
