@@ -69,4 +69,23 @@ class LessonManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    /**
+     * @param array $lesson
+     * @return bool
+     */
+    public function insert(array $lesson):bool
+    {
+        $query = 'INSERT INTO ' . self::TABLE . '(`activity_id`, `age_id`, `pool_id`,`day`, `time`,`price`) 
+                    VALUES (:activity, :age, :pool, :day, :time, :price)';
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue('activity', $lesson['activity'], \PDO::PARAM_STR);
+        $statement->bindValue('age', $lesson['age'], \PDO::PARAM_STR);
+        $statement->bindValue('pool', $lesson['pool'], \PDO::PARAM_STR);
+        $statement->bindValue('day', $lesson['day'], \PDO::PARAM_STR);
+        $statement->bindValue('time', $lesson['time'], \PDO::PARAM_STR);
+        $statement->bindValue('price', $lesson['price']);
+
+        return $statement->execute();
+    }
 }
