@@ -222,10 +222,12 @@ class AdminController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
 
-            if (count($errorsAndData['data']) == 6) {
-                $eventManager = new EventManager();
-                $eventManager->updateEvent($errorsAndData['data']);
-                header("location:/admin/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
+            if (count($errorsAndData['data']) == 4) {
+                $activityManager = new ActivityManager();
+                $activityManager->updateActivity($errorsAndData['data']);
+                header("location:/admin/showActivity/" .
+                    $errorsAndData['data']['id'] .
+                    "/L'activité a bien été modifiée");
             } else {
                 $toBeReturned = $this->twig->render(
                     'Admin/showActivity.html.twig',
