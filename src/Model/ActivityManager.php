@@ -44,6 +44,6 @@ class ActivityManager extends AbstractManager
 
     public function getActivityList(): array
     {
-        return $this->pdo->query('SELECT name FROM activity')->fetchAll();
+        return $this->pdo->query('SELECT id, name FROM activity')->fetchAll();
     }
 }
