@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>{% block title %}{% endblock %}</h1>
+    <section class="form-lesson">
+        <form class = "event-form" method="post" action="/./AdminLesson/AddLesson">
+            {% include 'Admin/_lessonDetails.html.twig' %}
+            <div class="form-button-pannel">
+                {% block buttons %}{% endblock %}
+            </div>
+        </form>
+    </section>
+{% endblock %}

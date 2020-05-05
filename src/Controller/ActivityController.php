@@ -54,9 +54,9 @@ class ActivityController extends AbstractController
 
         $lessonsByAgeClass=array();
         if ($ageClassId>=0) {
-            $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClassId);
+            $lessonsByAgeClass[]=$lessonManager->selectEverythingForOneById($id, $ageClassId);
         } elseif (!empty($ageClasses)) {
-            $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClasses[0]['id']);
+            $lessonsByAgeClass[]=$lessonManager->selectEverythingForOneById($id, $ageClasses[0]['id']);
         }
 
         return $this->twig->render('Activity/showActivity.html.twig', ['activity'=>$activity,
