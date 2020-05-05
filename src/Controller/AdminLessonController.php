@@ -28,7 +28,7 @@ class AdminLessonController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
-            return var_dump($lesson);
+
             $errors = $this->validation($lesson);
 
             if (empty($errors)) {
@@ -43,7 +43,6 @@ class AdminLessonController extends AbstractController
             'activities' => $activities ?? [],
             'ages' => $ages ?? [],
             'pools' => $pools ?? [],
-            'id' => $id ?? [],
         ]);
     }
 
@@ -87,7 +86,16 @@ class AdminLessonController extends AbstractController
     {
         $lessonManager = new LessonManager();
         $lesson = $lessonManager->selectOneById($id);
-        return $this->twig->render('Admin/editLesson.html.twig', ['lesson' => $lesson]);
+        $activityManager = new ActivityManager();
+        $activities = $activityManager->selectAll();
+        $ageManager = new AgeManager();
+        $ages = $ageManager->selectAll();
+        $poolManager = new PoolManager();
+        $pools = $poolManager->selectAll();
+        return $this->twig->render('Admin/editLesson.html.twig', ['lesson' => $lesson,
+            'activities' => $activities,
+            'ages' => $ages,
+            'pools' => $pools]);
     }
 
     public function editLesson()
@@ -118,7 +126,6 @@ class AdminLessonController extends AbstractController
             'activities' => $activities ?? [],
             'ages' => $ages ?? [],
             'pools' => $pools ?? [],
-            'id' => $id ?? [],
         ]);
     }
 }
