@@ -20,21 +20,19 @@ class AdminLessonController extends AbstractController
          * @throws \Twig\Error\RuntimeError
          * @throws \Twig\Error\SyntaxError
          */
-    public function addLesson()
-    {
+   // public function addLesson()
+    //{
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $lessonManager = new LessonManager();
-            $lesson = [
-                'time' => $_POST['time'],
-                'day' => $_POST['day'],
-                'price' => $_POST['price'],
-            ];
-            $id = $lessonManager->insert($lesson);
-            header('Location:/Admin/index');
-        }
+       // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // $lessonManager = new LessonManager();
+            // $lesson = [
+            //    'time' => $_POST['time'],
+            //    'day' => $_POST['day'],
+            //    'price' => $_POST['price'],
 
-        var_dump($lesson);
-        return $this->twig->render('Admin/addLesson.html.twig');
-    }
+           // $id = $lessonManager->insert($lesson);
+           // header('Location:/Admin/index');
+        //}
+      //  return $this->twig->render('Admin/addLesson.html.twig');
+    //}
 }
