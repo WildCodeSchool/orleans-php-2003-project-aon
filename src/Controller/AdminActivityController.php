@@ -24,7 +24,33 @@ class AdminActivityController extends AbstractController
     public function createActivity(string $message = "")
     {
         $message = urldecode($message);
-        return $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);
+        $availablePictures=$this->getAvailablePictures();
+        return $this->twig->render('Admin/addActivity.html.twig', ['message' => $message,
+            'availablePictures' => $availablePictures,]);
+    }
+
+    public function addActivity()
+    {
+        $toBeReturned="";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errorsAndData=$this->checkActivityPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
+
+            if (count($data)==4 && empty($data['id'])) {
+                $activityManager=new ActivityManager();
+                $activityManager->insert($data);
+                header("location:/admin/index");
+            } else {
+                $availablePictures=$this->getAvailablePictures();
+
+                $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
+                    'data'=>$data,
+                    'availablePictures' => $availablePictures,
+                    'message'=>"L'évenement n'a pas pu être créé."]);
+            }
+        }
+        return $toBeReturned;
     }
 
     public function showActivity(int $id, string $message = "")
