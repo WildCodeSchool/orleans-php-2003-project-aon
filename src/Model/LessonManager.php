@@ -101,10 +101,8 @@ class LessonManager extends AbstractManager
 
     public function editLesson(array $lesson): bool
     {
-        $query = "UPDATE lesson SET `activity_id` = :activity, 
-                   `age_id` = :age, `pool_id` = :pool, `day` = :day, `time` = :time, `price`= :price 
-                   JOIN activity 
-                   WHERE id=:id";
+        $query =  "UPDATE lesson SET `activity_id` = :activity,
+           `age_id` = :age, `pool_id` = :pool, `day` = :day, `time` = :time, `price`= :price WHERE id=:id";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('activity', $lesson['activity'], \PDO::PARAM_STR);
         $statement->bindValue('age', $lesson['age'], \PDO::PARAM_STR);
@@ -112,6 +110,7 @@ class LessonManager extends AbstractManager
         $statement->bindValue('day', $lesson['day'], \PDO::PARAM_STR);
         $statement->bindValue('time', $lesson['time'], \PDO::PARAM_STR);
         $statement->bindValue('price', $lesson['price']);
+        $statement->bindValue('id', $lesson['id']);
 
         return $statement->execute();
     }
