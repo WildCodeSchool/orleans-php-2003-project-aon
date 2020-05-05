@@ -2,15 +2,16 @@
     display: flex;
     flex-direction: row;
     background:transparent;
+    border: none;
 }
 .wau-card-img {
     width: 350px;
     height: 350px;
+    object-fit: contain;
 }
 .wau-card-text {
-    padding: var(--padding-large) ;
-
-    text-align:center;
+    padding: var(--padding-extra-large);
+    text-align:left;
 }
 
 @media screen and (max-width: 901px) {
