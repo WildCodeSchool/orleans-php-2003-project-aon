@@ -73,4 +73,16 @@ class AdminLessonController extends AbstractController
 
         return $errors ?? [];
     }
+
+    /**
+     * Handle item deletion
+     *
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        $lessonManager = new LessonManager();
+        $lessonManager->delete($id);
+        header('Location:/Admin/index');
+    }
 }

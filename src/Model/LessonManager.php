@@ -92,10 +92,21 @@ class LessonManager extends AbstractManager
 
     public function selectAllLessonsForAdmin(): array
     {
-        $query = ('SELECT ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
+        $query = ('SELECT l.id, ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
                     INNER JOIN activity as ac ON ac.id=l.activity_id 
                     JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id');
 
         return $this->pdo->query($query)->fetchAll();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 }
