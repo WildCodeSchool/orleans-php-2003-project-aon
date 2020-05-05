@@ -86,6 +86,7 @@ class AdminLessonController extends AbstractController
         header('Location:/Admin/index');
     }
 
+    /**
      * Display event informations specified by $id
      *
      * @param int $id
