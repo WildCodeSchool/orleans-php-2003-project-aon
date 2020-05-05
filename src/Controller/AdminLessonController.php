@@ -13,7 +13,7 @@ class AdminLessonController extends AbstractController
     public function createLesson(string $message = "")
     {
         $message = urldecode($message);
-        return $this->twig->render('Admin/addlesson.html.twig', ['message' => $message]);
+        return $this->twig->render('Admin/addLesson.html.twig', ['message' => $message]);
     }
 
     public function addLesson()
@@ -38,7 +38,7 @@ class AdminLessonController extends AbstractController
             }
         }
 
-        return $this->twig->render('Admin/addlesson.html.twig', [
+        return $this->twig->render('Admin/addLesson.html.twig', [
             'errors' => $errors ?? [],
             'lesson' => $lesson ?? [],
             'activities' => $activities ?? [],
