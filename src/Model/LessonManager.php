@@ -37,6 +37,7 @@ class LessonManager extends AbstractManager
             lesson.price,
             lesson.day,
             lesson.time,
+            lesson.id as lesson_id,
             pool.pool_name AS pool_name,
             age.age,
             age.id AS age_id
@@ -97,5 +98,13 @@ class LessonManager extends AbstractManager
                     JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id');
 
         return $this->pdo->query($query)->fetchAll();
+    }
+
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 }
