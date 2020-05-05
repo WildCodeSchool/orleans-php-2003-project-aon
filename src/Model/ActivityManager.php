@@ -59,4 +59,19 @@ class ActivityManager extends AbstractManager
 
         return $statement->execute();
     }
+
+    public function insert(array $activity):bool
+    {
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+            " (`name`, `description`, `picture`, `to_be_displayed`) 
+            VALUES 
+            (:name, :description, :picture, :to_be_displayed)");
+
+        $statement->bindValue('name', $activity['name'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $activity['description'], \PDO::PARAM_STR);
+        $statement->bindValue('picture', $activity['picture'], \PDO::PARAM_STR);
+        $statement->bindValue('to_be_displayed', $activity['to_be_displayed'], \PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
 }
