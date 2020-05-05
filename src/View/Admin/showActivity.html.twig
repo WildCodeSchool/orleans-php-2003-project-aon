@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Modifier l'activité:  {{ data.title }}</h1>
+    <form class = "event-form" method="post" action="/./adminActivity/editActivity">
+        {% include 'Admin/_activityDetails.html.twig' %}
+        <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>
+        <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Enregistrer les modifications">
+    </form>
+{% endblock %}
+
+
