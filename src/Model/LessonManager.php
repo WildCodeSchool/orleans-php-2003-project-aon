@@ -25,7 +25,7 @@ class LessonManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectEverthingForOneById(int $activityId, int $ageClassId = -1)
+    public function selectEverythingForOneById(int $activityId, int $ageClassId = -1)
     {
         $ageQuery="";
         if ($ageClassId >= 0) {
@@ -37,7 +37,7 @@ class LessonManager extends AbstractManager
             lesson.price,
             lesson.day,
             lesson.time,
-            pool.name AS pool_name,
+            pool.pool_name AS pool_name,
             age.age,
             age.id AS age_id
             FROM $this->table
@@ -70,6 +70,7 @@ class LessonManager extends AbstractManager
         return $statement->fetchAll();
     }
 
+
     /**
      * @param array $lesson
      * @return bool
@@ -87,5 +88,14 @@ class LessonManager extends AbstractManager
         $statement->bindValue('price', $lesson['price']);
 
         return $statement->execute();
+    }
+
+    public function selectAllLessonsForAdmin(): array
+    {
+        $query = ('SELECT ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
+                    INNER JOIN activity as ac ON ac.id=l.activity_id 
+                    JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id');
+
+        return $this->pdo->query($query)->fetchAll();
     }
 }
