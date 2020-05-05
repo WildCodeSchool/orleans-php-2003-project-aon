@@ -10,7 +10,10 @@
             <label class="col-form-label" for="title">Type de l'activité</label>
             <select required class="form-control" id="activity" name="activity">
                 {% for activity in activities %}
-                    <option value="{{ activity.id }}">{{ activity.name }}</option>
+                    <option value="{{ activity.id }}"
+                            {%  if lesson.activity==activity.name %}
+                    selected
+                            {% endif %}>{{ activity.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -18,7 +21,10 @@
             <label class="col-form-label" for="location">Age</label>
             <select required class="form-control" type="text" id="age" name="age">
                 {% for age in ages %}
-                    <option value="{{ age.id }}">{{ age.age }}</option>
+                    <option value="{{ age.id }}"
+                            {%  if lesson.age==age.age %}
+                    selected
+                            {% endif %}>{{ age.age }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -26,7 +32,10 @@
             <label for="pool-select">Choisir le bassin:</label>
             <select required  class="form-control" name="pool" id="pool">
                 {% for pool in pools %}
-                    <option value="{{ pool.id }}">{{ pool.pool_name }}</option>
+                    <option value="{{ pool.id }}"
+                            {%  if lesson.pool_name==pool.pool_name %}
+                    selected
+                            {% endif %}>{{ pool.pool_name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -37,12 +46,30 @@
             <label for="day-select">Choisir le jour:</label>
             <select name="day" id="day" class="form-control">
                 <option value="{{ lesson.day }}">--Choisir un jour--</option>
-                <option value="Lundi">Lundi</option>
-                <option value="Mardi">Mardi</option>
-                <option value="Mercredi">Mercredi</option>
-                <option value="Jeudi">Jeudi</option>
-                <option value="Vendredi">Vendredi</option>
-                <option value="Samedi">Samedi</option>
+                <option value="Lundi"
+                        {%  if lesson.day=="Lundi" %}
+                selected
+                        {% endif %}>Lundi</option>
+                <option value="Mardi"
+                        {%  if lesson.day=="Mardi" %}
+                selected
+                        {% endif %}>Mardi</option>
+                <option value="Mercredi"
+                        {%  if lesson.day=="Mercredi" %}
+                selected
+                        {% endif %}>Mercredi</option>
+                <option value="Jeudi"
+                        {%  if lesson.day=="Jeudi" %}
+                selected
+                        {% endif %}>Jeudi</option>
+                <option value="Vendredi"
+                        {%  if lesson.day=="Vendredi" %}
+                selected
+                        {% endif %}>Vendredi</option>
+                <option value="Samedi"
+                        {%  if lesson.day=="Samedi" %}
+                selected
+                        {% endif %}>Samedi</option>
             </select>
         </div>
         <div class="form-group-lesson">
@@ -61,4 +88,4 @@
 
 </div>
 
-<input type="hidden" name="id" value="{{ data.id }}">
+<input type="hidden" name="id" value="{{ lesson.id }}">
