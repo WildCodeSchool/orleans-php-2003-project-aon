@@ -28,7 +28,7 @@ class AdminLessonController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
-
+            return var_dump($lesson);
             $errors = $this->validation($lesson);
 
             if (empty($errors)) {
@@ -37,13 +37,13 @@ class AdminLessonController extends AbstractController
                 header("location:/admin/index");
             }
         }
-
         return $this->twig->render('Admin/addLesson.html.twig', [
             'errors' => $errors ?? [],
             'lesson' => $lesson ?? [],
             'activities' => $activities ?? [],
             'ages' => $ages ?? [],
             'pools' => $pools ?? [],
+            'id' => $id ?? [],
         ]);
     }
 
@@ -74,6 +74,22 @@ class AdminLessonController extends AbstractController
         return $errors ?? [];
     }
 
+    /**
+     * Display event informations specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function showLesson(int $id)
+    {
+        $lessonManager = new LessonManager();
+        $lesson = $lessonManager->selectOneById($id);
+        return $this->twig->render('Admin/editLesson.html.twig', ['lesson' => $lesson]);
+    }
+
     public function editLesson()
     {
         $activityManager = new ActivityManager();
@@ -102,6 +118,7 @@ class AdminLessonController extends AbstractController
             'activities' => $activities ?? [],
             'ages' => $ages ?? [],
             'pools' => $pools ?? [],
+            'id' => $id ?? [],
         ]);
     }
 }
