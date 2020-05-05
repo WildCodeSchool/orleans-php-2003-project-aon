@@ -27,9 +27,9 @@ class LessonManager extends AbstractManager
 
     public function selectEverythingForOneById(int $activityId, int $ageClassId = -1)
     {
-        $ageQuery="";
+        $ageQuery = "";
         if ($ageClassId >= 0) {
-            $ageQuery=" and age.id=$ageClassId";
+            $ageQuery = " and age.id=$ageClassId";
         }
 
         // prepared request
@@ -45,7 +45,7 @@ class LessonManager extends AbstractManager
             JOIN pool ON lesson.pool_id=pool.id 
             JOIN age ON lesson.age_id=age.id 
             WHERE activity.id=:id 
-            ".$ageQuery);
+            " . $ageQuery);
 
         $statement->bindValue('id', $activityId, \PDO::PARAM_INT);
         $statement->execute();
@@ -75,7 +75,7 @@ class LessonManager extends AbstractManager
      * @param array $lesson
      * @return bool
      */
-    public function insert(array $lesson):bool
+    public function insert(array $lesson): bool
     {
         $query = 'INSERT INTO ' . self::TABLE . '(`activity_id`, `age_id`, `pool_id`,`day`, `time`,`price`) 
                     VALUES (:activity, :age, :pool, :day, :time, :price)';
@@ -92,10 +92,38 @@ class LessonManager extends AbstractManager
 
     public function selectAllLessonsForAdmin(): array
     {
-        $query = ('SELECT ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
+        $query = ('SELECT l.id, ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
                     INNER JOIN activity as ac ON ac.id=l.activity_id 
                     JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id');
 
         return $this->pdo->query($query)->fetchAll();
+    }
+
+    public function editLesson(array $lesson): bool
+    {
+        $query =  "UPDATE lesson SET `activity_id` = :activity,
+           `age_id` = :age, `pool_id` = :pool, `day` = :day, `time` = :time, `price`= :price WHERE id=:id";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue('activity', $lesson['activity'], \PDO::PARAM_STR);
+        $statement->bindValue('age', $lesson['age'], \PDO::PARAM_STR);
+        $statement->bindValue('pool', $lesson['pool'], \PDO::PARAM_STR);
+        $statement->bindValue('day', $lesson['day'], \PDO::PARAM_STR);
+        $statement->bindValue('time', $lesson['time'], \PDO::PARAM_STR);
+        $statement->bindValue('price', $lesson['price']);
+        $statement->bindValue('id', $lesson['id']);
+
+        return $statement->execute();
+    }
+
+    public function selectOneById(int $id)
+    {
+        $statement = $this->pdo->prepare("SELECT l.id, ac.name, a.age, p.pool_name, l.day, l.time, l.price 
+                                                    FROM lesson as l JOIN activity as ac ON ac.id=l.activity_id
+                                                    JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id
+                                                    WHERE l.id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetch();
     }
 }
