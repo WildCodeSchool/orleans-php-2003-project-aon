@@ -74,7 +74,7 @@ class AdminLessonController extends AbstractController
         return $errors ?? [];
     }
 
-    private function editLesson()
+    public function editLesson()
     {
         $activityManager = new ActivityManager();
         $activities = $activityManager->selectAll();
@@ -91,7 +91,7 @@ class AdminLessonController extends AbstractController
 
             if (empty($errors)) {
                 $lessonManager = new LessonManager();
-                $lessonManager->UPDATE($lesson);
+                $lessonManager->editLesson($lesson);
                 header("location:/admin/index");
             }
         }
