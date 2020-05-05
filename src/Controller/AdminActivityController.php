@@ -21,6 +21,12 @@ class AdminActivityController extends AbstractController
         return $availablePictures;
     }
 
+    public function createActivity(string $message = "")
+    {
+        $message = urldecode($message);
+        return $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);
+    }
+
     public function showActivity(int $id, string $message = "")
     {
         $message = urldecode($message);
