@@ -1,0 +1,41 @@
+
+<section class="cookies container-fluid">
+    <div class="row">
+        <h2>Gestion des leçons</h2>
+
+
+        <table class="table table-stripped">
+            <thead>
+            <tr>
+                <th>Activité</th>
+                <th>Age</th>
+                <th>Bassin</th>
+                <th>Jour</th>
+                <th>Heure</th>
+                <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%  for id in lessons %}
+                <tr>
+                    <td>{{ id.name }}</td>
+                    <td>{{ id.age}}</td>
+                    <td>{{ id.pool_name }}</td>
+                    <td>{{ id.day}}</td>
+                    <td>{{ id.time}}</td>
+                    <td>{{ id.price}}€</td>
+                    <td><a class="mini activity-button btn btn-primary btn-lg" href="">Modifier</a>
+                    </td>
+                    <td>
+                        <button>
+                            <a><img class="delete_button" src="/./assets/icons/logo_delete.png" alt="logo_delete"></a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <a class="activity-button btn btn-primary btn-lg" href="/./AdminLesson/AddLesson">Ajouter une leçon</a>
+</section>

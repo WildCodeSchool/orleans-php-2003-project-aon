@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\LessonManager;
 use App\Model\ActivityManager;
 use App\Model\EventManager;
 use \FilesystemIterator;
@@ -26,7 +27,15 @@ class AdminController extends AbstractController
         $adminEvent = new EventManager();
         $event = $adminEvent->selectAll();
 
-        return $this->twig->render('Admin/index.html.twig', ['activities' => $activities, 'event' => $event]);
+        $lessonManager = new LessonManager();
+        $lessons = $lessonManager->selectAllLessonsForAdmin();
+
+        return $this->twig->render(
+            'Admin/index.html.twig',
+            ['event' => $event,
+                'lessons' => $lessons,
+                'activities' => $activities]
+        );
     }
 
     /**
