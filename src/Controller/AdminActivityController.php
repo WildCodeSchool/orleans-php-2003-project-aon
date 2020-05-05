@@ -21,6 +21,13 @@ class AdminActivityController extends AbstractController
         return $availablePictures;
     }
 
+    public function deleteActivity(int $id): void
+    {
+        $activityManager = new ActivityManager();
+        $activityManager->delete($id);
+        header('Location:/admin/index');
+    }
+
     public function createActivity(string $message = "")
     {
         $message = urldecode($message);
