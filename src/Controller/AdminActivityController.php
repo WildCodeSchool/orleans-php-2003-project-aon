@@ -104,7 +104,7 @@ class AdminActivityController extends AbstractController
     private function upload() : array
     {
         $maxFileSize=1048576;
-        $acceptedTypes=["image/jpg", "image/gif", "image/png"];
+        $acceptedTypes=["image/jpeg", "image/svg+xml", "image/jpg", "image/gif", "image/png"];
         $processedFileName="";
         $errorMessage="";
 
