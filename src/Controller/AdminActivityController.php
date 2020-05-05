@@ -14,8 +14,8 @@ class AdminActivityController extends AbstractController
         $availablePictures=array();
         $path="assets/activityImages/";
         $iterator = new FilesystemIterator($path);
-        foreach ($iterator as $fileinfo) {
-            $availablePictures[] = $fileinfo->getFilename();
+        foreach ($iterator as $fileInfo) {
+            $availablePictures[] = $fileInfo->getFilename();
         }
 
         return $availablePictures;
