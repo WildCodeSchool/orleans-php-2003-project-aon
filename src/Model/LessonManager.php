@@ -98,4 +98,19 @@ class LessonManager extends AbstractManager
 
         return $this->pdo->query($query)->fetchAll();
     }
+
+    public function editLesson(array $lesson):bool
+    {
+        $query =  "UPDATE " . self::TABLE . " SET `activity_id` = :activity, 
+                   `age_id` = :age, `pool_id` = :pool, `day` = :day, `time` = :time, `price`= :price WHERE id=:id";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue('activity', $lesson['activity'], \PDO::PARAM_STR);
+        $statement->bindValue('age', $lesson['age'], \PDO::PARAM_STR);
+        $statement->bindValue('pool', $lesson['pool'], \PDO::PARAM_STR);
+        $statement->bindValue('day', $lesson['day'], \PDO::PARAM_STR);
+        $statement->bindValue('time', $lesson['time'], \PDO::PARAM_STR);
+        $statement->bindValue('price', $lesson['price']);
+
+        return $statement->execute();
+    }
 }

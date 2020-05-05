@@ -73,4 +73,35 @@ class AdminLessonController extends AbstractController
 
         return $errors ?? [];
     }
+
+    private function editLesson()
+    {
+        $activityManager = new ActivityManager();
+        $activities = $activityManager->selectAll();
+        $ageManager = new AgeManager();
+        $ages = $ageManager->selectAll();
+        $poolManager = new PoolManager();
+        $pools = $poolManager->selectAll();
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $lesson = array_map('trim', $_POST);
+
+            $errors = $this->validation($lesson);
+
+            if (empty($errors)) {
+                $lessonManager = new LessonManager();
+                $lessonManager->UPDATE($lesson);
+                header("location:/admin/index");
+            }
+        }
+
+        return $this->twig->render('Admin/editLesson.html.twig', [
+            'errors' => $errors ?? [],
+            'lesson' => $lesson ?? [],
+            'activities' => $activities ?? [],
+            'ages' => $ages ?? [],
+            'pools' => $pools ?? [],
+        ]);
+    }
 }
