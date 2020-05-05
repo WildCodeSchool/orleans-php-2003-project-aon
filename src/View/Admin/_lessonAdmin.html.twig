@@ -1,25 +1,29 @@
 
 <section class="cookies container-fluid">
     <div class="row">
-        <h2>Gestion des activités</h2>
+        <h2>Gestion des leçons</h2>
 
 
         <table class="table table-stripped">
             <thead>
             <tr>
-                <th>Nom</th>
+                <th>Activité</th>
                 <th>Age</th>
+                <th>Bassin</th>
                 <th>Jour</th>
                 <th>Heure</th>
+                <th>Prix</th>
             </tr>
             </thead>
             <tbody>
-            {%  for id in activities %}
+            {%  for id in lessons %}
                 <tr>
                     <td>{{ id.name }}</td>
                     <td>{{ id.age}}</td>
+                    <td>{{ id.pool_name }}</td>
                     <td>{{ id.day}}</td>
                     <td>{{ id.time}}</td>
+                    <td>{{ id.price}}€</td>
                     <td><a class="mini activity-button btn btn-primary btn-lg" href="">Modifier</a>
                     </td>
                     <td>
@@ -33,6 +37,5 @@
             </tbody>
         </table>
     </div>
-    <a class="activity-button btn btn-primary btn-lg" href="">Ajouter une activité</a>
+    <a class="activity-button btn btn-primary btn-lg" href="/./AdminLesson/AddLesson">Ajouter une leçon</a>
 </section>
-
