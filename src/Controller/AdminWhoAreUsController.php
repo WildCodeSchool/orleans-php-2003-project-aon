@@ -11,31 +11,16 @@ class AdminWhoAreUsController extends AbstractController
     /**
      * Display item edition page specified by $id
      *
-     * @param int $id
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function edit(int $id): string
+    public function edit(): string
     {
-        $errorsAndData = $this->checkWhoAreUsPostData();
-        $fileNameAndErrors = $this->upload();
-        if ($fileNameAndErrors['fileName']!="") {
-            $errorsAndData['data']['picture'] = $fileNameAndErrors['fileName'];
-            $errorsAndData['errors']['picture'] = $fileNameAndErrors['error'];
-        }
         $whoAreUsManager = new WhoAreUsManager();
-        $whoAreUs = $whoAreUsManager->selectOneById($id);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $whoAreUs['description'] = $_POST['description'];
-            $whoAreUs['picture'] = $_POST['picture'];
-
-            $whoAreUsManager->update($whoAreUs);
-        }
-
-        return $this->twig->render('WhoAreUs/edit.html.twig', ['whoAreUs' => $whoAreUs]);
+        $whoAreUs = $whoAreUsManager->selectOneById(1);
+        return $this->twig->render('WhoAreUs/formWhoAreUs.html.twig', ['whoAreUs' => $whoAreUs]);
     }
     public function showWhoAreUs(int $id)
     {
@@ -57,15 +42,18 @@ class AdminWhoAreUsController extends AbstractController
                 $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
                 $errorsAndData['errors']['picture']=$fileNameAndError['error'];
             }
-            if (count($errorsAndData['data']) == 2) {
-                //$whoAreUsManager = new WhoAreUsManager();
+            if (count($errorsAndData['data']) == count($errorsAndData['errors'])) {
+                $whoAreUsManager = new WhoAreUsManager();
+                $whoAreUsManager->update($errorsAndData['data']);
                 header("location:/AdminWhoAreUs/edit/1" .
                     "/Qui sommes nous a bien été modifiée");
             } else {
                 $toBeReturned = $this->twig->render(
-                    'Admin/edit.html.twig',
+                    'WhoAreUs/formWhoAreUs.html.twig',
                     ['errors' => $errorsAndData['errors'],
-                        'data' => $errorsAndData['data']]
+                        'whoAreUs' => $errorsAndData['data'],
+                        'message' => 'Les modifications n\'ont pas été enregistrées'
+                    ]
                 );
             }
         }

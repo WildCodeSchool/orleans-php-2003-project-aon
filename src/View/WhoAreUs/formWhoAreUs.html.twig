@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1 class="titleWhoAreUs">Edit Qui sommes nous</h1>
+<section class="WAU-form">
+
+    {% if message != '' %}
+        <div class="form-message-WAU">{{ message }}</div>
+    {% endif %}
+
+    {% if not whoAreUs.picture is empty %}
+        <label class="col-form-label" for="picture">Illustration actuelle </label>
+        <img class="activity-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
+        <input type="hidden" name="picture" value="{{ whoAreUs.picture }}">
+    {% endif %}
+
+    <form class="WAU-form" method="post" action="/./adminWhoAreUs/editWhoAreUs" enctype="multipart/form-data">
+        <textarea class="WAUdescription" type="text" name="description">{{ whoAreUs.description }}</textarea>
+        <small class="errorMessage form-text text-danger">{{errors.description}}</small>
+        <input type="file" name="picture">
+        <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+
+        <input type="submit" value="Valider">
+    </form>
+</section>
+{% endblock  %}

@@ -25,18 +25,17 @@ class WhoAreUsManager extends AbstractManager
     }
 
     /**
-     * @param array $item
+     * @param array $whoAreUs
      * @return bool
      */
-    public function update(array $item):bool
+    public function update(array $whoAreUs):bool
     {
 
         // prepared request
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `description` = :description,
-         `picture`= :picture WHERE id=:id");
-        $statement->bindValue('id', $item['id'], \PDO::PARAM_INT);
-        $statement->bindValue('description', $item['description'], \PDO::PARAM_STR);
-        $statement->bindValue('picture', $item['picture'], \PDO::PARAM_STR);
+         `picture`= :picture WHERE id=1");
+        $statement->bindValue('description', $whoAreUs['description'], \PDO::PARAM_STR);
+        $statement->bindValue('picture', $whoAreUs['picture'], \PDO::PARAM_STR);
 
 
         return $statement->execute();
