@@ -1,0 +1,13 @@
+.role{
+    margin-bottom:0;
+}
+
+.contact{
+    font-weight: bold;
+}
+
+.staticDataContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: start;
+}
