@@ -29,7 +29,7 @@
             </select>
         </div>
         <div class="form-group-lesson">
-            <label for="pool-select">Choisir le bassin:</label>
+            <label for="pool-select">Choisir le bassin</label>
             <select required  class="form-control" name="pool" id="pool" required>
                 {% for pool in pools %}
                     <option value="{{ pool.id }}"
@@ -43,7 +43,7 @@
 
     <div class="form- activity-right form-container-right-lesson">
         <div class="form-group-lesson">
-            <label for="day-select">Choisir le jour:</label>
+            <label for="day-select">Choisir le jour</label>
             <select name="day" id="day" class="form-control" required>
                 <option value="{{ lesson.day }}">--Choisir un jour--</option>
                 <option value="Lundi"
