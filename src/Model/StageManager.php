@@ -3,7 +3,6 @@
 
 namespace App\Model;
 
-
 class StageManager extends AbstractManager
 {
     const TABLE = 'stage';
