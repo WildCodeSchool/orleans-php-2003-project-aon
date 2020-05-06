@@ -4,7 +4,23 @@
 
     <h1>Stages débutants hors club :</h1>
 
+    {% block stageDetails %}
+        <p>Notre club organise des stages débutants aux Vacances de la Toussaint, de Février et de Pâques,
+            pour tous les enfants (5 à 10 ans) ne sachant pas nager.</p>
 
-        {% include 'Stage/_stage.html.twig' %}
+        <div class="stagelist">
 
+            {% for stage in stages %}
+                <section class="stage">
+                    <div class="stageContent">
+                        <img class="stagePicture float-left" src="/assets/images/{{ stage.picture }}" alt="{{ stage.picture }}">
+                        <div class="stageDetails">
+                            <h5>{{ stage.title }}</h5>
+                            <div class="description">{{ stage.description }}</div>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
+    {% endblock %}
 {% endblock %}
