@@ -7,9 +7,8 @@
 
 namespace App\Controller;
 
-use App\Model\EventManager;
+use App\Model\MessageManager;
 use App\Model\ActivityManager;
-use App\Model\PartnerManager;
 
 class ContactController extends AbstractController
 {
@@ -40,7 +39,9 @@ class ContactController extends AbstractController
 
             if (count($errorsAndData['data']) == count($errorsAndData['errors'])) {
                 $data=$errorsAndData['data'];
-                mail("doc-albert@laposte.net", $data['subject'], $data['messageContent'], 'From: '.$data['email']);
+                //mail("doc-albert@laposte.net", $data['subject'], $data['messageContent'], 'From: '.$data['email']);
+                $messageManager=new MessageManager();
+                $messageManager->insert($data);
                 header("location:/contact/index/Votre message a été envoyé");
             } else {
                 $toBeReturned = $this->twig->render(

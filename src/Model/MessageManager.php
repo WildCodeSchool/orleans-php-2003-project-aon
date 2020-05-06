@@ -1,10 +1,8 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: sylvain
- * Date: 07/03/18
- * Time: 18:20
- * PHP version 7
+ * User: Adrien
+ * Date: 05/05/2020
  */
 
 namespace App\Model;
@@ -32,9 +30,9 @@ class MessageManager extends AbstractManager
         // prepared request
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
             " (`message`, `email`, `subject`, `name`) VALUES (:message, :email, :subject, :name)");
-        $statement->bindValue('message', $message['message'], \PDO::PARAM_STR);
+        $statement->bindValue('message', $message['messageContent'], \PDO::PARAM_STR);
         $statement->bindValue('email', $message['email'], \PDO::PARAM_STR);
-        $statement->bindValue('subject', $message['subjecte'], \PDO::PARAM_STR);
+        $statement->bindValue('subject', $message['subject'], \PDO::PARAM_STR);
         $statement->bindValue('name', $message['name'], \PDO::PARAM_STR);
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
