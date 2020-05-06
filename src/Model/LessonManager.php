@@ -116,7 +116,8 @@ class LessonManager extends AbstractManager
 
     public function selectAllPrices(): array
     {
-        $query = ('SELECT l.price, a.age, ac.name FROM lesson AS l JOIN age AS a ON a.id=l.age_id JOIN activity AS ac ON ac.id=l.activity_id ORDER BY ac.name ASC, a.age ASC');
+        $query = ('SELECT l.price, a.age, ac.name FROM lesson AS l JOIN age AS a ON a.id=l.age_id 
+                    JOIN activity AS ac ON ac.id=l.activity_id ORDER BY ac.name ASC, a.age ASC');
 
         return $this->pdo->query($query)->fetchAll();
     }
