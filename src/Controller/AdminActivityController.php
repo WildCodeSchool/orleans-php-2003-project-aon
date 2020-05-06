@@ -42,11 +42,6 @@ class AdminActivityController extends AbstractController
     {
         $toBeReturned = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            /*$fileNameAndError=$this->upload();
-            if ($fileNameAndError['fileName']!="") {
-                $_POST['picture']=$fileNameAndError['fileName'];
-            }*/
-
             $errorsAndData = $this->checkActivityPostData();
 
             $fileNameAndError=$this->upload();
@@ -105,8 +100,6 @@ class AdminActivityController extends AbstractController
 
         return ['fileName' => $processedFileName, 'error' => $errorMessage];
     }
-
-
 
     private function checkActivityPostData() : array
     {
