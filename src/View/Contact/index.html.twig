@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Contact</h1>
+    <h1 class="title">Contact</h1>
 
     {% if message != '' %}
         <div class="form-message">{{ message }}</div>
@@ -11,29 +11,29 @@
 
         <div id="userData" class="contactBloc">
 
-            <div class="form-group">
+            <div class="form-group-contact">
                 <label for="name"> Votre nom :</label>
                 <input type="text"
                     placeholder="John Doe"
                     value="{{ contact.name }}"
                     id="name"
-                    name="name">
+                    name="name" required>
                 <small class="errorMessage form-text text-danger">{{errors.name}}</small>
             </div>
 
-            <div class="form-group">
+            <div class="form-group-contact">
                 <label for="email"> Votre adresse électronique :</label>
                 <input type="text"
                    placeholder="john.doe@nager.fr"
                    value="{{ contact.email }}"
                    id="email"
-                   name="email">
+                   name="email" required>
                 <small class="errorMessage form-text text-danger">{{errors.email}}</small>
             </div>
 
-            <div class="form-group">
+            <div class="form-group-contact">
                 <label for="email"> L'objet de votre message :</label>
-                <select name="subject" id="subject">
+                <select name="subject" id="subject" required>
                     <option value="">--Veuillez choisir un sujet--</option>
                     {% for subject in subjects %}
                         <option value="{{subject}}">{{subject}}</option>
@@ -44,19 +44,19 @@
 
         </div>
 
-        <div id="message" class="contactBloc form-group">
+        <div id="message" class="form-group-contact">
             <label for="messageContent">Message*</label>
             <textarea name="messageContent" id="messageContent" rows="7" required>{{contact.messageContent}}</textarea>
             <small class="errorMessage form-text text-danger">{{errors.messageContent}}</small>
         </div>
 
-        <div id="button" class="contactBloc form-btn">
-            <button class="btn" type="submit">Envoyer le message</button>
+        <div id="button" class="form-btn">
+            <button class="activity-button btn btn-primary btn-lg" type="submit">Envoyer le message</button>
         </div>
 
     </form>
 
-    <section>
+
         <div class="staticDataContainer">
             <p class="role">Responsable Plannings/Groupes/Tests/Inscriptions Palais des Sports et Ephémère/ Jeunes Compétition</p>
             <p class="contact">Nicolas MARTIN  : 07.81.50.16.43 / allianceorleansnatation@gmail.com</p>
@@ -79,7 +79,5 @@
                 45100 Orléans
             </p>
         </div>
-
-    </section>
 
 {% endblock %}
