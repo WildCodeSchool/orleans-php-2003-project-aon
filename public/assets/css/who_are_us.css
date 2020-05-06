@@ -4,6 +4,7 @@
     background:transparent;
     border: none;
     padding: var(--padding-extra-large);
+    align-items: center;
 }
 .wau-card-img {
     width: 350px;
