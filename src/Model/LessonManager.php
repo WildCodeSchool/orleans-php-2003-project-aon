@@ -70,7 +70,6 @@ class LessonManager extends AbstractManager
         return $statement->fetchAll();
     }
 
-
     /**
      * @param array $lesson
      * @return bool
@@ -99,9 +98,6 @@ class LessonManager extends AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
-    /**
-     * @param int $id
-     */
     public function delete(int $id): void
     {
         // prepared request
@@ -109,7 +105,7 @@ class LessonManager extends AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
-  
+
     public function editLesson(array $lesson): bool
     {
         $query =  "UPDATE lesson SET `activity_id` = :activity,

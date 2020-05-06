@@ -1,4 +1,4 @@
-.event-form{
+.activity-form{
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +21,7 @@
     max-width:90vw;
 }
 
-.form-container-left, .form-container-right{
+.activity-form .form-container .form-container-left, .activity-form .form-container .form-container-right{
     display:flex;
     flex-direction: column;
     justify-content: stretch;
@@ -29,12 +29,12 @@
     padding: var(--padding-large);
 }
 
-.form-container-left{
-    width:300px;
+.activity-form .form-container .form-container-left{
+    width:450px;
 }
 
-.event-form .form-group textarea{
-    height : 380px;
+.activity-form .form-container .form-container-right .form-group textarea{
+    height : 450px;
 }
 
 h1{
