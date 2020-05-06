@@ -1,0 +1,4 @@
+.thead-dark-price {
+    background: var(--color-main-dark);
+    color: var(--color-light-alternative)
+}
