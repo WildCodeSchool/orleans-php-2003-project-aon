@@ -3,47 +3,51 @@
 {% block content %}
     <h1>Contact</h1>
 
+    {% if message != '' %}
+        <div class="form-message">{{ message }}</div>
+    {% endif %}
 
-    <form action="#contact" method="POST" class="form-contact">
+    <form action="/./contact/sendMessage" method="POST" class="form-contact">
 
         <div id="userData" class="contactBloc">
 
             <div class="form-group">
                 <label for="name"> Votre nom :</label>
                 <input type="text"
-                placeholder="John Doe"
-                value="{{ contact.name }}"
-                id="name"
-                name="name">
+                    placeholder="John Doe"
+                    value="{{ contact.name }}"
+                    id="name"
+                    name="name">
+                <small class="errorMessage form-text text-danger">{{errors.name}}</small>
             </div>
 
             <div class="form-group">
                 <label for="email"> Votre adresse électronique :</label>
                 <input type="text"
-                       placeholder="john.doe@nager.fr"
-                       value="{{ contact.email }}"
-                       id="email"
-                       name="email">
+                   placeholder="john.doe@nager.fr"
+                   value="{{ contact.email }}"
+                   id="email"
+                   name="email">
+                <small class="errorMessage form-text text-danger">{{errors.email}}</small>
             </div>
 
             <div class="form-group">
                 <label for="email"> L'objet de votre message :</label>
                 <select name="subject" id="subject">
-                    <option value="">--Please choose an option--</option>
-                    {% for subject in contact.subjects %}
+                    <option value="">--Veuillez choisir un sujet--</option>
+                    {% for subject in subjects %}
                         <option value="{{subject}}">{{subject}}</option>
                     {%  endfor %}
-                    <option value="stages">Stages</option>
-                    <option value="autres">Autres</option>
                 </select>
+                <small class="errorMessage form-text text-danger">{{errors.subject}}</small>
             </div>
 
         </div>
 
         <div id="message" class="contactBloc form-group">
-            <label for="message">Message*</label>
-            <textarea name="message" id="message" rows="7" required>{{messageContent}}</textarea>
-
+            <label for="messageContent">Message*</label>
+            <textarea name="messageContent" id="messageContent" rows="7" required>{{contact.messageContent}}</textarea>
+            <small class="errorMessage form-text text-danger">{{errors.messageContent}}</small>
         </div>
 
         <div id="button" class="contactBloc form-btn">
