@@ -111,6 +111,7 @@ class AdminLessonController extends AbstractController
             'pools' => $pools]);
     }
 
+
     public function editLesson()
     {
         $activityManager = new ActivityManager();
