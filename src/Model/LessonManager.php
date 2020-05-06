@@ -99,6 +99,17 @@ class LessonManager extends AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
+  
     public function editLesson(array $lesson): bool
     {
         $query =  "UPDATE lesson SET `activity_id` = :activity,
