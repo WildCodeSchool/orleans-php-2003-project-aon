@@ -76,6 +76,12 @@ class AdminActivityController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
 
+            $fileNameAndError=$this->upload();
+            if ($fileNameAndError['fileName']!="") {
+                $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
+                $errorsAndData['errors']['picture']=$fileNameAndError['error'];
+            }
+
             if (count($errorsAndData['data']) == 5) {
                 $activityManager = new ActivityManager();
                 $activityManager->updateActivity($errorsAndData['data']);
@@ -94,6 +100,37 @@ class AdminActivityController extends AbstractController
             }
         }
         return $toBeReturned;
+    }
+
+    private function upload() : array
+    {
+        $maxFileSize=1048576;
+        $acceptedTypes=["image/jpeg", "image/svg+xml", "image/jpg", "image/gif", "image/png"];
+        $processedFileName="";
+        $errorMessage="";
+
+        if (!empty($_FILES['picture'])) {
+            $processedFileName=$_FILES['picture']['name'];
+            $fileTmpName=$_FILES['picture']['tmp_name'];
+            $fileType=$_FILES['picture']['type'];
+            $fileSize=$_FILES['picture']['size'];
+            $fileError=$_FILES['picture']['error'];
+
+            if (0==$fileError) {
+                if ($fileSize>$maxFileSize) {
+                    $errorMessage="Le fichier $processedFileName dépasse la taille maximale de $maxFileSize";
+                } elseif (!in_array($fileType, $acceptedTypes)) {
+                    $errorMessage="Le type du fichier $fileType n'est pas 
+                    dans la liste :".implode(",", $acceptedTypes) ;
+                } else {
+                    $extension = pathinfo($processedFileName, PATHINFO_EXTENSION);
+                    $processedFileName = uniqid() . '.' .$extension;
+                    move_uploaded_file($fileTmpName, "assets/activityImages/".$processedFileName);
+                }
+            }
+        }
+
+        return ['fileName' => $processedFileName, 'error' => $errorMessage];
     }
 
     private function checkActivityPostData() : array
