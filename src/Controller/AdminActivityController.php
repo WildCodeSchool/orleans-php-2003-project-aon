@@ -21,6 +21,13 @@ class AdminActivityController extends AbstractController
         return $availablePictures;
     }
 
+    public function deleteActivity(int $id): void
+    {
+        $activityManager = new ActivityManager();
+        $activityManager->delete($id);
+        header('Location:/admin/index');
+    }
+
     public function createActivity(string $message = "")
     {
         $message = urldecode($message);
@@ -82,6 +89,12 @@ class AdminActivityController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
 
+            $fileNameAndError=$this->upload();
+            if ($fileNameAndError['fileName']!="") {
+                $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
+                $errorsAndData['errors']['picture']=$fileNameAndError['error'];
+            }
+
             if (count($errorsAndData['data']) == 5) {
                 $activityManager = new ActivityManager();
                 $activityManager->updateActivity($errorsAndData['data']);
@@ -105,7 +118,7 @@ class AdminActivityController extends AbstractController
     private function upload() : array
     {
         $maxFileSize=1048576;
-        $acceptedTypes=["image/jpg", "image/gif", "image/png"];
+        $acceptedTypes=["image/jpeg", "image/svg+xml", "image/jpg", "image/gif", "image/png"];
         $processedFileName="";
         $errorMessage="";
 
