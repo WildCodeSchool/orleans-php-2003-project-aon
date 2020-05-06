@@ -4,6 +4,7 @@
     background:transparent;
     border: none;
     padding: var(--padding-extra-large);
+    align-items: center;
 }
 .wau-card-img {
     width: 350px;
@@ -40,8 +41,5 @@
         width: 300px;
         height: 300px;
         object-fit: contain;
-    }
-    .titleWhoAreUs{
-        margin-top: var(--padding-extra-large-double);
     }
 }

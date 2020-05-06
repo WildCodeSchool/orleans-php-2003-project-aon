@@ -203,7 +203,7 @@ class AdminActivityController extends AbstractController
         $error="";
 
         if (empty($_POST[$postFieldName])) {
-            $error = "Vous devez indiquer $userFieldName de l'évenement";
+            $error = "Vous devez indiquer $userFieldName de l'activité";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
             $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
