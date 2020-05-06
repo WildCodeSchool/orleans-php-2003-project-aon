@@ -4,7 +4,6 @@
 
 <div class="form-container">
 
-
     <div class="form-container-left">
         <div class="form-group">
             <label class="col-form-label" for="name">Nom de l'activité</label>
@@ -13,9 +12,11 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="picture">Illustration actuelle de l'activité :</label>
-            <img class="activity-card-img" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité">
-            <input type="hidden" name="picture" value="{{ data.picture }}">
+            {% if not data.picture is empty %}
+                <label class="col-form-label" for="picture">Illustration actuelle de l'activité :</label>
+                <img class="activity-card-img" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité">
+                <input type="hidden" name="picture" value="{{ data.picture }}">
+            {% endif %}
 
             <label class="col-form-label" for="picture">Modifier l'illustration de l'activité :</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>" />
@@ -48,4 +49,3 @@
 </div>
 
 <input type="hidden" name="id" value="{{ data.id }}">
-

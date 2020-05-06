@@ -37,6 +37,8 @@ class HomeController extends AbstractController
         for ($i=0; $i<$activitiesLength; $i++) {
             if (strlen($activities[$i]['description'])>$maxLength) {
                 $activities[$i]['shortDescription']=substr($activities[$i]['description'], 0, $maxLength).'...';
+            } else {
+                $activities[$i]['shortDescription']=$activities[$i]['description'];
             }
         }
 

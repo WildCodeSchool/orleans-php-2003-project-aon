@@ -44,6 +44,12 @@ class AdminActivityController extends AbstractController
             $data=$errorsAndData['data'];
             $errors=$errorsAndData['errors'];
 
+            $fileNameAndError=$this->upload();
+            if ($fileNameAndError['fileName']!="") {
+                $data['picture']=$fileNameAndError['fileName'];
+                $errors['picture']=$fileNameAndError['error'];
+            }
+
             if (count($data)==4 && empty($data['id'])) {
                 $activityManager=new ActivityManager();
                 $activityManager->insert($data);
