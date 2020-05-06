@@ -33,14 +33,15 @@ class AdminActivityController extends AbstractController
     {
         $toBeReturned="";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $fileNameAndError=$this->upload();
-            if ($fileNameAndError['fileName']!="") {
-                $_POST['picture']=$fileNameAndError['fileName'];
-            }
-
             $errorsAndData=$this->checkActivityPostData();
             $data=$errorsAndData['data'];
             $errors=$errorsAndData['errors'];
+
+            $fileNameAndError=$this->upload();
+            if ($fileNameAndError['fileName']!="") {
+                $data['picture']=$fileNameAndError['fileName'];
+                $errors['picture']=$fileNameAndError['error'];
+            }
 
             if (count($data)==4 && empty($data['id'])) {
                 $activityManager=new ActivityManager();
@@ -104,7 +105,7 @@ class AdminActivityController extends AbstractController
     private function upload() : array
     {
         $maxFileSize=1048576;
-        $acceptedTypes=["image/jpeg", "image/svg+xml", "image/jpg", "image/gif", "image/png"];
+        $acceptedTypes=["image/jpg", "image/gif", "image/png"];
         $processedFileName="";
         $errorMessage="";
 
@@ -118,11 +119,9 @@ class AdminActivityController extends AbstractController
             if (0==$fileError) {
                 if ($fileSize>$maxFileSize) {
                     $errorMessage="Le fichier $processedFileName dépasse la taille maximale de $maxFileSize";
-                    var_dump($errorMessage);
                 } elseif (!in_array($fileType, $acceptedTypes)) {
                     $errorMessage="Le type du fichier $fileType n'est pas 
                     dans la liste :".implode(",", $acceptedTypes) ;
-                    var_dump($errorMessage);
                 } else {
                     $extension = pathinfo($processedFileName, PATHINFO_EXTENSION);
                     $processedFileName = uniqid() . '.' .$extension;
