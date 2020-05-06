@@ -34,6 +34,7 @@
     --padding-small: calc(var(--padding) / 2);
     --padding-large: calc(var(--padding) * 2);
     --padding-extra-large: calc(var(--padding) * 4);
+    --padding-extra-large-double: calc(var(--padding) * 8);
 
     --margin: 8px;
     --margin-small: calc(var(--margin) / 2);
