@@ -3,21 +3,45 @@
     flex-direction: row;
     background:transparent;
     border: none;
+    padding: var(--padding-extra-large);
 }
 .wau-card-img {
     width: 350px;
     height: 350px;
     object-fit: contain;
+    padding-right: var(--padding-large) ;
 }
 .wau-card-text {
-    padding: var(--padding-extra-large);
     text-align:left;
 }
-
-@media screen and (max-width: 901px) {
-    .whoAreUs-card{
+@media screen and (max-width: 1094px) {
+    .whoAreUs-card {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+    }
+
+    .wau-card-img {
+        width: 450px;
+        height: 450px;
+        object-fit: contain;
+    }
+    .titleWhoAreUs{
+        margin-top: var(--padding-extra-large);
+    }
+}
+@media screen and (max-width: 500px) {
+    .whoAreUs-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .wau-card-img {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+    }
+    .titleWhoAreUs{
+        margin-top: var(--padding-extra-large-double);
     }
 }
