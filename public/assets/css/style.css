@@ -5,6 +5,7 @@
 @import url('homepage_activity.css');
 @import url('homepage_partner.css');
 @import url('admin_event.css');
+@import url('admin_activity.css');
 @import url('admin_lesson.css');
 @import url('whoAreUs.css');
 @import url('activity.css');
@@ -33,6 +34,7 @@
     --padding-small: calc(var(--padding) / 2);
     --padding-large: calc(var(--padding) * 2);
     --padding-extra-large: calc(var(--padding) * 4);
+    --padding-extra-large-double: calc(var(--padding) * 8);
 
     --margin: 8px;
     --margin-small: calc(var(--margin) / 2);
