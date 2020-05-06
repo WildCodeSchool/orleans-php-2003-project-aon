@@ -37,7 +37,6 @@ class AdminLessonController extends AbstractController
                 header("location:/admin/index");
             }
         }
-
         return $this->twig->render('Admin/addLesson.html.twig', [
             'errors' => $errors ?? [],
             'lesson' => $lesson ?? [],
@@ -73,6 +72,45 @@ class AdminLessonController extends AbstractController
 
         return $errors ?? [];
     }
+
+    /**
+
+     * Handle item deletion
+     *
+     * @param int $id
+     */
+    public function delete(int $id): void
+    {
+        $lessonManager = new LessonManager();
+        $lessonManager->delete($id);
+        header('Location:/Admin/index');
+    }
+
+    /**
+     * Display event informations specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function showLesson(int $id)
+    {
+        $lessonManager = new LessonManager();
+        $lesson = $lessonManager->selectOneById($id);
+        $activityManager = new ActivityManager();
+        $activities = $activityManager->selectAll();
+        $ageManager = new AgeManager();
+        $ages = $ageManager->selectAll();
+        $poolManager = new PoolManager();
+        $pools = $poolManager->selectAll();
+        return $this->twig->render('Admin/editLesson.html.twig', ['lesson' => $lesson,
+            'activities' => $activities,
+            'ages' => $ages,
+            'pools' => $pools]);
+    }
+
 
     public function editLesson()
     {
