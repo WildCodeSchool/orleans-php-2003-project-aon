@@ -8,7 +8,7 @@
 @import url('admin_lesson.css');
 @import url('whoAreUs.css');
 @import url('activity.css');
-
+@import url('stage.css');
 
 :root {
     --color-light: #F0FFFF;

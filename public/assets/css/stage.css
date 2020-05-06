@@ -1,0 +1,59 @@
+.stage{
+    min-height: unset;
+    padding-top: 35px;
+    padding-bottom:35px;
+}
+
+.stageContent{
+    display:flex;
+    align-self: center;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 1030px;
+}
+
+.stage:nth-of-type(odd) .stageContent{
+    flex-direction: row-reverse;
+}
+
+.stageDetails{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:var(--margin-large);
+    max-width:80%;
+    min-width: 50%;
+}
+
+.stagePicture{
+    margin: var(--margin);
+    max-width:40%;
+    object-fit: contain;
+}
+
+.stagelist{
+    align-self: center;
+    display:flex;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 1030px;
+    flex-direction: column;
+}
+
+@media (max-width: 450px) {
+    .stagepicture{
+        width:85% ;
+        margin-left: var(--margin-large);
+    }
+
+    .stageContent{
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 850px){
+    .stage:nth-of-type(odd) .stageContent, .stage:nth-of-type(even) .stageContent {
+        flex-direction: column;
+    }
+}
