@@ -47,6 +47,7 @@
     box-shadow: 2px 2px 5px grey;
     box-sizing: content-box;
     position:relative;
+    padding-top: var(--padding-large);
 }
 
 .priceAndPlace{
@@ -117,6 +118,7 @@
 .lessonTime, .lessonDay, .poolName{
     display: flex;
     align-items: center;
+    padding: var(--padding);
 }
 
 .poolTitle{
