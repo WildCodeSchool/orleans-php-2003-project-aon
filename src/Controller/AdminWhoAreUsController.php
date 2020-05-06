@@ -41,11 +41,9 @@ class AdminWhoAreUsController extends AbstractController
     {
         $whoAreUsManager = new WhoAreUsManager();
         $whoAreUs = $whoAreUsManager->selectOneById($id);
-        $availablePictures=$this->getAvailablePictures();
         return $this->twig->render(
             'Admin/_WhoAreUs.html.twig',
             ['data' => $whoAreUs,
-                         'availablePictures' => $availablePictures
             ]
         );
     }
@@ -60,16 +58,13 @@ class AdminWhoAreUsController extends AbstractController
                 $errorsAndData['errors']['picture']=$fileNameAndError['error'];
             }
             if (count($errorsAndData['data']) == 2) {
-                $whoAreUsManager = new WhoAreUsManager();
-                $whoAreUsManager->updateActivity($errorsAndData['data']);
+                //$whoAreUsManager = new WhoAreUsManager();
                 header("location:/AdminWhoAreUs/edit/1" .
                     "/Qui sommes nous a bien été modifiée");
             } else {
-                $availablePictures=$this->getAvailablePictures();
                 $toBeReturned = $this->twig->render(
                     'Admin/edit.html.twig',
                     ['errors' => $errorsAndData['errors'],
-                        'availablePictures' => $availablePictures,
                         'data' => $errorsAndData['data']]
                 );
             }
