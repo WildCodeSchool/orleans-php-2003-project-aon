@@ -42,7 +42,4 @@
         height: 300px;
         object-fit: contain;
     }
-    .titleWhoAreUs{
-        margin-top: var(--padding-extra-large-double);
-    }
 }
