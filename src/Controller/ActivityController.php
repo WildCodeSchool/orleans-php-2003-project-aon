@@ -32,6 +32,8 @@ class ActivityController extends AbstractController
         for ($i=0; $i<$activitiesLength; $i++) {
             if (strlen($activities[$i]['description'])>$maxLength) {
                 $activities[$i]['shortDescription']=substr($activities[$i]['description'], 0, $maxLength).'...';
+            } else {
+                $activities[$i]['shortDescription']=$activities[$i]['description'];
             }
         }
 
@@ -54,9 +56,9 @@ class ActivityController extends AbstractController
 
         $lessonsByAgeClass=array();
         if ($ageClassId>=0) {
-            $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClassId);
+            $lessonsByAgeClass[]=$lessonManager->selectEverythingForOneById($id, $ageClassId);
         } elseif (!empty($ageClasses)) {
-            $lessonsByAgeClass[]=$lessonManager->selectEverthingForOneById($id, $ageClasses[0]['id']);
+            $lessonsByAgeClass[]=$lessonManager->selectEverythingForOneById($id, $ageClasses[0]['id']);
         }
 
         return $this->twig->render('Activity/showActivity.html.twig', ['activity'=>$activity,
