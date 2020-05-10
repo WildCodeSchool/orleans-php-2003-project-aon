@@ -13,11 +13,18 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="picture">Illustration de l'évènement</label>
-            <input class="form-control" type="text" id="picture" name="picture" value="{{data.picture}}" placeholder="photo.jpg">
-            <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
-        </div>
+            {% if not data.picture is empty %}
+                <label class="col-form-label" for="picture">Illustration actuelle de l'évènement</label>
+                <img class="activity-card-img" src="/assets/images/{{ data.picture }}" alt="illustration de l'évènement">
+                <input type="hidden" name="picture" value="{{ data.picture }}">
+            {% endif %}
 
+            <label class="col-form-label" for="picture">Modifier l'illustration de l'évènement :</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>" />
+            <input type="file" name="picture" id="picture" />
+
+                <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+        </div>
         <div class="form-group">
             <label class="col-form-label" for="date">Date de l'évènement</label>
             <input class="form-control" type="date" id="date" name="date" value="{{data.date}}">
