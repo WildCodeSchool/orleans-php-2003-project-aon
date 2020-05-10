@@ -12,8 +12,8 @@
 
         {% if not whoAreUs.picture is empty %}
             <label class="col-form-label" for="picture">Illustration actuelle </label>
-            <img class="activity-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
-            <input type="hidden" name="picture" value="{{ whoAreUs.picture }}">
+            <img class="WAU-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
+            <input class="actualPicture" type="hidden" name="picture" value="{{ whoAreUs.picture }}">
         {% endif %}
 
         <textarea class="WAUdescription" name="description">{{ whoAreUs.description }}</textarea>

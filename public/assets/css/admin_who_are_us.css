@@ -10,3 +10,8 @@
     width: 80%;
     height: 150px;
 }
+
+.WAU-card-img {
+    padding-bottom: var(--padding-large);
+    width: 350px;
+}
