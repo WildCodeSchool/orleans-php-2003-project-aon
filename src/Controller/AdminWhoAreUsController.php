@@ -8,36 +8,13 @@ use App\Model\WhoAreUsManager;
 class AdminWhoAreUsController extends AbstractController
 {
 
-    /**
-     * Display item edition page specified by $id
-     *
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function edit(): string
-    {
-        $whoAreUsManager = new WhoAreUsManager();
-        $whoAreUs = $whoAreUsManager->selectOneById(1);
-        return $this->twig->render('WhoAreUs/formWhoAreUs.html.twig', ['whoAreUs' => $whoAreUs]);
-    }
-    public function showWhoAreUs(int $id)
-    {
-        $whoAreUsManager = new WhoAreUsManager();
-        $whoAreUs = $whoAreUsManager->selectOneById($id);
-        return $this->twig->render(
-            'Admin/_WhoAreUs.html.twig',
-            ['data' => $whoAreUs,
-            ]
-        );
-    }
     public function editWhoAreUs(): string
     {
         $toBeReturned = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkWhoAreUsPostData();
             $fileNameAndError=$this->upload();
+
             if ($fileNameAndError['fileName']!="") {
                 $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
                 $errorsAndData['errors']['picture']=$fileNameAndError['error'];
@@ -45,7 +22,7 @@ class AdminWhoAreUsController extends AbstractController
             if (count($errorsAndData['data']) == count($errorsAndData['errors'])) {
                 $whoAreUsManager = new WhoAreUsManager();
                 $whoAreUsManager->update($errorsAndData['data']);
-                header("location:/AdminWhoAreUs/edit/1" .
+                header("location:/AdminWhoAreUs/editWhoAreUs" .
                     "/Qui sommes nous a bien été modifiée");
             } else {
                 $toBeReturned = $this->twig->render(
@@ -57,6 +34,13 @@ class AdminWhoAreUsController extends AbstractController
                 );
             }
         }
+
+        $whoAreUsManager = new WhoAreUsManager();
+        $whoAreUs = $whoAreUsManager->selectOneById(1);
+        $toBeReturned = $this->twig->render('WhoAreUs/formWhoAreUs.html.twig', ['whoAreUs' => $whoAreUs]);
+
+
+
         return $toBeReturned;
     }
     private function upload() : array

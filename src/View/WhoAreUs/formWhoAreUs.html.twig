@@ -8,17 +8,18 @@
         <div class="form-message-WAU">{{ message }}</div>
     {% endif %}
 
-    {% if not whoAreUs.picture is empty %}
-        <label class="col-form-label" for="picture">Illustration actuelle </label>
-        <img class="activity-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
-        <input type="hidden" name="picture" value="{{ whoAreUs.picture }}">
-    {% endif %}
-
     <form class="WAU-form" method="post" action="/./adminWhoAreUs/editWhoAreUs" enctype="multipart/form-data">
-        <textarea class="WAUdescription" type="text" name="description">{{ whoAreUs.description }}</textarea>
-        <small class="errorMessage form-text text-danger">{{errors.description}}</small>
+
+        {% if not whoAreUs.picture is empty %}
+            <label class="col-form-label" for="picture">Illustration actuelle </label>
+            <img class="activity-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
+            <input type="hidden" name="picture" value="{{ whoAreUs.picture }}">
+        {% endif %}
+
+        <textarea class="WAUdescription" name="description">{{ whoAreUs.description }}</textarea>
+        <small class="errorMessage form-text text-danger">{{ errors.description }}</small>
         <input type="file" name="picture">
-        <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+        <small class="forminput form-text text-danger">{{ errors.picture }}</small>
 
         <input type="submit" value="Valider">
     </form>
