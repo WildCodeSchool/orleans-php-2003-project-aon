@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\LessonManager;
 use App\Model\ActivityManager;
 use App\Model\EventManager;
+use App\Model\WhoAreUsManager;
 use App\Model\MessageManager;
 use \FilesystemIterator;
 
@@ -31,15 +32,19 @@ class AdminController extends AbstractController
         $lessonManager = new LessonManager();
         $lessons = $lessonManager->selectAllLessonsForAdmin();
 
+        $whoAreUsManager = new WhoAreUsManager();
+        $whoAreUs = $whoAreUsManager->selectAll();
+
         $messageManager = new MessageManager();
         $messages = $messageManager->selectAll();
 
         return $this->twig->render(
             'Admin/index.html.twig',
             ['event' => $event,
-                'lessons' => $lessons,
-                'messagesBox' => $messages,
-                'activities' => $activities]
+            'lessons' => $lessons,
+            'activities' => $activities,
+            'whoAreUs' => $whoAreUs,
+            'messagesBox' => $messages,]
         );
     }
 
