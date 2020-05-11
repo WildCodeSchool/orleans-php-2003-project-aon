@@ -8,18 +8,6 @@ use \FilesystemIterator;
 
 class AdminEventController extends AbstractController
 {
-    private function getAvailablePictures() : array
-    {
-        $availablePictures=array();
-        $path="assets/images/";
-        $iterator = new FilesystemIterator($path);
-        foreach ($iterator as $fileInfo) {
-            $availablePictures[] = $fileInfo->getFilename();
-        }
-
-        return $availablePictures;
-    }
-
     /**
      * Handle item deletion
      *
@@ -54,12 +42,10 @@ class AdminEventController extends AbstractController
         $eventManager = new EventManager();
         $event = $eventManager->selectOneById($id);
 
-        $availablePictures=$this->getAvailablePictures();
-
         return $this->twig->render('Admin/showEvent.html.twig', [
             'data' => $event,
             'message' => $message,
-            'availablePictures' => $availablePictures ]);
+        ]);
     }
     /**
      * Display event edition page specified by $id
@@ -123,7 +109,7 @@ class AdminEventController extends AbstractController
                 } else {
                     $extension = pathinfo($processedFileName, PATHINFO_EXTENSION);
                     $processedFileName = uniqid() . '.' .$extension;
-                    move_uploaded_file($fileTmpName, "assets/images/".$processedFileName);
+                    move_uploaded_file($fileTmpName, "assets/eventImages/".$processedFileName);
                 }
             }
         }
@@ -147,6 +133,7 @@ class AdminEventController extends AbstractController
             $errorsAndData = $this->checkEventPostData();
 
             $fileNameAndError=$this->upload();
+
             if ($fileNameAndError['fileName']!="") {
                 $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
                 $errorsAndData['errors']['picture']=$fileNameAndError['error'];
