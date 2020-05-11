@@ -48,7 +48,7 @@ class EventManager extends AbstractManager
     
     public function selectAll(): array
     {
-        return $this->pdo->query("SELECT id, title, description, location, picture, date as ordered_date,
+        return $this->pdo->query("SELECT id, title, description, location, picture, link, date as ordered_date,
                 DATE_FORMAT(date, '%d/%m/%Y') as date 
                 FROM " . $this->table . " ORDER BY ordered_date DESC")->fetchAll();
     }
