@@ -1,0 +1,36 @@
+
+ <section class="cookies container-fluid">
+        <div class="row">
+            <h2>Gestion de la messagerie</h2>
+
+            <table class="table table-stripped">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Sujet</th>
+                    <th>Message</th>
+                    <th>e-Mail</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  for message in messagesBox %}
+
+                <tr>
+                    <td>{{ message.name }}</td>
+                    <td>{{ message.subject }}</td>
+                    <td>{{ message.message }}</td>
+                    <td>{{ message.email }}</td>
+                    <td>
+                        <button>
+                            <a href="/./adminMessage/deleteMessage/{{ message.id }}"><img class="delete_button" src="/./assets/icons/logo_delete.png" alt="logo_delete"></a>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    <a class="activity-button btn btn-primary btn-lg" href="/./Admin/createEvent">Ajouter un évènement</a>
+  </section>
+

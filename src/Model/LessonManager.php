@@ -98,18 +98,11 @@ class LessonManager extends AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
-    public function delete(int $id): void
+    public function editLesson(array $lesson):bool
     {
-        // prepared request
-        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-    }
-
-    public function editLesson(array $lesson): bool
-    {
-        $query =  "UPDATE lesson SET `activity_id` = :activity,
-           `age_id` = :age, `pool_id` = :pool, `day` = :day, `time` = :time, `price`= :price WHERE id=:id";
+        $query =  "UPDATE " . self::TABLE . " SET `activity_id` = :activity, 
+                   `age_id` = :age, `pool_id` = :pool, `day` = :day, `time` = :time, `price`= :price WHERE id=:id";
+  
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('activity', $lesson['activity'], \PDO::PARAM_STR);
         $statement->bindValue('age', $lesson['age'], \PDO::PARAM_STR);
@@ -121,7 +114,23 @@ class LessonManager extends AbstractManager
 
         return $statement->execute();
     }
+  
+    public function delete(int $id): void
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . " WHERE id=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
 
+    public function selectAllPrices(): array
+    {
+        $query = ('SELECT l.price, a.age, ac.name FROM lesson AS l JOIN age AS a ON a.id=l.age_id 
+                    JOIN activity AS ac ON ac.id=l.activity_id ORDER BY ac.name ASC, a.age ASC');
+
+        return $this->pdo->query($query)->fetchAll();
+    }
+  
     public function selectOneById(int $id)
     {
         $statement = $this->pdo->prepare("SELECT l.id, ac.name, a.age, p.pool_name, l.day, l.time, l.price 

@@ -7,10 +7,12 @@
 @import url('admin_event.css');
 @import url('admin_activity.css');
 @import url('admin_lesson.css');
-@import url('whoAreUs.css');
+@import url('who_are_us.css');
 @import url('activity.css');
 @import url('admin_who_are_us.css');
-
+@import url('prices.css');
+@import url('stage.css');
+@import url('contact.css');
 
 
 :root {
@@ -62,6 +64,7 @@ body{
     align-items: stretch;
     color:var(--color-dark);
     font-size:16pt;
+
 }
 
 main{
@@ -85,6 +88,13 @@ h1{
     padding-top: var(--h1-padding-top);
     padding-bottom: calc(2*(var(--padding-large)));
     padding-left:var(--padding-large);
+    margin: 0;
+}
+
+@media (max-width: 500px) {
+    h1{
+        margin-top: var(--padding-extra-large-double);
+    }
 }
 
 
