@@ -104,7 +104,7 @@ h2 {
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
-    max-width:80%;
+    max-width:75%;
 }
 
 h3,h5 {
@@ -121,6 +121,7 @@ h4{
 
 li, a {
     text-decoration: none;
+    color:var(--color-main);
 }
 
 a:visited {
@@ -129,7 +130,7 @@ a:visited {
 
 a:hover, .navbar li a:hover{
     text-decoration: none;
-    color:var(--navbar-link-color-light);
+    color:var(--primary);
 }
 
 ul {
@@ -250,6 +251,10 @@ hr::before, hr::after {
     height:2px;
     width:40%;
     z-index:100;
+}
+
+.table-head-small{
+    width:10px;
 }
 
 @media screen and (max-width: 991px) {
