@@ -38,4 +38,6 @@
 .activity-button{
     background-color: var(--color-main);
     margin: var(--margin-large);
+    margin-left:0;
+    min-width:140px;
 }
