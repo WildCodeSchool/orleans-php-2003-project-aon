@@ -39,6 +39,31 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="container">
+            <!-- Le bouton permet d'éviter l'ouverture intempestive du modal pour le cours -->
+            <button type="button" class="activity-button btn btn-primary btn-lg" data-toggle="modal" data-target="#modal">Ajouter un bassin</button>
+
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Enregistrer un nouveau bassin</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group-lesson">
+                                <label class="col-form-label" for="location">Nom du Bassin</label>
+                                <input class="form-control-lesson" type="text" id="new_pool" name="new_pool" value=" " placeholder="200" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="activity-button btn btn-primary btn-lg"" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="activity-button btn btn-primary btn-lg"">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="form- activity-right form-container-right-lesson">
