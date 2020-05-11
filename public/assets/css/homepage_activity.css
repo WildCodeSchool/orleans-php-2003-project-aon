@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     margin:0;
     padding-bottom: var(--padding-extra-large);
+    width:100%;
 }
 
 .card-deck .activity-card{
