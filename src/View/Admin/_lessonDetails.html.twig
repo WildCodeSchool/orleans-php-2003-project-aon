@@ -11,7 +11,7 @@
             <select required class="form-control" id="activity" name="activity" required>
                 {% for activity in activities %}
                     <option value="{{ activity.id }}"
-                            {%  if lesson.name==activity.name %}
+                            {%  if activity==activity.name %}
                     selected
                             {% endif %}>{{ activity.name }}</option>
                 {% endfor %}
