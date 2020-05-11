@@ -82,7 +82,7 @@ class AdminActivityController extends AbstractController
                     "/L'activité a bien été modifiée");
             } else {
                 $toBeReturned = $this->twig->render(
-                    'Admin/showActivity.html.twig',
+                    'Admin/editActivity.html.twig',
                     ['errors' => $errors,
                      'message' => $message,
                      'data' => $data]
@@ -93,7 +93,7 @@ class AdminActivityController extends AbstractController
             $activity = $activityManager->selectOneById($id);
 
             $toBeReturned = $this->twig->render(
-                'Admin/showActivity.html.twig',
+                'Admin/editActivity.html.twig',
                 ['data' => $activity,
                  'message' => $message]
             );

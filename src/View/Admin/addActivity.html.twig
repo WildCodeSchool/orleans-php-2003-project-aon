@@ -1,12 +1,12 @@
 {% extends 'Admin/activityFormLayout.html.twig' %}
 
-{% block title %}Creer une activité{% endblock %}
+{% set title="Créer une activité" %}
 
-{% block method %}/./adminActivity/addActivity{% endblock %}
+{% block title %}{{title}}{% endblock %}
 
 {% block buttons %}
             <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>
-            <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Enregistrer l'activité">
+            <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="{{title}}">
 {% endblock %}
 
 
