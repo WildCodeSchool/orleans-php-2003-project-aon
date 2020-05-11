@@ -250,7 +250,6 @@ hr::before, hr::after {
     margin:auto 0;
     height:2px;
     width:40%;
-    z-index:100;
 }
 
 .table-head-small{
