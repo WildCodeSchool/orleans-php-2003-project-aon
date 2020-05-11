@@ -75,11 +75,8 @@ class AdminEventController extends AbstractController
                 $eventManager->insert($data);
                 header("location:/admin/index");
             } else {
-                $availablePictures=$this->getAvailablePictures();
-
                 $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
                     'data'=>$data,
-                    'availablePictures' => $availablePictures,
                     'message'=>"L'évènement n'a pas pu être créé."]);
             }
         }
@@ -142,14 +139,12 @@ class AdminEventController extends AbstractController
             if (count($errorsAndData['data']) == 6) {
                 $eventManager = new EventManager();
                 $eventManager->updateEvent($errorsAndData['data']);
-                header("location:/adminEvent/showEvent/" . $errorsAndData['data']['id'] . "/L'évènement a bien été modifié");
+                header("location:/adminEvent/showEvent/" . $errorsAndData['data']['id'] .
+                            "/L'évènement a bien été modifié");
             } else {
-                $availablePictures=$this->getAvailablePictures();
-
                 $toBeReturned = $this->twig->render(
                     'Admin/showEvent.html.twig',
                     ['errors' => $errorsAndData['errors'],
-                        'availablePictures' => $availablePictures,
                         'data' => $errorsAndData['data']]
                 );
             }
@@ -239,5 +234,4 @@ class AdminEventController extends AbstractController
 
         return ['error' => $error, 'data'=>$data];
     }
-
 }
