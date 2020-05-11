@@ -16,9 +16,11 @@
                 {{ event.description }}
             </div>
 
-            <div class="description">
-                <a href=" {{ event.link }}">lien de l'event</a>
-            </div>
+            {% if not event.link is empty %}
+                <div class="link">
+                    <a href="{{ event.link }}">Lien vers l'évènement</a>
+                </div>
+            {% endif %}
         </div>
 
     </div>
