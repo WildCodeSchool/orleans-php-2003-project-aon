@@ -63,7 +63,7 @@ body{
     align-items: stretch;
     color:var(--color-dark);
     font-size:16pt;
-
+    overflow-x: hidden;
 }
 
 main{
@@ -104,7 +104,7 @@ h2 {
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
-    max- width:80%;
+    max-width:80%;
 }
 
 h3,h5 {
