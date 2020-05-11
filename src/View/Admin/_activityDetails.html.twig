@@ -14,7 +14,7 @@
         <div class="form-group">
             {% if not data.picture is empty %}
                 <label class="col-form-label" for="picture">Illustration actuelle de l'activité :</label>
-                <img class="activity-card-img" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité">
+                <div class="form-image-container"><img class="form-image" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité"></div>
                 <input type="hidden" name="picture" value="{{ data.picture }}">
             {% endif %}
 

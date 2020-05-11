@@ -266,6 +266,17 @@ hr::before, hr::after {
     min-height: max-content;
 }
 
+.form-image-container{
+    max-height:200px;
+    width: 100%;
+    overflow:hidden;
+
+}
+
+.form-image{
+    width:100%;
+}
+
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
