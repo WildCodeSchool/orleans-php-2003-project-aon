@@ -43,8 +43,7 @@ class AdminController extends AbstractController
                 'lessons' => $lessons,
                 'activities' => $activities,
                 'whoAreUs' => $whoAreUs,
-                'messagesBox' => $messages,
-                'activities' => $activities]
+                'messagesBox' => $messages,]
         );
     }
 
