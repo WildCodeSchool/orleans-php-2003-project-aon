@@ -19,7 +19,6 @@ class AdminActivityController extends AbstractController
     public function addActivity(string $message = "")
     {
         $message = urldecode($message);
-
         $toBeReturned="";
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,8 +28,13 @@ class AdminActivityController extends AbstractController
             unset($errors['id']);
 
             $fileNameAndError=$this->upload();
-            if ($fileNameAndError['fileName']!="") {
+
+            if (!empty($fileNameAndError['fileName'])) {
                 $data['picture']=$fileNameAndError['fileName'];
+                unset($errors['picture']);
+            }
+
+            if (!empty($fileNameAndError['error'])) {
                 $errors['picture']=$fileNameAndError['error'];
             }
 
@@ -57,29 +61,31 @@ class AdminActivityController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
 
             $fileNameAndError=$this->upload();
             if (!empty($fileNameAndError['fileName'])) {
-                $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
-                unset($errorsAndData['errors']['picture']);
+                $data['picture']=$fileNameAndError['fileName'];
+                unset($errors['picture']);
             }
 
             if (!empty($fileNameAndError['error'])) {
-                $errorsAndData['errors']['picture']=$fileNameAndError['error'];
+                $errors['picture']=$fileNameAndError['error'];
             }
 
-            if (empty($errorsAndData['errors'])) {
+            if (empty($errors)) {
                 $activityManager = new ActivityManager();
-                $activityManager->updateActivity($errorsAndData['data']);
+                $activityManager->updateActivity($data);
                 header("location:/adminActivity/editActivity/" .
-                    $errorsAndData['data']['id'] .
+                    $data['id'] .
                     "/L'activité a bien été modifiée");
             } else {
                 $toBeReturned = $this->twig->render(
                     'Admin/showActivity.html.twig',
-                    ['errors' => $errorsAndData['errors'],
+                    ['errors' => $errors,
                      'message' => $message,
-                     'data' => $errorsAndData['data']]
+                     'data' => $data]
                 );
             }
         } else {
