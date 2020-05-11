@@ -16,6 +16,7 @@
             <input class="actualPicture" type="hidden" name="picture" value="{{ whoAreUs.picture }}">
         {% endif %}
 
+        <label class="col-form-label" for="description">Description actuelle </label>
         <textarea class="WAUdescription" name="description">{{ whoAreUs.description }}</textarea>
         <small class="errorMessage form-text text-danger">{{ errors.description }}</small>
         <input type="file" name="picture">
