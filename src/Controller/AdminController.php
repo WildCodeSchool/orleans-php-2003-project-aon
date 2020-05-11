@@ -37,9 +37,9 @@ class AdminController extends AbstractController
         return $this->twig->render(
             'Admin/index.html.twig',
             ['event' => $event,
-                'lessons' => $lessons,
-                'messagesBox' => $messages,
-                'activities' => $activities]
+            'lessons' => $lessons,
+            'messagesBox' => $messages,
+            'activities' => $activities]
         );
     }
 
