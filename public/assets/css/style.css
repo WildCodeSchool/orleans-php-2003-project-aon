@@ -171,7 +171,7 @@ hr{
     background-color: var(--navbar-color);
     transition: 1s;
     position:fixed;
-    width:var(--navbar-width);
+    width:100vw;
     z-index:var(--navbar-zindex);
     min-height:var(--navbar-height);
 }
