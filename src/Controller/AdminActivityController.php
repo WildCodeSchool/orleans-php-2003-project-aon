@@ -45,7 +45,7 @@ class AdminActivityController extends AbstractController
             } else {
                 $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
                     'data'=>$data,
-                    'message'=>"L'activié n'a pas pu être créé."]);
+                    'message'=>"L'activité n'a pas pu être créé."]);
             }
         } else {
             $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);

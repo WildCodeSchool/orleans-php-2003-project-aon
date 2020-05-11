@@ -1,10 +1,7 @@
-{% extends 'Admin/activityFormLayout.html.twig' %}
+{% extends 'Admin/formLayout.html.twig' %}
 
-{% block title %}Modifier une activité{% endblock %}
+{% set title="Modifier une activité" %}
 
-{% block buttons %}
-            <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>
-            <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Modifier l'activité">
+{% block form %}
+    {% include 'Admin/_activityDetails.html.twig' %}
 {% endblock %}
-
-
