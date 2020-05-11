@@ -7,7 +7,7 @@
     <div class="form-container-left">
         <div class="form-group">
             <label class="col-form-label" for="name">Nom de l'activité :</label>
-            <input class="form-control" type="text" id="name" name="name" value="{{data.name}}" placeholder="Aquagym">
+            <input class="form-control" type="text" id="name" name="name" value="{{data.name}}" placeholder="Aquagym" required>
             <small class="errorMessage form-text text-danger">{{errors.title}}</small>
         </div>
 
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <label class="col-form-label" for="description">Description de l'activité</label>
-            <textarea class="activityFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
+            <textarea class="activityFormTextArea form-control" type="text" id="description" name="description"  required>{{data.description}}</textarea>
             <small class="errorMessage form-text text-danger">{{errors.description}}</small>
         </div>
 
