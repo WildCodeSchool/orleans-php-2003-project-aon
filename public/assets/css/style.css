@@ -160,7 +160,7 @@ ul {
 
 hr{
     margin: var(--margin-extra-large);
-    width: 75%;
+    min-width: 100%;
     height: 2px;
     background-color: var(--color-dark);
     border: none;
