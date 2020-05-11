@@ -66,26 +66,14 @@ class AdminActivityController extends AbstractController
         return $toBeReturned;
     }
 
-    public function showActivity(int $id, string $message = "")
+    public function editActivity(int $id = 0, string $message = ""): string
     {
         $message = urldecode($message);
-        $activityManager = new ActivityManager();
-        $activity = $activityManager->selectOneById($id);
 
         $availablePictures=$this->getAvailablePictures();
 
-        return $this->twig->render(
-            'Admin/showActivity.html.twig',
-            ['data' => $activity,
-                'message' => $message,
-                'availablePictures' => $availablePictures
-            ]
-        );
-    }
+        $toBeReturned="";
 
-    public function editActivity(): string
-    {
-        $toBeReturned = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
 
@@ -98,19 +86,28 @@ class AdminActivityController extends AbstractController
             if (count($errorsAndData['data']) == 5) {
                 $activityManager = new ActivityManager();
                 $activityManager->updateActivity($errorsAndData['data']);
-                header("location:/adminActivity/showActivity/" .
+                header("location:/adminActivity/editActivity/" .
                     $errorsAndData['data']['id'] .
                     "/L'activité a bien été modifiée");
             } else {
-                $availablePictures=$this->getAvailablePictures();
-
                 $toBeReturned = $this->twig->render(
                     'Admin/showActivity.html.twig',
                     ['errors' => $errorsAndData['errors'],
-                        'availablePictures' => $availablePictures,
-                        'data' => $errorsAndData['data']]
+                     'availablePictures' => $availablePictures,
+                     'message' => $message,
+                     'data' => $errorsAndData['data']]
                 );
             }
+        } else {
+            $activityManager = new ActivityManager();
+            $activity = $activityManager->selectOneById($id);
+
+            $toBeReturned = $this->twig->render(
+                'Admin/showActivity.html.twig',
+                ['data' => $activity,
+                 'message' => $message,
+                 'availablePictures' => $availablePictures]
+            );
         }
         return $toBeReturned;
     }
