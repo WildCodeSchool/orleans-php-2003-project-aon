@@ -6,6 +6,7 @@ use App\Model\LessonManager;
 use App\Model\ActivityManager;
 use App\Model\EventManager;
 use App\Model\WhoAreUsManager;
+use App\Model\MessageManager;
 use \FilesystemIterator;
 
 class AdminController extends AbstractController
@@ -33,6 +34,8 @@ class AdminController extends AbstractController
 
         $whoAreUsManager = new WhoAreUsManager();
         $whoAreUs = $whoAreUsManager->selectAll();
+        $messageManager = new MessageManager();
+        $messages = $messageManager->selectAll();
 
         return $this->twig->render(
             'Admin/index.html.twig',
@@ -40,6 +43,8 @@ class AdminController extends AbstractController
                 'lessons' => $lessons,
                 'activities' => $activities,
                 'whoAreUs' => $whoAreUs]
+                'messagesBox' => $messages,
+                'activities' => $activities]
         );
     }
 
@@ -103,7 +108,7 @@ class AdminController extends AbstractController
             } else {
                 $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
                     'data'=>$data,
-                    'message'=>"L'évenement n'a pas pu être créé."]);
+                    'message'=>"L'évènement n'a pas pu être créé."]);
             }
         }
         return $toBeReturned;
@@ -166,7 +171,7 @@ class AdminController extends AbstractController
 
         //check date
         if (empty($_POST['date'])) {
-            $errors['date'] .= "Vous devez indiquer la date de l'évenement";
+            $errors['date'] .= "Vous devez indiquer la date de l'évènement";
         } elseif (!preg_match("/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/", trim($_POST['date']))) {
             $errors['date'] .= "La date doit avoir le format aaaa-mm-jj";
         } else {
@@ -207,7 +212,7 @@ class AdminController extends AbstractController
         $error="";
 
         if (empty($_POST[$postFieldName])) {
-            $error = "Vous devez indiquer $userFieldName de l'évenement";
+            $error = "Vous devez indiquer $userFieldName de l'évènement";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
             $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
