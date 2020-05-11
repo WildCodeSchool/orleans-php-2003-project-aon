@@ -68,7 +68,6 @@ body{
 
 main{
     align-self: center;
-    _max-width:75%;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -255,12 +254,5 @@ hr::before, hr::after {
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
-    }
-
-    .main{
-        max-width:95vw;
-        min-width:95vw;
-        margin:0;
-        padding:0;
     }
 }
