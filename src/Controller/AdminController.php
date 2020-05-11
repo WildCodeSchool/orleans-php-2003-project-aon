@@ -34,6 +34,7 @@ class AdminController extends AbstractController
 
         $whoAreUsManager = new WhoAreUsManager();
         $whoAreUs = $whoAreUsManager->selectAll();
+
         $messageManager = new MessageManager();
         $messages = $messageManager->selectAll();
 
@@ -44,6 +45,8 @@ class AdminController extends AbstractController
                 'activities' => $activities,
                 'whoAreUs' => $whoAreUs,
                 'messagesBox' => $messages,]
+                'messagesBox' => $messages,
+                'activities' => $activities]
         );
     }
 
