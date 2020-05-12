@@ -45,7 +45,7 @@
     --margin-large: calc(var(--margin) * 2);
     --margin-extra-large: calc(var(--margin) * 4);
 
-    --font-main-size: 16pt;
+    --font-main-size: 1.2rem;
 
     --navbar-height:5vw;
 
@@ -63,19 +63,17 @@ body{
     flex-direction: column;
     align-items: stretch;
     color:var(--color-dark);
-    font-size:16pt;
-
+    font-size:var(--font-main-size);
+    overflow-x: hidden;
 }
 
 main{
     align-self: center;
-    max-width:75%;
     display:flex;
     flex-direction: column;
     align-items: center;
 
     background-attachment:fixed;
-    background-image : url("../images/bulles.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -106,6 +104,7 @@ h2 {
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
+    max-width:75%;
 }
 
 h3,h5 {
@@ -113,6 +112,7 @@ h3,h5 {
     color:var(--color-contrast);
     font-size: 30px;
     font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.20);
 }
 
 h4{
@@ -122,6 +122,7 @@ h4{
 
 li, a {
     text-decoration: none;
+    color:var(--color-main);
 }
 
 a:visited {
@@ -130,11 +131,13 @@ a:visited {
 
 a:hover, .navbar li a:hover{
     text-decoration: none;
-    color:var(--navbar-link-color-light);
+    color:var(--primary);
 }
 
 ul {
     list-style-type: none;
+    padding:0;
+    padding: var(--padding) 0;
 }
 
 .row {
@@ -144,6 +147,7 @@ ul {
 
 .logo {
     width: 50px;
+    padding-bottom:1.5rem;
 }
 
 .page-footer {
@@ -151,8 +155,9 @@ ul {
 }
 
 .logoNavBar{
-    width: 30%;
-    height: 25%;
+    width: 48%;
+    height: 40%;
+    margin-left:10%;
 }
 
 .collapse {
@@ -161,26 +166,35 @@ ul {
 
 hr{
     margin: var(--margin-extra-large);
-    width: 75%;
+    min-width: 100%;
     height: 2px;
     background-color: var(--color-dark);
     border: none;
 }
 
-.navbar{
-    background-color: var(--navbar-color);
-    transition: 1s;
-    position:fixed;
-    width:var(--navbar-width);
-    z-index:var(--navbar-zindex);
-    min-height:var(--navbar-height);
+.navbar-collapse{
+    padding-right:10%;
 }
 
-.navbar a, footer a{
+.navbar{
+    background-color: var(--navbar-color);
+    transition: 0.8s;
+    position:fixed;
+    width:100vw;
+    z-index:var(--navbar-zindex);
+    min-height:var(--navbar-height);
+    font-size:calc(1.2 * var(--font-main-size));
+}
+
+.navbar li a, footer li a{
     color:var(--navbar-link-color-dark);
     font-weight: bold;
-    margin-left:var(--margin);
-    margin-right:var(--margin);
+    padding-left:var(--margin-extra-large);
+    padding-right:var(--margin-extra-large);
+}
+
+.navbar li a:hover, footer a:hover {
+    color: var(--color-light-alternative);
 }
 
 .navbar-toggler-icon {
@@ -189,17 +203,17 @@ hr{
 
 .navbar li, footer li{
     position:relative;
-    box-sizing: content-box;
+    box-sizing: border-box;
+    padding:0 var(--padding-large);
 }
 
 .navbar li::after{
     content:' ';
     width:30%;
-    height:5%;
+    height:2px;
     position:absolute;
     background:transparent;
-    top:80%;
-    left:0;
+    top:90%;
     left:35%;
 }
 
@@ -232,6 +246,46 @@ section h2{
     display:none;
 }
 
+hr{
+    overflow: visible;
+    background : no-repeat center/100px url("../icons/swimming33.svg");
+    background-color:transparent;
+    display:flex;
+    height:100px;
+    display:flex;
+    width:500px;
+    justify-content: space-between;
+
+
+}
+
+hr::before, hr::after {
+    content:" ";
+    background-color:lightgrey;
+    margin:auto 0;
+    height:2px;
+    width:40%;
+}
+
+.table-head-small{
+    width:10px;
+}
+
+.admin{
+    min-height: max-content;
+}
+
+.form-image-container{
+    max-height:200px;
+    width: 100%;
+    overflow:hidden;
+
+}
+
+.form-image{
+    width:100%;
+}
+
 
 
 @media screen and (max-width: 991px) {
@@ -239,10 +293,14 @@ section h2{
         --navbar-color-transp: var(--navbar-color);
     }
 
-    .main{
-        max-width:95vw;
-        min-width:95vw;
-        margin:0;
-        padding:0;
+    .navbar a, footer li a{
+        margin-left:var(--margin);
+        margin-right:var(--margin);
     }
+
+    footer li a{
+        padding:0;
+        margin-left:0;
+    }
+
 }

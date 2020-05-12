@@ -1,16 +1,17 @@
 .activity-card-deck{
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     margin:0;
     padding-bottom: var(--padding-extra-large);
+    width:100%;
 }
 
 .card-deck .activity-card{
     max-width: 310px;
     min-width: 310px;
-    margin: calc(1 * (var(--margin-extra-large)));
+    margin: calc(1 * (var(--margin-extra-large))) auto;
     background:transparent;
 }
 
@@ -37,4 +38,7 @@
 .activity-button{
     background-color: var(--color-main);
     margin: var(--margin-large);
+    margin-left:0;
+    min-width:140px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
