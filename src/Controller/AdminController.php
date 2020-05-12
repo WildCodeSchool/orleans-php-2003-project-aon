@@ -40,9 +40,9 @@ class AdminController extends AbstractController
             'Admin/index.html.twig',
             ['event' => $event,
             'lessons' => $lessons,
+            'messagesBox' => $messages,
             'activities' => $activities,
-            'whoAreUs' => $whoAreUs,
-            'messagesBox' => $messages,]
+            'whoAreUs' => $whoAreUs, ]
         );
     }
 }
