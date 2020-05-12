@@ -44,7 +44,7 @@
     --margin-large: calc(var(--margin) * 2);
     --margin-extra-large: calc(var(--margin) * 4);
 
-    --font-main-size: 1rem;
+    --font-main-size: 1.2rem;
 
     --navbar-height:5vw;
 
@@ -62,7 +62,7 @@ body{
     flex-direction: column;
     align-items: stretch;
     color:var(--color-dark);
-    font-size:1rem;
+    font-size:var(--font-main-size);
     overflow-x: hidden;
 }
 
@@ -73,7 +73,6 @@ main{
     align-items: center;
 
     background-attachment:fixed;
-    _background-image : url("../images/bulles.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -112,7 +111,7 @@ h3,h5 {
     color:var(--color-contrast);
     font-size: 30px;
     font-weight: bold;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.20);
 }
 
 h4{
