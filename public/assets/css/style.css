@@ -112,7 +112,7 @@ h3,h5 {
     color:var(--color-contrast);
     font-size: 30px;
     font-weight: bold;
-    text-shadow: 2px 2px #558ABB;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 h4{
