@@ -48,7 +48,16 @@ class AdminLessonController extends AbstractController
 
     private function validation(array $lesson) : array
     {
+        $poolManager = new PoolManager();
+
         $errors = [];
+
+        $pools = $poolManager->selectAll();
+        $poolsIds  = array_column($pools, 'id');
+        if (!in_array($_POST['pool'], $poolsIds)) {
+            $errors[] = 'Ce bassin n\'existe pas';
+        }
+
         if (empty($lesson['day'])) {
             $errors[] = 'Le jour doit être indiqué';
         } elseif (!in_array($lesson['day'], ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'])) {
@@ -105,6 +114,7 @@ class AdminLessonController extends AbstractController
         $ages = $ageManager->selectAll();
         $poolManager = new PoolManager();
         $pools = $poolManager->selectAll();
+
         return $this->twig->render('Admin/editLesson.html.twig', ['lesson' => $lesson,
             'activities' => $activities,
             'ages' => $ages,
@@ -112,26 +122,35 @@ class AdminLessonController extends AbstractController
     }
 
 
-    public function editLesson()
+    public function editLesson(int $id = null)
     {
-        $activityManager = new ActivityManager();
-        $activities = $activityManager->selectAll();
-        $ageManager = new AgeManager();
-        $ages = $ageManager->selectAll();
+        $lessonManager = new LessonManager();
         $poolManager = new PoolManager();
-        $pools = $poolManager->selectAll();
-
+        $ageManager = new AgeManager();
+        $activityManager = new ActivityManager();
+        $lesson = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
 
-            $errors = $this->validation($lesson);
+            if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
+                $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
+                $lesson['pool_name'] = $_POST['new_pool'];
+            } else {
+                $errors = $this->validation($lesson);
 
-            if (empty($errors)) {
-                $lessonManager = new LessonManager();
-                $lessonManager->editLesson($lesson);
-                header("location:/admin/index");
+                if (empty($errors)) {
+                    $lessonManager->editLesson($lesson);
+                    header("location:/admin/index");
+                }
             }
+        }
+
+        $activities = $activityManager->selectAll();
+        $ages = $ageManager->selectAll();
+        $pools = $poolManager->selectAll();
+        if (!empty($id)) {
+            $lesson = $lessonManager->selectOneById($id);
         }
 
         return $this->twig->render('Admin/editLesson.html.twig', [

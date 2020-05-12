@@ -133,7 +133,7 @@ class LessonManager extends AbstractManager
   
     public function selectOneById(int $id)
     {
-        $statement = $this->pdo->prepare("SELECT l.id, ac.name, a.age, p.pool_name, l.day, l.time, l.price 
+        $statement = $this->pdo->prepare("SELECT l.id, ac.name, a.age as age_name, p.pool_name, l.day, l.time, l.price 
                                                     FROM lesson as l JOIN activity as ac ON ac.id=l.activity_id
                                                     JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id
                                                     WHERE l.id=:id");

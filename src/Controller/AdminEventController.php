@@ -71,8 +71,9 @@ class AdminEventController extends AbstractController
                 $errors['picture'] = $fileNameAndError['error'];
             }
 
-            if (count($data) == 5 && empty($data['id'])) {
-                $eventManager = new EventManager();
+
+            if (count($data) == 6 && empty($data['id'])) {
+                $eventManager=new EventManager();
                 $eventManager->insert($data);
                 header("location:/admin/index");
             } else {
@@ -170,7 +171,6 @@ class AdminEventController extends AbstractController
             'id' => '',
             'link' => '',
         ];
-
 
         //data array
         $data = array();
