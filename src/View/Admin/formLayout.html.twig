@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>{{title}}</h1>
+    <section class="form">
+        <form class = "activity-form" method="post" enctype="multipart/form-data">
+            {% block form %}{% endblock %}
+            <div class="form-button-pannel">
+
+                <a class="activity-button btn btn-primary" href="/./Admin/index">Retour</a>
+                <input class="activity-button btn btn-primary" type="submit" name="action" value="{{title}}">
+            </div>
+        </form>
+    </section>
+{% endblock %}
+
