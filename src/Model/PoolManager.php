@@ -19,7 +19,7 @@ class PoolManager extends AbstractManager
 
     /**
      * @param array $pool
-     * @return bool
+     * @return int
      */
     public function insert(array $pool):int
     {
