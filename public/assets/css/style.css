@@ -146,6 +146,7 @@ ul {
 
 .logo {
     width: 50px;
+    padding-bottom:1.5rem;
 }
 
 .page-footer {
@@ -181,7 +182,7 @@ hr{
     width:100vw;
     z-index:var(--navbar-zindex);
     min-height:var(--navbar-height);
-    font-size:calc(1.3 * var(--font-main-size));
+    font-size:calc(1.2 * var(--font-main-size));
 }
 
 .navbar li a, footer li a{
