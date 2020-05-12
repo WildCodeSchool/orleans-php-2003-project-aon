@@ -9,18 +9,22 @@
             <img  class="col-md activityPicture" src="/./assets/activityImages/{{ activity.picture }}" alt="Activity Picture">
 
             <div class="col-md buttonAndTable">
-              <p> Selectionnez votre catégorie  : </p>
-               <div class="btn-group" role="group">
-                   <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Selectionnez une catégorie {{ lessonsByAgeClass.0.0.age }}
-                   </button>
-                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                       {% for ageClass in ageClasses %}
-                           <a class="{{ageClass.action}} dropdown-item" href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
-                       {% endfor %}
-                   </div>
-               </div>
 
+                {% if ageClasses|length > 1 %}
+                      <p> Selectionnez votre catégorie  : </p>
+                       <div class="btn-group" role="group">
+                           <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Selectionnez une catégorie {{ lessonsByAgeClass.0.0.age }}
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                               {% for ageClass in ageClasses %}
+                                   <a class="{{ageClass.action}} dropdown-item" href="/./activity/showActivity/{{ activity.id }}/{{  ageClass.id }}#{{  ageClass.id }}" >{{ ageClass.age }}</a>
+                               {% endfor %}
+                           </div>
+                       </div>
+                {% else %}
+                    Cette activité n'est pas programmée pour l'instant. N'hésitez pas à nous contacter pour avoir de plus amples informations.
+                {%  endif %}
 
 
               {% for ageClass in lessonsByAgeClass %}
