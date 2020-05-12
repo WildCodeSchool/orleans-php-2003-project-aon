@@ -154,6 +154,7 @@ ul {
 .logoNavBar{
     width: 48%;
     height: 40%;
+    margin-left:10%;
 }
 
 .collapse {
@@ -166,6 +167,10 @@ hr{
     height: 2px;
     background-color: var(--color-dark);
     border: none;
+}
+
+.navbar-collapse{
+    padding-right:10%;
 }
 
 .navbar{
@@ -181,8 +186,8 @@ hr{
 .navbar a, footer a{
     color:var(--navbar-link-color-dark);
     font-weight: bold;
-    margin-left:var(--margin);
-    margin-right:var(--margin);
+    margin-left:var(--margin-extra-large);
+    margin-right:var(--margin-extra-large);
 }
 
 .navbar li a:hover, footer a:hover {
@@ -280,5 +285,10 @@ hr::before, hr::after {
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
+    }
+
+    .navbar a, footer a{
+        margin-left:var(--margin);
+        margin-right:var(--margin);
     }
 }
