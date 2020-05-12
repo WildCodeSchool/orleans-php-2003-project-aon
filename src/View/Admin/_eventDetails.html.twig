@@ -8,33 +8,36 @@
     <div class="form-container-left">
         <div class="form-group">
             <label class="col-form-label" for="title">Nom de l'évènement</label>
-            <input class="form-control" type="text" id="title" name="title" value="{{data.title}}" placeholder="Championnat d'Orléans">
-            <small class="errorMessage form-text text-danger">{{errors.title}}</small>
+            <input class="form-control" type="text" id="title" name="title" value="{{ data.title }}"
+                   placeholder="Championnat d'Orléans">
+            <small class="errorMessage form-text text-danger">{{ errors.title }}</small>
         </div>
 
         <div class="form-group">
             {% if not data.picture is empty %}
                 <label class="col-form-label" for="picture">Illustration actuelle de l'évènement</label>
-                <img class="activity-card-img" src="/assets/eventImages/{{ data.picture }}" alt="illustration de l'évènement">
+                <img class="activity-card-img" src="/assets/eventImages/{{ data.picture }}"
+                     alt="illustration de l'évènement">
                 <input type="hidden" name="picture" value="{{ data.picture }}">
             {% endif %}
 
             <label class="col-form-label" for="picture">Modifier l'illustration de l'évènement :</label>
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>" />
-            <input type="file" name="picture" id="picture" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>"/>
+            <input type="file" name="picture" id="picture"/>
 
-                <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
+            <small class="errorMessage form-text text-danger">{{ errors.picture }}</small>
         </div>
         <div class="form-group">
             <label class="col-form-label" for="date">Date de l'évènement</label>
-            <input class="form-control" type="date" id="date" name="date" value="{{data.date}}">
-            <small class="errorMessage form-text text-danger">{{errors.date}}</small>
+            <input class="form-control" type="date" id="date" name="date" value="{{ data.date }}">
+            <small class="errorMessage form-text text-danger">{{ errors.date }}</small>
         </div>
 
         <div class="form-group">
             <label class="col-form-label" for="location">Endroit de l'évènement</label>
-            <input class="form-control" type="text" id="location" name="location" value="{{data.location}}" placeholder="Piscine du palais des sports">
-            <small class="errorMessage form-text text-danger">{{errors.location}}</small>
+            <input class="form-control" type="text" id="location" name="location" value="{{ data.location }}"
+                   placeholder="Piscine du palais des sports">
+            <small class="errorMessage form-text text-danger">{{ errors.location }}</small>
         </div>
     </div>
 
@@ -42,12 +45,19 @@
 
         <div class="form-group">
             <label class="col-form-label" for="description">Description de l'évènement</label>
-            <textarea class="eventFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
-            <small class="errorMessage form-text text-danger">{{errors.description}}</small>
+            <textarea class="eventFormTextArea form-control" type="text" id="description"
+                      name="description">{{ data.description }}</textarea>
+            <small class="errorMessage form-text text-danger">{{ errors.description }}</small>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="link">Lien vers l'évènement</label>
+            <input class="form-control" type="url" id="link" name="link" value="{{ data.link }}"
+                   placeholder="www.votre-evenement.com">
+            <small class="errorMessage form-text text-danger">{{ errors.link }}</small>
         </div>
 
     </div>
-
 
 
 </div>
