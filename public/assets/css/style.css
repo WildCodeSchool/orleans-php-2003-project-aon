@@ -183,11 +183,11 @@ hr{
     font-size:calc(1.3 * var(--font-main-size));
 }
 
-.navbar a, footer a{
+.navbar li a, footer li a{
     color:var(--navbar-link-color-dark);
     font-weight: bold;
-    margin-left:var(--margin-extra-large);
-    margin-right:var(--margin-extra-large);
+    padding-left:var(--margin-extra-large);
+    padding-right:var(--margin-extra-large);
 }
 
 .navbar li a:hover, footer a:hover {
@@ -200,17 +200,16 @@ hr{
 
 .navbar li, footer li{
     position:relative;
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 
 .navbar li::after{
     content:' ';
     width:30%;
-    height:5%;
+    height:2px;
     position:absolute;
     background:transparent;
-    top:80%;
-    left:0;
+    top:90%;
     left:35%;
 }
 
