@@ -10,8 +10,24 @@
     width: 80%;
     height: 150px;
 }
+.WAUdescription {
+    border: solid 2px;
+    border-color: var(--color-main-light);
+}
 
 .WAU-card-img {
     padding-bottom: var(--padding-large);
     width: 350px;
+}
+
+@media (max-width: 850px) {
+    .WAUfile {
+        width: 80%;
+        padding: var(--padding-large);
+    }
+    .WAUdescription {
+        border: solid 2px;
+        border-color: var(--color-main-light);
+    }
+
 }
