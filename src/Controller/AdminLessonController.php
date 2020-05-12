@@ -24,6 +24,7 @@ class AdminLessonController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
+
             if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
                 $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
                 $lesson['pool_name'] = $_POST['new_pool'];
