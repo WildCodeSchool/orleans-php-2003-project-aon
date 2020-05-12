@@ -22,7 +22,7 @@
                                {% endfor %}
                            </div>
                        </div>
-                {% else %}
+                {% elseif ageClasses|length == 0 %}
                     Cette activité n'est pas programmée pour l'instant. N'hésitez pas à nous contacter pour avoir de plus amples informations.
                 {%  endif %}
 

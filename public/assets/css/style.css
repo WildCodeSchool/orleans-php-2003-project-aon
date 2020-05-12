@@ -135,6 +135,8 @@ a:hover, .navbar li a:hover{
 
 ul {
     list-style-type: none;
+    padding:0;
+    padding: var(--padding) 0;
 }
 
 .row {
@@ -200,6 +202,7 @@ hr{
 .navbar li, footer li{
     position:relative;
     box-sizing: border-box;
+    padding:0 var(--padding-large);
 }
 
 .navbar li::after{
@@ -285,8 +288,13 @@ hr::before, hr::after {
         --navbar-color-transp: var(--navbar-color);
     }
 
-    .navbar a, footer a{
+    .navbar a, footer li a{
         margin-left:var(--margin);
         margin-right:var(--margin);
+    }
+
+    footer li a{
+        padding:0;
+        margin-left:0;
     }
 }
