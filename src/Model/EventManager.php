@@ -71,16 +71,17 @@ class EventManager extends AbstractManager
     public function insert(array $event):bool
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-            " (`title`, `description`, `picture`, `date`, `location`) 
+            " (`title`, `description`, `picture`, `date`, `location`, `link`) 
             VALUES 
-            (:title, :description, :picture, :date, :location)");
+            (:title, :description, :picture, :date, :location, :link)");
 
         $statement->bindValue('title', $event['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $event['description'], \PDO::PARAM_STR);
         $statement->bindValue('picture', $event['picture'], \PDO::PARAM_STR);
         $statement->bindValue('date', $event['date'], \PDO::PARAM_STR);
         $statement->bindValue('location', $event['location'], \PDO::PARAM_STR);
-      
+        $statement->bindValue('link', $event['link'], \PDO::PARAM_STR);
+
         return $statement->execute();
     }
 
