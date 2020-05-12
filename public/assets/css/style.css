@@ -170,13 +170,12 @@ hr{
 
 .navbar{
     background-color: var(--navbar-color);
-    transition: 1s;
+    transition: 0.8s;
     position:fixed;
     width:100vw;
     z-index:var(--navbar-zindex);
     min-height:var(--navbar-height);
     font-size:calc(1.3 * var(--font-main-size));
-    _font-size:16pt;
 }
 
 .navbar a, footer a{
