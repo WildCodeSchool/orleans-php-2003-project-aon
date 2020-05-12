@@ -19,24 +19,30 @@ class AdminLessonController extends AbstractController
     public function addLesson()
     {
         $activityManager = new ActivityManager();
-        $activities = $activityManager->selectAll();
         $ageManager = new AgeManager();
-        $ages = $ageManager->selectAll();
         $poolManager = new PoolManager();
-        $pools = $poolManager->selectAll();
-
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
 
-            $errors = $this->validation($lesson);
+            if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
+                $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
+                $lesson['pool_name'] = $_POST['new_pool'];
+            } else {
+                $errors = $this->validation($lesson);
 
-            if (empty($errors)) {
-                $lessonManager = new LessonManager();
-                $lessonManager->insert($lesson);
-                header("location:/admin/index");
+                if (empty($errors)) {
+                    $lessonManager = new LessonManager();
+                    $lessonManager->insert($lesson);
+                    header("location:/admin/index");
+                }
             }
         }
+
+        $activities = $activityManager->selectAll();
+        $ages = $ageManager->selectAll();
+        $pools = $poolManager->selectAll();
+
         return $this->twig->render('Admin/addLesson.html.twig', [
             'errors' => $errors ?? [],
             'lesson' => $lesson ?? [],
@@ -104,23 +110,6 @@ class AdminLessonController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function showLesson(int $id)
-    {
-        $lessonManager = new LessonManager();
-        $lesson = $lessonManager->selectOneById($id);
-        $activityManager = new ActivityManager();
-        $activities = $activityManager->selectAll();
-        $ageManager = new AgeManager();
-        $ages = $ageManager->selectAll();
-        $poolManager = new PoolManager();
-        $pools = $poolManager->selectAll();
-
-        return $this->twig->render('Admin/editLesson.html.twig', ['lesson' => $lesson,
-            'activities' => $activities,
-            'ages' => $ages,
-            'pools' => $pools]);
-    }
-
 
     public function editLesson(int $id = null)
     {

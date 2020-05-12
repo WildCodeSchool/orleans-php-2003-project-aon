@@ -11,7 +11,7 @@
             <select required class="form-control" id="activity" name="activity" required>
                 {% for activity in activities %}
                     <option value="{{ activity.id }}"
-                            {%  if lesson.activity==activity.name %}
+                            {%  if lesson.name == activity.name %}
                     selected
                             {% endif %}>{{ activity.name }}</option>
                 {% endfor %}
@@ -72,7 +72,7 @@
     <div class="form- activity-right form-container-right-lesson">
         <div class="form-group-lesson">
             <label for="day-select">Choisir le jour</label>
-            <select name="day" id="day" class="form-control" required>
+            <select name="day" id="day" class="form-control">
                 <option value="{{ lesson.day }}">--Choisir un jour--</option>
                 <option value="Lundi"
                         {%  if lesson.day=="Lundi" %}
@@ -102,11 +102,11 @@
         </div>
         <div class="form-group-lesson">
             <label class="col-form-label" for="location">Heure</label>
-            <input class="form-control-lesson" type="text" id="time" name="time" value="{{ lesson.time}}" placeholder="19h00-20h00" required>
+            <input class="form-control-lesson" type="text" id="time" name="time" value="{{ lesson.time}}" placeholder="19h00-20h00">
         </div>
         <div class="form-group-lesson">
             <label class="col-form-label" for="location">Prix</label>
-            <input class="form-control-lesson" type="text" id="price" name="price" value="{{ lesson.price}}" placeholder="200" required>
+            <input class="form-control-lesson" type="text" id="price" name="price" value="{{ lesson.price}}" placeholder="200">
         </div>
     </div>
 
