@@ -225,5 +225,4 @@ class AdminEventController extends AbstractController
 
         return ['error' => $error, 'data'=>$data];
     }
-
 }

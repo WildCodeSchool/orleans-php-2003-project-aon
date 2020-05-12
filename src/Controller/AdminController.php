@@ -47,5 +47,4 @@ class AdminController extends AbstractController
             'messagesBox' => $messages,]
         );
     }
-
 }
