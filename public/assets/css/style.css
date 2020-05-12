@@ -256,6 +256,7 @@ hr{
     width:500px;
     justify-content: space-between;
 
+
 }
 
 hr::before, hr::after {
@@ -285,6 +286,8 @@ hr::before, hr::after {
     width:100%;
 }
 
+
+
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
@@ -299,4 +302,5 @@ hr::before, hr::after {
         padding:0;
         margin-left:0;
     }
+
 }

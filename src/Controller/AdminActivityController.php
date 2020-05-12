@@ -9,18 +9,6 @@ use \FilesystemIterator;
 class AdminActivityController extends AbstractController
 {
 
-    private function getAvailablePictures() : array
-    {
-        $availablePictures=array();
-        $path="assets/activityImages/";
-        $iterator = new FilesystemIterator($path);
-        foreach ($iterator as $fileInfo) {
-            $availablePictures[] = $fileInfo->getFilename();
-        }
-
-        return $availablePictures;
-    }
-
     public function deleteActivity(int $id): void
     {
         $activityManager = new ActivityManager();
@@ -28,93 +16,95 @@ class AdminActivityController extends AbstractController
         header('Location:/admin/index');
     }
 
-    public function createActivity(string $message = "")
+    public function addActivity(string $message = "")
     {
         $message = urldecode($message);
-        $availablePictures=$this->getAvailablePictures();
-        return $this->twig->render('Admin/addActivity.html.twig', ['message' => $message,
-            'availablePictures' => $availablePictures,]);
-    }
-
-    public function addActivity()
-    {
         $toBeReturned="";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData=$this->checkActivityPostData();
             $data=$errorsAndData['data'];
             $errors=$errorsAndData['errors'];
+            unset($errors['id']);
 
             $fileNameAndError=$this->upload();
-            if ($fileNameAndError['fileName']!="") {
+
+            if (!empty($fileNameAndError['fileName'])) {
                 $data['picture']=$fileNameAndError['fileName'];
+                unset($errors['picture']);
+            }
+
+            if (!empty($fileNameAndError['error'])) {
                 $errors['picture']=$fileNameAndError['error'];
             }
 
-            if (count($data)==4 && empty($data['id'])) {
-                $activityManager=new ActivityManager();
-                $activityManager->insert($data);
-                header("location:/admin/index");
+            if (empty($errors)) {
+                    $activityManager=new ActivityManager();
+                    $activityManager->insert($data);
+                    header("location:/admin/index");
             } else {
-                $availablePictures=$this->getAvailablePictures();
-
                 $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
                     'data'=>$data,
-                    'availablePictures' => $availablePictures,
-                    'message'=>"L'évenement n'a pas pu être créé."]);
+                    'message'=>"L'activité n'a pas pu être créé."]);
             }
+        } else {
+            $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);
         }
         return $toBeReturned;
     }
 
-    public function showActivity(int $id, string $message = "")
+    public function editActivity(int $id = 0, string $message = ""): string
     {
         $message = urldecode($message);
-        $activityManager = new ActivityManager();
-        $activity = $activityManager->selectOneById($id);
 
-        $availablePictures=$this->getAvailablePictures();
+        $toBeReturned="";
 
-        return $this->twig->render(
-            'Admin/showActivity.html.twig',
-            ['data' => $activity,
-                'message' => $message,
-                'availablePictures' => $availablePictures
-            ]
-        );
-    }
-
-    public function editActivity(): string
-    {
-        $toBeReturned = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkActivityPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
 
             $fileNameAndError=$this->upload();
-            if ($fileNameAndError['fileName']!="") {
-                $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
-                $errorsAndData['errors']['picture']=$fileNameAndError['error'];
+            if (!empty($fileNameAndError['fileName'])) {
+                $data['picture']=$fileNameAndError['fileName'];
+                unset($errors['picture']);
             }
 
-            if (count($errorsAndData['data']) == 5) {
+            if (!empty($fileNameAndError['error'])) {
+                $errors['picture']=$fileNameAndError['error'];
+            }
+
+            if (empty($errors)) {
                 $activityManager = new ActivityManager();
-                $activityManager->updateActivity($errorsAndData['data']);
-                header("location:/adminActivity/showActivity/" .
-                    $errorsAndData['data']['id'] .
+                $activityManager->updateActivity($data);
+                header("location:/adminActivity/editActivity/" .
+                    $data['id'] .
                     "/L'activité a bien été modifiée");
             } else {
-                $availablePictures=$this->getAvailablePictures();
-
                 $toBeReturned = $this->twig->render(
-                    'Admin/showActivity.html.twig',
-                    ['errors' => $errorsAndData['errors'],
-                        'availablePictures' => $availablePictures,
-                        'data' => $errorsAndData['data']]
+                    'Admin/editActivity.html.twig',
+                    ['errors' => $errors,
+                     'message' => $message,
+                     'data' => $data]
                 );
             }
+        } else {
+            $activityManager = new ActivityManager();
+            $activity = $activityManager->selectOneById($id);
+
+            $toBeReturned = $this->twig->render(
+                'Admin/editActivity.html.twig',
+                ['data' => $activity,
+                 'message' => $message]
+            );
         }
         return $toBeReturned;
     }
 
+    /**
+     * try to upload a file
+     * @return array[fileName=>uploadedFileNameOnServerIfExist, error=>errorDescriptionIfAny]
+     */
     private function upload() : array
     {
         $maxFileSize=1048576;
@@ -146,31 +136,34 @@ class AdminActivityController extends AbstractController
         return ['fileName' => $processedFileName, 'error' => $errorMessage];
     }
 
+    /**
+     * check that every needed data is in the $_POST and without issue
+     * @return array[data[dataName=>dataValue],errors[dataName=>errorValue]
+     */
     private function checkActivityPostData() : array
     {
-        //errors array
-        $errors=[
-            'name' => '',
-            'description' => '',
-            'picture' => '',
-            'id' => ''];
-
         //data array
         $data=array();
 
+        //errors array
+        $errors=array();
+
+        //check name
         $this->checkTextFromPost('name', "le nom", 50, $errors, $data);
 
+        //check description
         $this->checkTextFromPost('description', "la description", 10000, $errors, $data);
 
+        //check picture
         $this->checkTextFromPost('picture', "la photo", 250, $errors, $data);
 
         //check id
         if (empty($_POST['id'])) {
-            $errors['id'] .= "ID ERROR";
+            $errors['id'] = "ID ERROR";
         } elseif (!is_numeric(trim($_POST['id']))) {
-            $errors['id'] .= "Format id incorrect";
+            $errors['id'] = "Format id incorrect";
         } elseif (intval(trim($_POST['id']))<1) {
-            $errors['id'] .= "Id is negative";
+            $errors['id'] = "Id is negative";
         } else {
             $data['id']=intval(trim($_POST['id']));
         }
@@ -199,8 +192,6 @@ class AdminActivityController extends AbstractController
         &$errors,
         &$data
     ) : array {
-        $datum="";
-        $error="";
 
         if (empty($_POST[$postFieldName])) {
             $error = "Vous devez indiquer $userFieldName de l'activité";
@@ -210,11 +201,13 @@ class AdminActivityController extends AbstractController
             $datum =trim($_POST[$postFieldName]);
         }
 
-        $errors[$postFieldName]=$error;
-        if ($datum!="") {
+        if (!empty($error)) {
+            $errors[$postFieldName]=$error;
+        }
+        if (!empty($datum)) {
             $data[$postFieldName] = $datum;
         }
 
-        return ['error' => $error, 'data'=>$data];
+        return ['errors' => $errors, 'data'=>$data];
     }
 }

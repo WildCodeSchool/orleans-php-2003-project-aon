@@ -5,7 +5,7 @@
     <div class="eventContent">
 
 
-        <img src="../assets/images/{{ event.picture }}" class="eventpicture float-left" alt="image de l'évènement">
+        <img src="../assets/eventImages/{{ event.picture }}" class="eventpicture float-left" alt="image de l'évènement">
 
         <div class="eventDetails">
             <h4 class="date">{{ event.date }}</h4>
@@ -14,7 +14,14 @@
 
             <div class="description">
                 {{ event.description }}
+                <p></p>
             </div>
+
+            {% if not event.link is empty %}
+                <div class="link">
+                    <a href="{{ event.link }}">Lien vers l'évènement</a>
+                </div>
+            {% endif %}
         </div>
 
     </div>
