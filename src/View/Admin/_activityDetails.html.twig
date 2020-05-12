@@ -6,21 +6,21 @@
 
     <div class="form-container-left">
         <div class="form-group">
-            <label class="col-form-label" for="name">Nom de l'activité :</label>
+            <label class="col-form-label" for="name">Nom de l'activité</label>
             <input class="form-control" type="text" id="name" name="name" value="{{data.name}}" placeholder="Aquagym" required>
             <small class="errorMessage form-text text-danger">{{errors.name}}</small>
         </div>
 
         {% if not data.picture is empty %}
             <div class="form-group">
-                <label class="col-form-label" for="picture">Illustration actuelle de l'activité :</label>
+                <label class="col-form-label" for="picture">Illustration actuelle de l'activité</label>
                 <div class="form-image-container"><img class="form-image" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité"></div>
                 <input type="hidden" name="picture" value="{{ data.picture }}">
             </div>
         {% endif %}
 
         <div class="form-group">
-            <label class="col-form-label" for="picture">Modifier l'illustration de l'activité :</label>
+            <label class="col-form-label" for="picture">Modifier l'illustration de l'activité</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>" />
             <input type="file" name="picture" id="picture" />
 
