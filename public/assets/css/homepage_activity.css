@@ -1,5 +1,5 @@
 .activity-card-deck{
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -10,7 +10,7 @@
 .card-deck .activity-card{
     max-width: 310px;
     min-width: 310px;
-    margin: calc(1 * (var(--margin-extra-large)));
+    margin: calc(1 * (var(--margin-extra-large))) auto;
     background:transparent;
 }
 
