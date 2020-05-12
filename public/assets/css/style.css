@@ -9,6 +9,7 @@
 @import url('admin_lesson.css');
 @import url('who_are_us.css');
 @import url('activity.css');
+@import url('admin_who_are_us.css');
 @import url('prices.css');
 @import url('stage.css');
 @import url('contact.css');
@@ -63,12 +64,11 @@ body{
     align-items: stretch;
     color:var(--color-dark);
     font-size:16pt;
-
+    overflow-x: hidden;
 }
 
 main{
     align-self: center;
-    max-width:75%;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -105,6 +105,7 @@ h2 {
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
+    max-width:75%;
 }
 
 h3,h5 {
@@ -121,6 +122,7 @@ h4{
 
 li, a {
     text-decoration: none;
+    color:var(--color-main);
 }
 
 a:visited {
@@ -129,7 +131,7 @@ a:visited {
 
 a:hover, .navbar li a:hover{
     text-decoration: none;
-    color:var(--navbar-link-color-light);
+    color:var(--primary);
 }
 
 ul {
@@ -160,7 +162,7 @@ ul {
 
 hr{
     margin: var(--margin-extra-large);
-    width: 75%;
+    min-width: 100%;
     height: 2px;
     background-color: var(--color-dark);
     border: none;
@@ -170,7 +172,7 @@ hr{
     background-color: var(--navbar-color);
     transition: 1s;
     position:fixed;
-    width:var(--navbar-width);
+    width:100vw;
     z-index:var(--navbar-zindex);
     min-height:var(--navbar-height);
 }
@@ -231,17 +233,36 @@ section h2{
     display:none;
 }
 
+hr{
+    overflow: visible;
+    background : no-repeat center/100px url("../icons/swimming33.svg");
+    background-color:transparent;
+    display:flex;
+    height:100px;
+    display:flex;
+    width:500px;
+    justify-content: space-between;
 
+}
+
+hr::before, hr::after {
+    content:" ";
+    background-color:lightgrey;
+    margin:auto 0;
+    height:2px;
+    width:40%;
+}
+
+.table-head-small{
+    width:10px;
+}
+
+.admin{
+    min-height: max-content;
+}
 
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
-    }
-
-    .main{
-        max-width:95vw;
-        min-width:95vw;
-        margin:0;
-        padding:0;
     }
 }
