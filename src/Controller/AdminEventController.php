@@ -70,7 +70,7 @@ class AdminEventController extends AbstractController
                 $errors['picture']=$fileNameAndError['error'];
             }
 
-            if (count($data)==5 && empty($data['id'])) {
+            if (count($data) == 6 && empty($data['id'])) {
                 $eventManager=new EventManager();
                 $eventManager->insert($data);
                 header("location:/admin/index");
@@ -157,19 +157,21 @@ class AdminEventController extends AbstractController
      * it check there are not empty, have the right size and the right type
      * @return array : array[] contains the data to be inserted in a clean form, array[1] contains error messages
      */
-    private function checkEventPostData() : array
+    private function checkEventPostData(): array
     {
         //errors array
-        $errors=[
+        $errors = [
             'title' => '',
             'description' => '',
             'picture' => '',
             'date' => '',
             'location' => '',
-            'id' => ''];
+            'id' => '',
+            'link' => '',
+        ];
 
         //data array
-        $data=array();
+        $data = array();
 
         $this->checkTextFromPost('title', "le titre", 50, $errors, $data);
 
@@ -183,7 +185,7 @@ class AdminEventController extends AbstractController
         } elseif (!preg_match("/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/", trim($_POST['date']))) {
             $errors['date'] .= "La date doit avoir le format aaaa-mm-jj";
         } else {
-            $data['date']=trim($_POST['date']);
+            $data['date'] = trim($_POST['date']);
         }
 
         //check id
@@ -191,10 +193,19 @@ class AdminEventController extends AbstractController
             $errors['id'] .= "ID ERROR";
         } elseif (!is_numeric(trim($_POST['id']))) {
             $errors['id'] .= "Format id incorrect";
-        } elseif (intval(trim($_POST['id']))<1) {
+        } elseif (intval(trim($_POST['id'])) < 1) {
             $errors['id'] .= "Id is negative";
         } else {
-            $data['id']=intval(trim($_POST['id']));
+            $data['id'] = intval(trim($_POST['id']));
+        }
+
+        //check url
+        if ((!empty($_POST['link']))) {
+            if (filter_var(trim($_POST['link']), FILTER_VALIDATE_URL)) {
+                $data['link'] = trim($_POST['link'] ?? '');
+            } else {
+                $errors['link'] .= "Le lien doit avoir le format suivant : www.my-event.com";
+            }
         }
 
         $this->checkTextFromPost('location', "l'endroit", 50, $errors, $data);
@@ -215,23 +226,23 @@ class AdminEventController extends AbstractController
         int $maxLength,
         &$errors,
         &$data
-    ) : array {
-        $datum="";
-        $error="";
+    ): array {
+        $datum = "";
+        $error = "";
 
         if (empty($_POST[$postFieldName])) {
             $error = "Vous devez indiquer $userFieldName de l'évènement";
-        } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
+        } elseif (strlen(trim($_POST[$postFieldName])) > $maxLength) {
             $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
-            $datum =trim($_POST[$postFieldName]);
+            $datum = trim($_POST[$postFieldName]);
         }
 
-        $errors[$postFieldName]=$error;
-        if ($datum!="") {
+        $errors[$postFieldName] = $error;
+        if ($datum != "") {
             $data[$postFieldName] = $datum;
         }
 
-        return ['error' => $error, 'data'=>$data];
+        return ['error' => $error, 'data' => $data];
     }
 }
