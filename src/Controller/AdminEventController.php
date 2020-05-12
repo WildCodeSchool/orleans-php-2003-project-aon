@@ -47,6 +47,7 @@ class AdminEventController extends AbstractController
             'message' => $message,
         ]);
     }
+
     /**
      * Display event edition page specified by $id
      *
@@ -58,55 +59,56 @@ class AdminEventController extends AbstractController
 
     public function addEvent()
     {
-        $toBeReturned="";
+        $toBeReturned = "";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $errorsAndData=$this->checkEventPostData();
-            $data=$errorsAndData['data'];
-            $errors=$errorsAndData['errors'];
+            $errorsAndData = $this->checkEventPostData();
+            $data = $errorsAndData['data'];
+            $errors = $errorsAndData['errors'];
 
-            $fileNameAndError=$this->upload();
-            if ($fileNameAndError['fileName']!="") {
-                $data['picture']=$fileNameAndError['fileName'];
-                $errors['picture']=$fileNameAndError['error'];
+            $fileNameAndError = $this->upload();
+            if ($fileNameAndError['fileName'] != "") {
+                $data['picture'] = $fileNameAndError['fileName'];
+                $errors['picture'] = $fileNameAndError['error'];
             }
+
 
             if (count($data) == 6 && empty($data['id'])) {
                 $eventManager=new EventManager();
                 $eventManager->insert($data);
                 header("location:/admin/index");
             } else {
-                $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors'=>$errors,
-                    'data'=>$data,
-                    'message'=>"L'évènement n'a pas pu être créé."]);
+                $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['errors' => $errors,
+                    'data' => $data,
+                    'message' => "L'évènement n'a pas pu être créé."]);
             }
         }
         return $toBeReturned;
     }
 
-    private function upload() : array
+    private function upload(): array
     {
-        $maxFileSize=1048576;
-        $acceptedTypes=["image/jpeg", "image/svg+xml", "image/jpg", "image/gif", "image/png"];
-        $processedFileName="";
-        $errorMessage="";
+        $maxFileSize = 1048576;
+        $acceptedTypes = ["image/jpeg", "image/svg+xml", "image/jpg", "image/gif", "image/png"];
+        $processedFileName = "";
+        $errorMessage = "";
 
         if (!empty($_FILES['picture'])) {
-            $processedFileName=$_FILES['picture']['name'];
-            $fileTmpName=$_FILES['picture']['tmp_name'];
-            $fileType=$_FILES['picture']['type'];
-            $fileSize=$_FILES['picture']['size'];
-            $fileError=$_FILES['picture']['error'];
+            $processedFileName = $_FILES['picture']['name'];
+            $fileTmpName = $_FILES['picture']['tmp_name'];
+            $fileType = $_FILES['picture']['type'];
+            $fileSize = $_FILES['picture']['size'];
+            $fileError = $_FILES['picture']['error'];
 
-            if (0==$fileError) {
-                if ($fileSize>$maxFileSize) {
-                    $errorMessage="Le fichier $processedFileName dépasse la taille maximale de $maxFileSize";
+            if (0 == $fileError) {
+                if ($fileSize > $maxFileSize) {
+                    $errorMessage = "Le fichier $processedFileName dépasse la taille maximale de $maxFileSize";
                 } elseif (!in_array($fileType, $acceptedTypes)) {
-                    $errorMessage="Le type du fichier $fileType n'est pas 
-                    dans la liste :".implode(",", $acceptedTypes) ;
+                    $errorMessage = "Le type du fichier $fileType n'est pas 
+                    dans la liste :" . implode(",", $acceptedTypes);
                 } else {
                     $extension = pathinfo($processedFileName, PATHINFO_EXTENSION);
-                    $processedFileName = uniqid() . '.' .$extension;
-                    move_uploaded_file($fileTmpName, "assets/eventImages/".$processedFileName);
+                    $processedFileName = uniqid() . '.' . $extension;
+                    move_uploaded_file($fileTmpName, "assets/eventImages/" . $processedFileName);
                 }
             }
         }
@@ -129,18 +131,18 @@ class AdminEventController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkEventPostData();
 
-            $fileNameAndError=$this->upload();
+            $fileNameAndError = $this->upload();
 
-            if ($fileNameAndError['fileName']!="") {
-                $errorsAndData['data']['picture']=$fileNameAndError['fileName'];
-                $errorsAndData['errors']['picture']=$fileNameAndError['error'];
+            if ($fileNameAndError['fileName'] != "") {
+                $errorsAndData['data']['picture'] = $fileNameAndError['fileName'];
+                $errorsAndData['errors']['picture'] = $fileNameAndError['error'];
             }
 
-            if (count($errorsAndData['data']) == 6) {
+            if (count($errorsAndData['data']) == 7) {
                 $eventManager = new EventManager();
                 $eventManager->updateEvent($errorsAndData['data']);
                 header("location:/adminEvent/showEvent/" . $errorsAndData['data']['id'] .
-                            "/L'évènement a bien été modifié");
+                    "/L'évènement a bien été modifié");
             } else {
                 $toBeReturned = $this->twig->render(
                     'Admin/showEvent.html.twig',
