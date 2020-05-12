@@ -39,9 +39,17 @@
         </nav>
     </header>
 
-    <main class="container parallax-container" data-parallax="scroll" data-image-src="http://localhost:8000/assets/images/bulles25.png">
-        {% block content %}    {% endblock %}
-    </main>
+    <div class="bulles parallax-container" data-speed="0.5" data-parallax="scroll" data-image-src="http://localhost:8000/assets/images/bulles25-1.png">
+    <div class="bulles parallax-container" data-speed="0.4" data-parallax="scroll" data-image-src="http://localhost:8000/assets/images/bulles25-2.png">
+    <div class="bulles parallax-container" data-speed="0.3" data-parallax="scroll" data-image-src="http://localhost:8000/assets/images/bulles25-3.png">
+    <div class="bulles parallax-container" data-speed="0.2" data-parallax="scroll" data-image-src="http://localhost:8000/assets/images/bulles25-4.png">
+        <main class="container" >
+            {% block content %}    {% endblock %}
+        </main>
+    </div>
+    </div>
+    </div>
+    </div>
 
   <footer class="page-footer font-small blue pt-4">
       <div class="container-fluid text-center text-md-left">
