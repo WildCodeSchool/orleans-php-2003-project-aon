@@ -104,7 +104,7 @@ h2 {
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
-    max-width:75%;
+    max-width:85%;
 }
 
 h3,h5 {
