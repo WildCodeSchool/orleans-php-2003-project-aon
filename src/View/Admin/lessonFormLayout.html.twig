@@ -3,7 +3,7 @@
 {% block content %}
     <h1>{% block title %}{% endblock %}</h1>
     <section class="form">
-        <form novalidate class = "lesson-form" method="post" action="/./AdminLesson/AddLesson">
+        <form class = "lesson-form" method="post" action="/./AdminLesson/AddLesson">
             {% include 'Admin/_lessonDetails.html.twig' %}
             <div class="form-button-pannel">
                 {% block buttons %}{% endblock %}
