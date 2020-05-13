@@ -54,9 +54,20 @@ class AdminLessonController extends AbstractController
 
     private function validation(array $lesson) : array
     {
+        $activityManager = new ActivityManager();
+        $ageManager = new AgeManager();
         $poolManager = new PoolManager();
-
         $errors = [];
+        $activities = $activityManager->selectAll();
+        $activitiesIds  = array_column($activities, 'id');
+        if (!in_array($_POST['activity'], $activitiesIds)) {
+            $errors[] = 'Cette activité n\'existe pas';
+        }
+        $ages = $ageManager->selectAll();
+        $agesIds  = array_column($ages, 'id');
+        if (!in_array($_POST['age'], $agesIds)) {
+            $errors[] = 'Cette tranche d\'âge n\'existe pas';
+        }
 
         $pools = $poolManager->selectAll();
         $poolsIds  = array_column($pools, 'id');
