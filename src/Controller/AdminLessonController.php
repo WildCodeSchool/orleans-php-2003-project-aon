@@ -58,6 +58,7 @@ class AdminLessonController extends AbstractController
     {
         $ids = $manager->selectAll();
         $idList = array_column($ids, 'id');
+
         if (!in_array($id, $idList)) {
             return ["Cette $name n'existe pas"];
         }
@@ -72,6 +73,7 @@ class AdminLessonController extends AbstractController
         $errors = [];
 
         $errors = array_merge($errors, $this->idExist($_POST['age'], $ageManager, 'classe d\'âge'));
+
         $errors = array_merge($errors, $this->idExist($_POST['activity'], $activityManager, 'activité'));
         $errors = array_merge($errors, $this->idExist($_POST['pool'], $poolManager, 'piscine'));
 
@@ -123,6 +125,7 @@ class AdminLessonController extends AbstractController
 
     public function editLesson(int $id = null)
     {
+
         $lessonManager = new LessonManager();
         $poolManager = new PoolManager();
         $ageManager = new AgeManager();
