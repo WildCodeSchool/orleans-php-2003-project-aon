@@ -14,13 +14,14 @@
             <label class="col-form-label" for="picture">Illustration actuelle </label>
             <img class="WAU-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
             <input class="actualPicture" type="hidden" name="picture" value="{{ whoAreUs.picture }}">
+            <input type="file" name="picture">
+            <small class="forminput form-text text-danger">{{ errors.picture }}</small>
         {% endif %}
+
 
         <label class="col-form-label" for="description">Description actuelle </label>
         <textarea class="WAUdescription" name="description">{{ whoAreUs.description }}</textarea>
         <small class="errorMessage form-text text-danger">{{ errors.description }}</small>
-        <input type="file" name="picture">
-        <small class="forminput form-text text-danger">{{ errors.picture }}</small>
 
         <div class="form-button-pannel">
             <a class="activity-button btn btn-primary" href="/./Admin/index">Retour</a>
