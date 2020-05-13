@@ -3,26 +3,26 @@
 {% block title %}A.O.N. Orléans{% endblock %}
 
 {% block content %}
+    <section>
+        <h1>Les tarifs</h1>
+        <table class="table table-hover">
+            <thead class="thead-dark-price">
+                <tr>
+                    <th>Activité</th>
+                    <th>Age</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+        {% for price in prices %}
+            <tbody>
+                <tr>
+                    <td>{{ price.name }}</td>
+                    <td>{{ price.age }}</td>
+                    <td>{{ price.price }} € </td>
+                </tr>
+            </tbody>
 
-    <h1>Les tarifs</h1>
-    <table class="table table-hover">
-        <thead class="thead-dark-price">
-            <tr>
-                <th>Activité</th>
-                <th>Age</th>
-                <th>Prix</th>
-            </tr>
-        </thead>
-    {% for price in prices %}
-        <tbody>
-            <tr>
-                <td>{{ price.name }}</td>
-                <td>{{ price.age }}</td>
-                <td>{{ price.price }} € </td>
-            </tr>
-        </tbody>
-
-    {% endfor %}
-    </table>
-
+        {% endfor %}
+        </table>
+    </section>
 {% endblock %}
