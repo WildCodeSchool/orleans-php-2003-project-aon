@@ -22,7 +22,10 @@
         <input type="file" name="picture">
         <small class="forminput form-text text-danger">{{ errors.picture }}</small>
 
-        <input type="submit" value="Valider">
+        <div class="form-button-pannel">
+            <a class="activity-button btn btn-primary" href="/./Admin/index">Retour</a>
+            <input class="activity-button btn btn-primary" type="submit" name="action" value="Validé">
+        </div>
     </form>
 </section>
 {% endblock  %}
