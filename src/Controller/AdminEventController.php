@@ -11,7 +11,7 @@ class AdminEventController extends AbstractController
     /**
      * Handle item deletion
      */
-    public function deleteMessage(): void
+    public function delete(): void
     {
         if (!empty($_POST['id'])) {
             $id = $_POST['id'];

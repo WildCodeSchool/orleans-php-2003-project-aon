@@ -11,6 +11,7 @@ class AdminActivityController extends AbstractController
 
     public function deleteActivity(): void
     {
+
         if (!empty($_POST['id'])) {
             $id = $_POST['id'];
             $activityManager = new ActivityManager();

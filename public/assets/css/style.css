@@ -237,29 +237,17 @@ section{
 section h2{
     align-self: start;
 }
-.delete-form{
-    display: flex;
-    justify-content: center;
-}
-
 .delete_button{
-
-    background: url(../images/trash1.svg) no-repeat center;
-    background-size: 100%;
-    width: 20px;
-    height: 20px;
-    color : transparent;
-    border: none;
+    /*width: 30px;*/
+    display:none;
+    color:var(--color-main);
 }
-.delete_button:hover{
-    background: url(../images/trashHover.svg) no-repeat center;
-    background-size: 100%;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    border: none;
+.delete_icon {
+    color:var(--color-main);
 }
-
+.delete_icon:hover{
+    color:var(--primary);
+}
 
 .clearfix{
     display:none;
