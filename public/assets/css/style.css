@@ -65,6 +65,7 @@ body{
     color:var(--color-dark);
     font-size:var(--font-main-size);
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 main{
