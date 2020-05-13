@@ -7,21 +7,22 @@
     <div class="form-container-left">
         <div class="form-group">
             <label class="col-form-label" for="name">Nom de l'activité</label>
-            <input class="form-control" type="text" id="name" name="name" value="{{data.name}}" placeholder="Aquagym">
-            <small class="errorMessage form-text text-danger">{{errors.title}}</small>
+            <input class="form-control" type="text" id="name" name="name" value="{{data.name}}" placeholder="Aquagym" required>
+            <small class="errorMessage form-text text-danger">{{errors.name}}</small>
         </div>
 
-        <div class="form-group">
-            {% if not data.picture is empty %}
-                <label class="col-form-label" for="picture">Illustration actuelle de l'activité :</label>
-                <img class="activity-card-img" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité">
+        {% if not data.picture is empty %}
+            <div class="form-group">
+                <label class="col-form-label" for="picture">Illustration actuelle de l'activité</label>
+                <div class="form-image-container"><img class="form-image" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité"></div>
                 <input type="hidden" name="picture" value="{{ data.picture }}">
-            {% endif %}
+            </div>
+        {% endif %}
 
-            <label class="col-form-label" for="picture">Modifier l'illustration de l'activité :</label>
+        <div class="form-group">
+            <label class="col-form-label" for="picture">Modifier l'illustration de l'activité</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>" />
             <input type="file" name="picture" id="picture" />
-
 
             <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
         </div>
@@ -40,7 +41,7 @@
 
         <div class="form-group">
             <label class="col-form-label" for="description">Description de l'activité</label>
-            <textarea class="activityFormTextArea form-control" type="text" id="description" name="description">{{data.description}}</textarea>
+            <textarea class="activityFormTextArea form-control" type="text" id="description" name="description"  required>{{data.description}}</textarea>
             <small class="errorMessage form-text text-danger">{{errors.description}}</small>
         </div>
 

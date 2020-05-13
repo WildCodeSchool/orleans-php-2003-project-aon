@@ -38,7 +38,7 @@ class EventManager extends AbstractManager
     public function selectNextEvent()
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT title, description, location, picture, date as ordered_date,
+        $statement = $this->pdo->prepare("SELECT title, description, location, picture, link, date as ordered_date,
                 DATE_FORMAT(date, '%d/%m/%Y') as date 
                 FROM $this->table ORDER BY ordered_date DESC LIMIT 1");
         $statement->execute();
@@ -48,7 +48,7 @@ class EventManager extends AbstractManager
     
     public function selectAll(): array
     {
-        return $this->pdo->query("SELECT id, title, description, location, picture, date as ordered_date,
+        return $this->pdo->query("SELECT id, title, description, location, picture, link, date as ordered_date,
                 DATE_FORMAT(date, '%d/%m/%Y') as date 
                 FROM " . $this->table . " ORDER BY ordered_date DESC")->fetchAll();
     }
@@ -71,29 +71,33 @@ class EventManager extends AbstractManager
     public function insert(array $event):bool
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-            " (`title`, `description`, `picture`, `date`, `location`) 
+            " (`title`, `description`, `picture`, `date`, `location`, `link`) 
             VALUES 
-            (:title, :description, :picture, :date, :location)");
+            (:title, :description, :picture, :date, :location, :link)");
 
         $statement->bindValue('title', $event['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $event['description'], \PDO::PARAM_STR);
         $statement->bindValue('picture', $event['picture'], \PDO::PARAM_STR);
         $statement->bindValue('date', $event['date'], \PDO::PARAM_STR);
         $statement->bindValue('location', $event['location'], \PDO::PARAM_STR);
-      
+        $statement->bindValue('link', $event['link'], \PDO::PARAM_STR);
+
         return $statement->execute();
     }
 
     public function updateEvent(array $event): bool
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `title` = :title, 
-        `description` = :description, `picture` = :picture, `date` = :date, `location` = :location WHERE id=:id");
+        `description` = :description, `picture` = :picture, `date` = :date, `location` = :location,
+        `link`= :link WHERE id=:id");
         $statement->bindValue('title', $event['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $event['description'], \PDO::PARAM_STR);
         $statement->bindValue('picture', $event['picture'], \PDO::PARAM_STR);
         $statement->bindValue('date', $event['date']);
         $statement->bindValue('location', $event['location'], \PDO::PARAM_STR);
         $statement->bindValue('id', $event['id'], \PDO::PARAM_INT);
+        $statement->bindValue('link', $event['link'], \PDO::PARAM_STR);
+
 
         return $statement->execute();
     }
