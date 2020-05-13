@@ -91,14 +91,15 @@ class AdminLessonController extends AbstractController
     /**
 
      * Handle item deletion
-     *
-     * @param int $id
      */
-    public function delete(int $id): void
+    public function delete(): void
     {
-        $lessonManager = new LessonManager();
-        $lessonManager->delete($id);
-        header('Location:/Admin/index');
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $lessonManager = new LessonManager();
+            $lessonManager->delete($id);
+            header('Location:/Admin/index');
+        }
     }
 
     /**
