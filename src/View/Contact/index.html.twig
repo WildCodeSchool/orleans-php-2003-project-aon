@@ -7,7 +7,7 @@
         <div class="form-message">{{ message }}</div>
     {% endif %}
 
-    <form action="/./contact/sendMessage" method="POST" class="form-contact">
+    <form novalidate action="/./contact/sendMessage" method="POST" class="form-contact">
 
         <div id="userData" class="contactBloc">
 
@@ -55,7 +55,8 @@
                 <select class="form-control custom-select" name="subject" id="subject" required>
                     <option value="">--Veuillez choisir un sujet--</option>
                     {% for subject in subjects %}
-                        <option value="{{subject}}">{{subject}}</option>
+                        <option value="{{subject}}"
+                        {%  if subject == contact.subject %} selected {%  endif %}>{{subject}}</option>
                     {%  endfor %}
                 </select>
                 <small class="errorMessage form-text text-danger">{{errors.subject}}</small>
