@@ -237,10 +237,29 @@ section{
 section h2{
     align-self: start;
 }
+.delete-form{
+    display: flex;
+    justify-content: center;
+}
 
 .delete_button{
-    width: 30px;
+
+    background: url(../images/trash1.svg) no-repeat center;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    color : transparent;
+    border: none;
 }
+.delete_button:hover{
+    background: url(../images/trashHover.svg) no-repeat center;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+}
+
 
 .clearfix{
     display:none;

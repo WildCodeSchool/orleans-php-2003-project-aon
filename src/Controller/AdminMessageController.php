@@ -7,10 +7,13 @@ use App\Model\MessageManager;
 class AdminMessageController extends AbstractController
 {
 
-    public function deleteMessage(int $id): void
+    public function deleteMessage(): void
     {
-        $messageManager = new MessageManager();
-        $messageManager->delete($id);
-        header('Location:/admin/index');
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $messageManager = new MessageManager();
+            $messageManager->delete($id);
+            header('Location:/admin/index');
+        }
     }
 }
