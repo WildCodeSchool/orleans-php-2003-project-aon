@@ -13,6 +13,7 @@
 
             <div class="form-group-contact">
                 <label for="name"> Votre nom :</label>
+                <small class="errorMessage form-text text-danger">{{errors.name}}</small>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend"><span class="input-group-text">
                         <svg class="bi bi-person" width="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -26,11 +27,11 @@
                         name="name" required
                         class="form-control">
                 </div>
-                <small class="errorMessage form-text text-danger">{{errors.name}}</small>
             </div>
 
             <div class="form-group-contact">
                 <label for="email"> Votre adresse électronique :</label>
+                <small class="errorMessage form-text text-danger">{{errors.email}}</small>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend"><span class="input-group-text" aria-label="arobase">@</span></div>
                     <input type="email"
@@ -40,11 +41,11 @@
                        name="email" required
                        class="form-control">
                 </div>
-                <small class="errorMessage form-text text-danger">{{errors.email}}</small>
             </div>
 
             <div class="form-group-contact">
                 <label for="email"> L'objet de votre message :</label>
+                <small class="errorMessage form-text text-danger">{{errors.subject}}</small>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend"><span class="input-group-text" aria-label="arobase">
                         <svg class="bi bi-question-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -58,15 +59,14 @@
                         <option value="{{subject}}">{{subject}}</option>
                     {%  endfor %}
                 </select>
-                <small class="errorMessage form-text text-danger">{{errors.subject}}</small>
             </div>
 
         </div>
 
         <div id="message" class="form-group-contact">
+            <small class="errorMessage form-text text-danger">{{errors.messageContent}}</small>
             <label for="messageContent">Message*</label>
             <textarea name="messageContent" id="messageContent" rows="7" required>{{contact.messageContent}}</textarea>
-            <small class="errorMessage form-text text-danger">{{errors.messageContent}}</small>
         </div>
 
         <div id="button" class="form-btn">
