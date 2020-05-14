@@ -210,7 +210,7 @@ class AdminEventController extends AbstractController
             } else {
                 $errors['link'] = "Le lien doit avoir le format suivant : www.my-event.com";
             }
-        }else {
+        } else {
             $data['link'] = "";
         }
 
@@ -235,10 +235,12 @@ class AdminEventController extends AbstractController
         &$data
     ) : array {
 
-        if (empty(trim($_POST[$postFieldName]))) {
+        if (empty($_POST[$postFieldName])) {
             $error = "Vous devez indiquer $userFieldName de l'activité";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
-            $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
+            $error = "Le nom de $userFieldName doit être compris entre 1 et $maxLength caractères";
+        } elseif (strlen(trim($_POST[$postFieldName])) <1) {
+             $error = "Le nom de $userFieldName doit être compris entre 1 et $maxLength caractères";
         } else {
             $datum =trim($_POST[$postFieldName]);
         }
