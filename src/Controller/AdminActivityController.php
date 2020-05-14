@@ -9,11 +9,15 @@ use \FilesystemIterator;
 class AdminActivityController extends AbstractController
 {
 
-    public function deleteActivity(int $id): void
+    public function deleteActivity(): void
     {
-        $activityManager = new ActivityManager();
-        $activityManager->delete($id);
-        header('Location:/admin/index');
+
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $activityManager = new ActivityManager();
+            $activityManager->delete($id);
+            header('Location:/admin/index');
+        }
     }
 
     public function addActivity(string $message = "")
@@ -45,7 +49,7 @@ class AdminActivityController extends AbstractController
             } else {
                 $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['errors'=>$errors,
                     'data'=>$data,
-                    'message'=>"L'activité n'a pas pu être créé."]);
+                    'message'=>"L'activité n'a pas pu être créée."]);
             }
         } else {
             $toBeReturned = $this->twig->render('Admin/addActivity.html.twig', ['message' => $message]);
@@ -192,11 +196,12 @@ class AdminActivityController extends AbstractController
         &$errors,
         &$data
     ) : array {
-
         if (empty($_POST[$postFieldName])) {
             $error = "Vous devez indiquer $userFieldName de l'activité";
         } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
-            $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
+            $error = "Le nom de $userFieldName doit être compris entre 1 et $maxLength caractères";
+        } elseif (strlen(trim($_POST[$postFieldName])) <1) {
+            $error = "Le nom de $userFieldName doit être compris entre 1 et $maxLength caractères";
         } else {
             $datum =trim($_POST[$postFieldName]);
         }

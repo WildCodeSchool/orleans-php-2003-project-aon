@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\AbstractManager;
 use App\Model\ActivityManager;
 use App\Model\AgeManager;
 use App\Model\LessonManager;
@@ -25,9 +26,17 @@ class AdminLessonController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
 
-            if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
-                $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
-                $lesson['pool_name'] = $_POST['new_pool'];
+            if (!empty($_POST['create_pool'])) {
+                if (!empty(trim($_POST['new_pool']))) {
+                    if (strlen(trim($_POST['new_pool']))<49) {
+                        $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
+                        $lesson['pool_name'] = $_POST['new_pool'];
+                    } else {
+                        $errors[]="Le nom du bassin doit faire moins de 49 caractères.";
+                    }
+                } else {
+                    $errors[]="Vous devez préciser le nom du bassin pour le créer.";
+                }
             } else {
                 $errors = $this->validation($lesson);
 
@@ -52,53 +61,66 @@ class AdminLessonController extends AbstractController
         ]);
     }
 
-    private function validation(array $lesson) : array
-    {
-        $poolManager = new PoolManager();
 
+    private function idExist(int $id, AbstractManager $manager, string $name, string $key): array
+    {
+        $ids = $manager->selectAll();
+        $idList = array_column($ids, 'id');
+        $errors = [];
+        if (!in_array($id, $idList)) {
+            $errors[$key] = "Cette $name n'existe pas";
+            return $errors;
+        }
+        return [];
+    }
+
+    private function validation(array $lesson): array
+    {
+        $activityManager = new ActivityManager();
+        $ageManager = new AgeManager();
+        $poolManager = new PoolManager();
         $errors = [];
 
-        $pools = $poolManager->selectAll();
-        $poolsIds  = array_column($pools, 'id');
-        if (!in_array($_POST['pool'], $poolsIds)) {
-            $errors[] = 'Ce bassin n\'existe pas';
-        }
+        $errors = array_merge($errors, $this->idExist($_POST['age'], $ageManager, 'classe d\'âge', 'age'));
+
+        $errors = array_merge($errors, $this->idExist($_POST['activity'], $activityManager, 'activité', 'activity'));
+        $errors = array_merge($errors, $this->idExist($_POST['pool'], $poolManager, 'piscine', 'pool'));
 
         if (empty($lesson['day'])) {
-            $errors[] = 'Le jour doit être indiqué';
+            $errors['day'] = 'Le jour doit être indiqué';
         } elseif (!in_array($lesson['day'], ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'])) {
-            $errors[] = 'Le jour doit être dans la liste';
+            $errors['day'] = 'Le jour doit être dans la liste';
         }
         if (empty($lesson['time'])) {
-            $errors[] = 'L\'heure doit être indiquée';
+            $errors['time'] = 'L\'heure doit être indiquée';
         } elseif (!preg_match(
             '^([0-1]?[0-9]|2[0-3])h[0-5][0-9]-([0-1]?[0-9]|2[0-3])h[0-5][0-9]^',
             $lesson['time']
         )) {
-            $errors[] = 'Format de l\'heure 20h00-21h30';
+            $errors['time'] = 'Format de l\'heure 20h00-21h30';
         }
         if (empty($lesson['price'])) {
-            $errors[] = 'Le prix doit être indiqué';
+            $errors['price'] = 'Le prix doit être indiqué';
         } elseif (!is_numeric($lesson['price'])) {
-            $errors[] = 'Le prix doit être indiqué en chiffres';
+            $errors['price'] = 'Le prix doit être indiqué en chiffres';
         } elseif ($lesson['price'] < 0) {
-            $errors[] = 'Le prix doit être supérieur à 0';
+            $errors['price'] = 'Le prix doit être supérieur à 0';
         }
 
         return $errors ?? [];
     }
 
     /**
-
      * Handle item deletion
-     *
-     * @param int $id
      */
-    public function delete(int $id): void
+    public function delete(): void
     {
-        $lessonManager = new LessonManager();
-        $lessonManager->delete($id);
-        header('Location:/Admin/index');
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $lessonManager = new LessonManager();
+            $lessonManager->delete($id);
+            header('Location:/Admin/index');
+        }
     }
 
     /**
@@ -113,6 +135,7 @@ class AdminLessonController extends AbstractController
 
     public function editLesson(int $id = null)
     {
+
         $lessonManager = new LessonManager();
         $poolManager = new PoolManager();
         $ageManager = new AgeManager();
@@ -122,9 +145,17 @@ class AdminLessonController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
 
-            if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
-                $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
-                $lesson['pool_name'] = $_POST['new_pool'];
+            if (!empty($_POST['create_pool'])) {
+                if (!empty(trim($_POST['new_pool']))) {
+                    if (strlen(trim($_POST['new_pool']))<49) {
+                        $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
+                        $lesson['pool_name'] = $_POST['new_pool'];
+                    } else {
+                        $errors[]="Le nom du bassin doit faire moins de 49 caractères.";
+                    }
+                } else {
+                    $errors[]="Vous devez préciser le nom du bassin pour le créer.";
+                }
             } else {
                 $errors = $this->validation($lesson);
 

@@ -93,7 +93,7 @@ class LessonManager extends AbstractManager
     {
         $query = ('SELECT l.id, ac.name, a.age, p.pool_name, l.day, l.time, l.price FROM lesson as l 
                     INNER JOIN activity as ac ON ac.id=l.activity_id 
-                    JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id');
+                    JOIN age as a ON a.id=l.age_id JOIN pool as p ON p.id=l.pool_id ORDER BY ac.name ASC');
 
         return $this->pdo->query($query)->fetchAll();
     }
