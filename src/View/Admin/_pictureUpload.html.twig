@@ -2,10 +2,10 @@
 
 {% if not data.picture is empty %}
     <div class="form-group">
-        <label class="col-form-label" for="picture">Illustration actuelle de l'activité</label>
+        <label class="col-form-label" for="picture">Illustration actuelle</label>
         <div class="form-image-container">
             <div id="upload-file-info" class="small file-name-in-picture"> &nbsp; </div>
-            <img class="form-image" src="/assets/{{ pictureDirectory }}/{{ data.picture }}" alt="illustration de l'activité">
+            <img class="form-image" src="/assets/{{ pictureDirectory }}/{{ data.picture }}" alt="illustration actuelle">
         </div>
 
         <input type="hidden" name="picture" value="{{ data.picture }}">
@@ -31,7 +31,6 @@
 
         <label class="col-form-label" for="picture">Illustration de l'activité</label>
 
-        <!--<input type="file" name="picture" id="picture" />-->
         <div id="upload-file-info" class="small file-name-without-picture"> &nbsp; </div>
 
         <div class="custom-file">
