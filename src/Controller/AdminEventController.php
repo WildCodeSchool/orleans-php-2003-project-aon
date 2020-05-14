@@ -10,14 +10,15 @@ class AdminEventController extends AbstractController
 {
     /**
      * Handle item deletion
-     *
-     * @param int $id
      */
-    public function delete(int $id): void
+    public function delete(): void
     {
-        $eventManager = new EventManager();
-        $eventManager->delete($id);
-        header('Location:/Admin/index');
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $eventManager = new EventManager();
+            $eventManager->delete($id);
+            header('Location:/Admin/index');
+        }
     }
 
 
