@@ -1,9 +1,16 @@
-{% extends 'Admin/lessonFormLayout.html.twig' %}
+{#{% extends 'Admin/lessonFormLayout.html.twig' %}#}
 
-{% block title %}Créer une leçon{% endblock %}
+{#{% block title %}Créer une leçon{% endblock %}#}
 
-{% block buttons %}
-    <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>
-    <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Enregistrer la leçon">
+{#{% block buttons %}#}
+{#    <a class="activity-button btn btn-primary btn-lg" href="/./Admin/index">Retour</a>#}
+{#    <input class="activity-button btn btn-primary btn-lg" type="submit" name="action" value="Enregistrer la leçon">#}
+{#{% endblock %}#}
+
+{% extends 'Admin/formLayout.html.twig' %}
+
+{% set title="Créer une Leçon" %}
+
+{% block form %}
+    {% include 'Admin/_lessonDetails.html.twig' %}
 {% endblock %}
-
