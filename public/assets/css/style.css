@@ -237,9 +237,16 @@ section{
 section h2{
     align-self: start;
 }
-
 .delete_button{
-    width: 30px;
+    /*width: 30px;*/
+    display:none;
+    color:var(--color-main);
+}
+.delete_icon {
+    color:var(--color-main);
+}
+.delete_icon:hover{
+    color:var(--primary);
 }
 
 .clearfix{
