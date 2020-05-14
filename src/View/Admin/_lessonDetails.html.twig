@@ -18,7 +18,7 @@
         </div>
         <div class="form-group-lesson">
             <label class="col-form-label" for="location">Age</label>
-            <select class="form-control custom-select" required class="form-control" type="text" id="age" name="age" required>
+            <select class="form-control custom-select" required class="form-control" id="age" name="age" required>
                 {% for age in ages %}
                     <option value="{{ age.id }}"
                             {%  if lesson.age_name==age.age %}
@@ -30,7 +30,7 @@
             <small class="errorMessage form-text text-danger">{{ errors.age }}</small>
         </div>
         <div class="form-group-lesson">
-            <label for="pool-select">Choisir le bassin</label>
+            <label  class="col-form-label" for="pool-select">Choisir le bassin</label>
             <select class="form-control custom-select" required  class="form-control" name="pool" id="pool" required>
                 {% for pool in pools %}
                     <option value="{{ pool.id }}"
@@ -42,6 +42,7 @@
             <input type="hidden" name="pool_name" value="{{ lesson.pool_name }}">
             <small class="errorMessage form-text text-danger">{{ errors.pool }}</small>
         </div>
+
         <div class="container p-0">
 
             <button type="button" class="activity-button btn btn-primary" data-toggle="modal" data-target="#modal">Ajouter un bassin</button>
@@ -60,10 +61,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-
-                            <button type="button" class="activity-button btn btn-primary" data-dismiss="modal">Fermer</button>
-                            <input type="submit" class="activity-button btn btn-primary" value="Enregistrer" name="create_pool">
-
+                            <button type="button" class="activity-button btn btn-primary btn" data-dismiss="modal">Fermer</button>
+                            <input type="submit" class="activity-button btn btn-primary btn" value="Enregistrer" name="create_pool">
                         </div>
                     </div>
                 </div>
@@ -73,7 +72,7 @@
 
     <div class="form- activity-right form-container-right-lesson">
         <div class="form-group-lesson">
-            <label for="day-select">Choisir le jour</label>
+            <label class="col-form-label" for="day-select">Choisir le jour</label>
             <select class="form-control custom-select" name="day" id="day" class="form-control">
                 <option value="{{ lesson.day }}">--Choisir un jour--</option>
                 <option value="Lundi"
