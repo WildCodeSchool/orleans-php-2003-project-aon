@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{# extends 'layout.html.twig' %}
 
 {% block content %}
     <h1>Modifier l'évènement:  {{ data.title }}</h1>
@@ -7,6 +7,14 @@
         <a class="back-button btn" href="/./Admin/index">Retour</a>
         <input class="activity-button btn btn-primary btn" type="submit" name="action" value="Enregistrer les modifications">
     </form>
+{% endblock %}-->#}
+
+{% extends 'Admin/formLayout.html.twig' %}
+
+{% set title= "Modifier l'évènement" %}
+
+{% block form %}
+    {% include 'Admin/_eventDetails.html.twig' %}
 {% endblock %}
 
 
