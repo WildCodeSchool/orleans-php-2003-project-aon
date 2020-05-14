@@ -282,8 +282,6 @@ hr::before, hr::after {
     min-height: max-content;
 }
 
-
-
 @media screen and (max-width: 991px) {
     .navbar {
         --navbar-color-transp: var(--navbar-color);
