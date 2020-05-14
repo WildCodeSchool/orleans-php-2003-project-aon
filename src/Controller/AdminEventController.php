@@ -210,7 +210,10 @@ class AdminEventController extends AbstractController
             } else {
                 $errors['link'] = "Le lien doit avoir le format suivant : www.my-event.com";
             }
+        }else {
+            $data['link'] = "";
         }
+
 
         $this->checkTextFromPost('location', "l'endroit", 50, $errors, $data);
 
