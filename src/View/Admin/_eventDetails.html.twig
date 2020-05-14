@@ -4,15 +4,21 @@
 
 <div class="form-container">
 
-
     <div class="form-container-left">
         <div class="form-group">
             <label class="col-form-label" for="title">Nom de l'évènement</label>
             <input class="form-control" type="text" id="title" name="title" value="{{ data.title }}"
-                   placeholder="Championnat d'Orléans">
+                   placeholder="Championnat d'Orléans" required>
             <small class="errorMessage form-text text-danger">{{ errors.title }}</small>
         </div>
 
+        <div class="form-group">
+            {% if not data.picture is empty %}
+                <label class="col-form-label" for="picture">Illustration actuelle de l'évènement</label>
+            <div class="form-image-container"><img class="form-image" src="/assets/eventImages/{{ data.picture }}"
+                                                   alt="illustration de l'évènement"></div>
+                <input type="hidden" name="picture" value="{{ data.picture }}">
+            {% endif %}
 
         {% set pictureDirectory = "eventImages" %}
         {% include 'Admin/_pictureUpload.html.twig' %}
@@ -20,14 +26,14 @@
 
         <div class="form-group">
             <label class="col-form-label" for="date">Date de l'évènement</label>
-            <input class="form-control" type="date" id="date" name="date" value="{{ data.date }}">
+            <input class="form-control" type="date" id="date" name="date" value="{{ data.date }}"  required>
             <small class="errorMessage form-text text-danger">{{ errors.date }}</small>
         </div>
 
         <div class="form-group">
             <label class="col-form-label" for="location">Endroit de l'évènement</label>
             <input class="form-control" type="text" id="location" name="location" value="{{ data.location }}"
-                   placeholder="Piscine du palais des sports">
+                   placeholder="Piscine du palais des sports" required>
             <small class="errorMessage form-text text-danger">{{ errors.location }}</small>
         </div>
     </div>
@@ -37,7 +43,7 @@
         <div class="form-group">
             <label class="col-form-label" for="description">Description de l'évènement</label>
             <textarea class="eventFormTextArea form-control" type="text" id="description"
-                      name="description">{{ data.description }}</textarea>
+                      name="description"  required>{{ data.description }}</textarea>
             <small class="errorMessage form-text text-danger">{{ errors.description }}</small>
         </div>
 

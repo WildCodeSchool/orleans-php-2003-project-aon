@@ -1,3 +1,5 @@
+
+{#
 {% extends 'layout.html.twig' %}
 
 {% block content %}
@@ -8,5 +10,12 @@
         <input class="activity-button btn btn-primary btn" type="submit" name="action" value="Enregistrer les modifications">
     </form>
 {% endblock %}
+#}
 
+{% extends 'Admin/formLayout.html.twig' %}
 
+{% set title="Modifier un évènement" %}
+
+{% block form %}
+    {% include 'Admin/_eventDetails.html.twig' %}
+{% endblock %}
