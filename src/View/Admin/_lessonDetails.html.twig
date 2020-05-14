@@ -43,10 +43,7 @@
             <input type="hidden" name="pool_name" value="{{ lesson.pool_name }}">
         </div>
         <div class="container p-0">
-            <!-- Le bouton permet d'éviter l'ouverture intempestive du modal pour le cours -->
-
             <button type="button" class="activity-button btn btn-primary" data-toggle="modal" data-target="#modal">Ajouter un bassin</button>
-
 
             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -61,7 +58,7 @@
                                 <input class="form-control-lesson" type="text" id="new_pool" name="new_pool" value=" " placeholder="200" required>
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer justify-content-around">
 
                             <button type="button" class="activity-button btn btn-primary" data-dismiss="modal">Fermer</button>
                             <input type="submit" class="activity-button btn btn-primary" value="Enregistrer" name="create_pool">

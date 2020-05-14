@@ -26,9 +26,17 @@ class AdminLessonController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
 
-            if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
-                $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
-                $lesson['pool_name'] = $_POST['new_pool'];
+            if (!empty($_POST['create_pool'])) {
+                if (!empty(trim($_POST['new_pool']))) {
+                    if (strlen(trim($_POST['new_pool']))<49) {
+                        $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
+                        $lesson['pool_name'] = $_POST['new_pool'];
+                    } else {
+                        $errors[]="Le nom du bassin doit faire moins de 49 caractères.";
+                    }
+                } else {
+                    $errors[]="Vous devez préciser le nom du bassin pour le créer.";
+                }
             } else {
                 $errors = $this->validation($lesson);
 
@@ -136,9 +144,17 @@ class AdminLessonController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lesson = array_map('trim', $_POST);
 
-            if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
-                $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
-                $lesson['pool_name'] = $_POST['new_pool'];
+            if (!empty($_POST['create_pool'])) {
+                if (!empty(trim($_POST['new_pool']))) {
+                    if (strlen(trim($_POST['new_pool']))<49) {
+                        $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
+                        $lesson['pool_name'] = $_POST['new_pool'];
+                    } else {
+                        $errors[]="Le nom du bassin doit faire moins de 49 caractères.";
+                    }
+                } else {
+                    $errors[]="Vous devez préciser le nom du bassin pour le créer.";
+                }
             } else {
                 $errors = $this->validation($lesson);
 
