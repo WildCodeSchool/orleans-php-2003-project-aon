@@ -10,21 +10,20 @@
 
     <form class="WAU-form" method="post" action="/./adminWhoAreUs/editWhoAreUs" enctype="multipart/form-data">
 
-        {% if not whoAreUs.picture is empty %}
-            <label class="col-form-label" for="picture">Illustration actuelle </label>
-            <img class="WAU-card-img" src="/assets/activityImages/{{ whoAreUs.picture }}" alt="illustration">
-            <input class="actualPicture" type="hidden" name="picture" value="{{ whoAreUs.picture }}">
-        {% endif %}
+        
+        {% set data = whoAreUs %}
+        {% set pictureDirectory = "activityImages" %}
+        {% include 'Admin/_pictureUpload.html.twig' %}
+
 
         <label class="col-form-label" for="description">Description actuelle </label>
         <textarea class="WAUdescription" name="description">{{ whoAreUs.description }}</textarea>
         <small class="errorMessage form-text text-danger">{{ errors.description }}</small>
-        <input type="file" name="picture">
-        <small class="forminput form-text text-danger">{{ errors.picture }}</small>
 
-        <div class="form-button-pannel">
+
+    <div class="form-button-pannel">
             <a class="activity-button btn btn-primary" href="/./Admin/index">Retour</a>
-            <input class="activity-button btn btn-primary" type="submit" name="action" value="Validé">
+            <input class="activity-button btn btn-primary" type="submit" name="action" value="Enregistrer les modifications">
         </div>
     </form>
 </section>
