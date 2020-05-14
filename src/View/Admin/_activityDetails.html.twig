@@ -11,21 +11,8 @@
             <small class="errorMessage form-text text-danger">{{errors.name}}</small>
         </div>
 
-        {% if not data.picture is empty %}
-            <div class="form-group">
-                <label class="col-form-label" for="picture">Illustration actuelle de l'activité</label>
-                <div class="form-image-container"><img class="form-image" src="/assets/activityImages/{{ data.picture }}" alt="illustration de l'activité"></div>
-                <input type="hidden" name="picture" value="{{ data.picture }}">
-            </div>
-        {% endif %}
-
-        <div class="form-group">
-            <label class="col-form-label" for="picture">Modifier l'illustration de l'activité</label>
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?=$maxFileSize?>>" />
-            <input type="file" name="picture" id="picture" />
-
-            <small class="errorMessage form-text text-danger">{{errors.picture}}</small>
-        </div>
+        {% set pictureDirectory = "activityImages" %}
+        {% include 'Admin/_pictureUpload.html.twig' %}
 
         <div class="form-group ckbox">
             <input class="" type="checkbox" id="tbd" name="toBeDisplayed" value="1"

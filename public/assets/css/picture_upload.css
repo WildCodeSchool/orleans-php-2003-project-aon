@@ -1,0 +1,74 @@
+.form-image-container{
+    max-height:200px;
+    width: 100%;
+    overflow:hidden;
+    position:relative;
+    border-radius:0;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    border-bottom: none;
+}
+
+.form-image{
+    width:100%;
+}
+
+.file-name-in-picture{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    color:black;
+    background:#FFFFFF50;
+    text-align: center;
+}
+
+.file-name-without-picture{
+    border-radius:0;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    border-bottom: none;
+    text-align: center;
+}
+
+.custom-file-label{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+    height: initial;
+    border-radius:0;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.custom-file{
+    min-height: content-box;
+    margin-bottom: 20px;
+}
+.custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: calc(1.5em + .75rem);
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #495057;
+    content: "Rechercher une image";
+    content:none;
+    background-color: #e9ecef;
+    border-left: inherit;
+    border-radius: 0 .25rem .25rem 0;
+}
+.upload-icon{
+    min-width:20px;
+    min-height:20px;
+}
+.drag-and-drop-message{
+
+}
