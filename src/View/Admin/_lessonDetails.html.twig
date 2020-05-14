@@ -8,7 +8,7 @@
     <div class="form- activity-left form-container-left-lesson">
         <div class="form-group-lesson">
             <label class="col-form-label" for="title">Type de l'activité</label>
-            <select required class="form-control" id="activity" name="activity" required>
+            <select class="form-control custom-select" required class="form-control" id="activity" name="activity" required>
                 {% for activity in activities %}
                     <option value="{{ activity.id }}"
                             {%  if lesson.name == activity.name %}
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group-lesson">
             <label class="col-form-label" for="location">Age</label>
-            <select required class="form-control" type="text" id="age" name="age" required>
+            <select class="form-control custom-select" required class="form-control" type="text" id="age" name="age" required>
                 {% for age in ages %}
                     <option value="{{ age.id }}"
                             {%  if lesson.age_name==age.age %}
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group-lesson">
             <label for="pool-select">Choisir le bassin</label>
-            <select required  class="form-control" name="pool" id="pool" required>
+            <select class="form-control custom-select" required  class="form-control" name="pool" id="pool" required>
                 {% for pool in pools %}
                     <option value="{{ pool.id }}"
                             {%  if lesson.pool_name==pool.pool_name %}
@@ -44,7 +44,7 @@
         </div>
         <div class="container">
             <!-- Le bouton permet d'éviter l'ouverture intempestive du modal pour le cours -->
-            <button type="button" class="activity-button btn btn-primary btn-lg" data-toggle="modal" data-target="#modal">Ajouter un bassin</button>
+            <button type="button" class="activity-button btn btn-primary btn" data-toggle="modal" data-target="#modal">Ajouter un bassin</button>
 
             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="activity-button btn btn-primary btn-lg" data-dismiss="modal">Fermer</button>
-                            <input type="submit" class="activity-button btn btn-primary btn-lg" value="Enregistrer" name="create_pool">
+                            <button type="button" class="activity-button btn btn-primary btn" data-dismiss="modal">Fermer</button>
+                            <input type="submit" class="activity-button btn btn-primary btn" value="Enregistrer" name="create_pool">
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
     <div class="form- activity-right form-container-right-lesson">
         <div class="form-group-lesson">
             <label for="day-select">Choisir le jour</label>
-            <select name="day" id="day" class="form-control">
+            <select class="form-control custom-select" name="day" id="day" class="form-control">
                 <option value="{{ lesson.day }}">--Choisir un jour--</option>
                 <option value="Lundi"
                         {%  if lesson.day=="Lundi" %}

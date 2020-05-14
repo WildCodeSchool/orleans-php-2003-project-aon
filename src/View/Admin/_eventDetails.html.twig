@@ -13,8 +13,10 @@
             <small class="errorMessage form-text text-danger">{{ errors.title }}</small>
         </div>
 
+
         {% set pictureDirectory = "eventImages" %}
         {% include 'Admin/_pictureUpload.html.twig' %}
+
 
         <div class="form-group">
             <label class="col-form-label" for="date">Date de l'évènement</label>
