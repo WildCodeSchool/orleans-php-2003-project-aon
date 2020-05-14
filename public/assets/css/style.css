@@ -13,7 +13,7 @@
 @import url('prices.css');
 @import url('stage.css');
 @import url('contact.css');
-
+@import url('picture_upload.css');
 
 :root {
     --color-light: #F0FFFF;
@@ -104,7 +104,7 @@ h2 {
     font-weight: bold;
     padding:var(--padding-large);
     color:var(--color-main);
-    max-width:75%;
+    max-width:85%;
 }
 
 h3,h5 {
@@ -237,9 +237,16 @@ section{
 section h2{
     align-self: start;
 }
-
 .delete_button{
-    width: 30px;
+    /*width: 30px;*/
+    display:none;
+    color:var(--color-main);
+}
+.delete_icon {
+    color:var(--color-main);
+}
+.delete_icon:hover{
+    color:var(--primary);
 }
 
 .clearfix{
@@ -273,17 +280,6 @@ hr::before, hr::after {
 
 .admin{
     min-height: max-content;
-}
-
-.form-image-container{
-    max-height:200px;
-    width: 100%;
-    overflow:hidden;
-
-}
-
-.form-image{
-    width:100%;
 }
 
 
