@@ -1,10 +1,7 @@
-{% extends 'layout.html.twig' %}
+{% extends 'Admin/formLayout.html.twig' %}
 
-{% block content %}
-    <h1>Modifier la leçon :</h1>
-    <form class = "event-form" method="post" action="/./AdminLesson/editLesson">
-        {% include 'Admin/_lessonDetails.html.twig' %}
-        <a class="activity-button btn btn-primary btn" href="/./Admin/index">Retour</a>
-        <input class="activity-button btn btn-primary btn" type="submit" name="action" value="Enregistrer les modifications">
-    </form>
+{% set title="Modifier une Leçon" %}
+
+{% block form %}
+    {% include 'Admin/_lessonDetails.html.twig' %}
 {% endblock %}
