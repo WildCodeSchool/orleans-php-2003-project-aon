@@ -14,13 +14,22 @@
 }
 
 .form-contact{
-    width: 600px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    min-width:60%;
+
 }
 
 .form-group-contact{
     display: flex;
     flex-direction: column;
+    margin-bottom: 2px;
 }
+
 
 @media (max-width: 600px) {
     .form-contact{
