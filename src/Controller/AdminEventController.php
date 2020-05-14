@@ -29,27 +29,6 @@ class AdminEventController extends AbstractController
     }
 
     /**
-     * Display event informations specified by $id
-     *
-     * @param int $id
-     * @return string
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function showEvent(int $id, string $message = "")
-    {
-        $message = urldecode($message);
-        $eventManager = new EventManager();
-        $event = $eventManager->selectOneById($id);
-
-        return $this->twig->render('Admin/showEvent.html.twig', [
-            'data' => $event,
-            'message' => $message,
-        ]);
-    }
-
-    /**
      * Display event edition page specified by $id
      *
      * @return string
@@ -58,22 +37,29 @@ class AdminEventController extends AbstractController
      * @throws \Twig\Error\SyntaxError
      */
 
-    public function addEvent()
+    public function addEvent(string $message = "")
     {
+        $message = urldecode($message);
         $toBeReturned = "";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkEventPostData();
             $data = $errorsAndData['data'];
             $errors = $errorsAndData['errors'];
+            unset($errors['id']);
 
             $fileNameAndError = $this->upload();
-            if ($fileNameAndError['fileName'] != "") {
-                $data['picture'] = $fileNameAndError['fileName'];
-                $errors['picture'] = $fileNameAndError['error'];
+
+            if (!empty($fileNameAndError['fileName'])) {
+                $data['picture']=$fileNameAndError['fileName'];
+                unset($errors['picture']);
             }
 
+            if (!empty($fileNameAndError['error'])) {
+                $errors['picture']=$fileNameAndError['error'];
+            }
 
-            if (count($data) == 6 && empty($data['id'])) {
+            if (empty($errors)) {
                 $eventManager=new EventManager();
                 $eventManager->insert($data);
                 header("location:/admin/index");
@@ -82,6 +68,8 @@ class AdminEventController extends AbstractController
                     'data' => $data,
                     'message' => "L'évènement n'a pas pu être créé."]);
             }
+        } else {
+            $toBeReturned = $this->twig->render('Admin/addEvent.html.twig', ['message' => $message]);
         }
         return $toBeReturned;
     }
@@ -126,32 +114,53 @@ class AdminEventController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function editEvent(): string
+    public function editEvent(int $id = -1, string $message = ""): string
     {
+        $message = urldecode($message);
+
         $toBeReturned = "";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorsAndData = $this->checkEventPostData();
+            $data=$errorsAndData['data'];
+            $errors=$errorsAndData['errors'];
 
             $fileNameAndError = $this->upload();
-
-            if ($fileNameAndError['fileName'] != "") {
-                $errorsAndData['data']['picture'] = $fileNameAndError['fileName'];
-                $errorsAndData['errors']['picture'] = $fileNameAndError['error'];
+            if (!empty($fileNameAndError['fileName'])) {
+                $data['picture']=$fileNameAndError['fileName'];
+                unset($errors['picture']);
             }
 
-            if (count($errorsAndData['data']) == 7) {
+            if (!empty($fileNameAndError['error'])) {
+                $errors['picture']=$fileNameAndError['error'];
+            }
+
+            if (empty($errors)) {
                 $eventManager = new EventManager();
-                $eventManager->updateEvent($errorsAndData['data']);
-                header("location:/adminEvent/showEvent/" . $errorsAndData['data']['id'] .
+                $eventManager->updateEvent($data);
+                header("location:/adminEvent/editEvent/" . $data['id'] .
                     "/L'évènement a bien été modifié");
             } else {
                 $toBeReturned = $this->twig->render(
                     'Admin/showEvent.html.twig',
-                    ['errors' => $errorsAndData['errors'],
-                        'data' => $errorsAndData['data']]
+                    ['errors' => $errors,
+                        'data' => $data,
+                        'message' => $message,]
+                );
+            }
+        } else {
+            if ($id > 0) {
+                $eventManager = new EventManager();
+                $event = $eventManager->selectOneById($id);
+
+                $toBeReturned = $this->twig->render(
+                    'Admin/showEvent.html.twig',
+                    [   'data' => $event,
+                        'message' => $message,]
                 );
             }
         }
+
         return $toBeReturned;
     }
 
@@ -163,18 +172,10 @@ class AdminEventController extends AbstractController
     private function checkEventPostData(): array
     {
         //errors array
-        $errors = [
-            'title' => '',
-            'description' => '',
-            'picture' => '',
-            'date' => '',
-            'location' => '',
-            'id' => '',
-            'link' => '',
-        ];
+        $errors = [];
 
         //data array
-        $data = array();
+        $data = [];
 
         $this->checkTextFromPost('title', "le titre", 50, $errors, $data);
 
@@ -184,20 +185,20 @@ class AdminEventController extends AbstractController
 
         //check date
         if (empty($_POST['date'])) {
-            $errors['date'] .= "Vous devez indiquer la date de l'évènement";
+            $errors['date'] = "Vous devez indiquer la date de l'évènement";
         } elseif (!preg_match("/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/", trim($_POST['date']))) {
-            $errors['date'] .= "La date doit avoir le format aaaa-mm-jj";
+            $errors['date'] = "La date doit avoir le format aaaa-mm-jj";
         } else {
             $data['date'] = trim($_POST['date']);
         }
 
         //check id
         if (empty($_POST['id'])) {
-            $errors['id'] .= "ID ERROR";
+            $errors['id'] = "ID ERROR";
         } elseif (!is_numeric(trim($_POST['id']))) {
-            $errors['id'] .= "Format id incorrect";
+            $errors['id'] = "Format id incorrect";
         } elseif (intval(trim($_POST['id'])) < 1) {
-            $errors['id'] .= "Id is negative";
+            $errors['id'] = "Id is negative";
         } else {
             $data['id'] = intval(trim($_POST['id']));
         }
@@ -207,7 +208,7 @@ class AdminEventController extends AbstractController
             if (filter_var(trim($_POST['link']), FILTER_VALIDATE_URL)) {
                 $data['link'] = trim($_POST['link'] ?? '');
             } else {
-                $errors['link'] .= "Le lien doit avoir le format suivant : www.my-event.com";
+                $errors['link'] = "Le lien doit avoir le format suivant : www.my-event.com";
             }
         }
 
@@ -229,23 +230,23 @@ class AdminEventController extends AbstractController
         int $maxLength,
         &$errors,
         &$data
-    ): array {
-        $datum = "";
-        $error = "";
+    ) : array {
 
         if (empty($_POST[$postFieldName])) {
-            $error = "Vous devez indiquer $userFieldName de l'évènement";
-        } elseif (strlen(trim($_POST[$postFieldName])) > $maxLength) {
+            $error = "Vous devez indiquer $userFieldName de l'activité";
+        } elseif (strlen(trim($_POST[$postFieldName]))>$maxLength) {
             $error = "Le nom de $userFieldName ne doit pas dépasser $maxLength caractères";
         } else {
-            $datum = trim($_POST[$postFieldName]);
+            $datum =trim($_POST[$postFieldName]);
         }
 
-        $errors[$postFieldName] = $error;
-        if ($datum != "") {
+        if (!empty($error)) {
+            $errors[$postFieldName]=$error;
+        }
+        if (!empty($datum)) {
             $data[$postFieldName] = $datum;
         }
 
-        return ['error' => $error, 'data' => $data];
+        return ['errors' => $errors, 'data'=>$data];
     }
 }
