@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\AbstractManager;
 use App\Model\ActivityManager;
 use App\Model\AgeManager;
 use App\Model\LessonManager;
@@ -26,7 +27,7 @@ class AdminLessonController extends AbstractController
             $lesson = array_map('trim', $_POST);
 
             if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
-                $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
+                $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
                 $lesson['pool_name'] = $_POST['new_pool'];
             } else {
                 $errors = $this->validation($lesson);
@@ -52,17 +53,29 @@ class AdminLessonController extends AbstractController
         ]);
     }
 
-    private function validation(array $lesson) : array
-    {
-        $poolManager = new PoolManager();
 
+    private function idExist(int $id, AbstractManager $manager, string $name): array
+    {
+        $ids = $manager->selectAll();
+        $idList = array_column($ids, 'id');
+
+        if (!in_array($id, $idList)) {
+            return ["Cette $name n'existe pas"];
+        }
+        return [];
+    }
+
+    private function validation(array $lesson): array
+    {
+        $activityManager = new ActivityManager();
+        $ageManager = new AgeManager();
+        $poolManager = new PoolManager();
         $errors = [];
 
-        $pools = $poolManager->selectAll();
-        $poolsIds  = array_column($pools, 'id');
-        if (!in_array($_POST['pool'], $poolsIds)) {
-            $errors[] = 'Ce bassin n\'existe pas';
-        }
+        $errors = array_merge($errors, $this->idExist($_POST['age'], $ageManager, 'classe d\'âge'));
+
+        $errors = array_merge($errors, $this->idExist($_POST['activity'], $activityManager, 'activité'));
+        $errors = array_merge($errors, $this->idExist($_POST['pool'], $poolManager, 'piscine'));
 
         if (empty($lesson['day'])) {
             $errors[] = 'Le jour doit être indiqué';
@@ -89,7 +102,6 @@ class AdminLessonController extends AbstractController
     }
 
     /**
-
      * Handle item deletion
      */
     public function delete(): void
@@ -114,6 +126,7 @@ class AdminLessonController extends AbstractController
 
     public function editLesson(int $id = null)
     {
+
         $lessonManager = new LessonManager();
         $poolManager = new PoolManager();
         $ageManager = new AgeManager();
@@ -124,7 +137,7 @@ class AdminLessonController extends AbstractController
             $lesson = array_map('trim', $_POST);
 
             if (!empty($_POST['create_pool']) && !empty($_POST['new_pool'])) {
-                $_POST['pool'] = $poolManager->insert(['new_pool'=>$_POST['new_pool']]);
+                $_POST['pool'] = $poolManager->insert(['new_pool' => $_POST['new_pool']]);
                 $lesson['pool_name'] = $_POST['new_pool'];
             } else {
                 $errors = $this->validation($lesson);
