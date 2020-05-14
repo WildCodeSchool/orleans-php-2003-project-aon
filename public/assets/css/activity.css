@@ -174,4 +174,13 @@ li a:focus{
     align-items: center;
 }
 
+@media screen and (max-width: 500px) {
+    .lessonData {
+        width: 95%;
+    }
+    .activityDescription {
+
+    }
+}
+
 
