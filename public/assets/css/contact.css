@@ -29,10 +29,12 @@
     margin-bottom: 2px;
 }
 
-
 @media (max-width: 600px) {
     .form-contact{
         width: 100%;
+    }
+    .contactTextArea {
+        border: solid 1px lightgray;
     }
 
 }
