@@ -54,13 +54,14 @@ class AdminLessonController extends AbstractController
     }
 
 
-    private function idExist(int $id, AbstractManager $manager, string $name): array
+    private function idExist(int $id, AbstractManager $manager, string $name, string $key): array
     {
         $ids = $manager->selectAll();
         $idList = array_column($ids, 'id');
-
+        $errors = [];
         if (!in_array($id, $idList)) {
-            return ["Cette $name n'existe pas"];
+            $errors[$key] = "Cette $name n'existe pas";
+            return $errors;
         }
         return [];
     }
@@ -72,30 +73,30 @@ class AdminLessonController extends AbstractController
         $poolManager = new PoolManager();
         $errors = [];
 
-        $errors = array_merge($errors, $this->idExist($_POST['age'], $ageManager, 'classe d\'âge'));
+        $errors = array_merge($errors, $this->idExist($_POST['age'], $ageManager, 'classe d\'âge', 'age'));
 
-        $errors = array_merge($errors, $this->idExist($_POST['activity'], $activityManager, 'activité'));
-        $errors = array_merge($errors, $this->idExist($_POST['pool'], $poolManager, 'piscine'));
+        $errors = array_merge($errors, $this->idExist($_POST['activity'], $activityManager, 'activité', 'activity'));
+        $errors = array_merge($errors, $this->idExist($_POST['pool'], $poolManager, 'piscine', 'pool'));
 
         if (empty($lesson['day'])) {
-            $errors[] = 'Le jour doit être indiqué';
+            $errors['day'] = 'Le jour doit être indiqué';
         } elseif (!in_array($lesson['day'], ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'])) {
-            $errors[] = 'Le jour doit être dans la liste';
+            $errors['day'] = 'Le jour doit être dans la liste';
         }
         if (empty($lesson['time'])) {
-            $errors[] = 'L\'heure doit être indiquée';
+            $errors['time'] = 'L\'heure doit être indiquée';
         } elseif (!preg_match(
             '^([0-1]?[0-9]|2[0-3])h[0-5][0-9]-([0-1]?[0-9]|2[0-3])h[0-5][0-9]^',
             $lesson['time']
         )) {
-            $errors[] = 'Format de l\'heure 20h00-21h30';
+            $errors['time'] = 'Format de l\'heure 20h00-21h30';
         }
         if (empty($lesson['price'])) {
-            $errors[] = 'Le prix doit être indiqué';
+            $errors['price'] = 'Le prix doit être indiqué';
         } elseif (!is_numeric($lesson['price'])) {
-            $errors[] = 'Le prix doit être indiqué en chiffres';
+            $errors['price'] = 'Le prix doit être indiqué en chiffres';
         } elseif ($lesson['price'] < 0) {
-            $errors[] = 'Le prix doit être supérieur à 0';
+            $errors['price'] = 'Le prix doit être supérieur à 0';
         }
 
         return $errors ?? [];
